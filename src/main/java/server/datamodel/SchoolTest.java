@@ -1,22 +1,26 @@
 package server.datamodel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class SchoolTest {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	private String type;
+	@OneToMany	
 	private List<Question> questions;
 	
 	public SchoolTest(){
-		
+		questions = new ArrayList<Question>();
 	}
 
 	public int getId() {

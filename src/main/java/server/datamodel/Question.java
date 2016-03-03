@@ -1,10 +1,13 @@
 package server.datamodel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import javafx.scene.image.Image;
 
@@ -12,15 +15,16 @@ import javafx.scene.image.Image;
 public class Question {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	private boolean multiQuestion;
 	private Image questionImage;
 	private String questionText;
+	@OneToMany
 	private List<Answer> answers;
 	
 	public Question(){
-		
+		answers = new ArrayList<Answer>();
 	}
 
 	public int getId() {

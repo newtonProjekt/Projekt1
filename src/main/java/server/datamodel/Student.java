@@ -1,30 +1,40 @@
 package server.datamodel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Student {
 
 	@Id
-	@GeneratedValue
-	private int id;
+	private int persNumber;
 	private String name, login, password;
+	@OneToMany
 	private List<AnswerSubmited> answersSubmited;
 	
 	public Student(){
-		
+		answersSubmited = new ArrayList<AnswerSubmited>();
+	}
+	
+	public Student(int persNumber, String name, String login, String password) {
+		answersSubmited = new ArrayList<AnswerSubmited>();
+		this.persNumber = persNumber;
+		this.name = name;
+		this.login = login;
+		this.password = password;
 	}
 
-	public int getId() {
-		return id;
+	public int getPersNumber() {
+		return persNumber;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setPersNumber(int persNumber) {
+		this.persNumber = persNumber;
 	}
 
 	public String getName() {

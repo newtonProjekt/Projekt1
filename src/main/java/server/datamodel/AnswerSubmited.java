@@ -2,21 +2,33 @@ package server.datamodel;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.OneToOne;
+/**
+ * The entity class that stores the usersubmited answers.
+ * 
+ * @author Johan Lindström (jolindse@hotmail.com)
+ *
+ */
 @Entity
 public class AnswerSubmited {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
-	// Make reference to test
+	@OneToOne
 	private int testId;
 	private String answerString;
 	private boolean correctAnswer;
 	
 	public AnswerSubmited(){
-		
+	}
+
+	public AnswerSubmited(int testId, String answerString, boolean correctAnswer) {
+		this.testId = testId;
+		this.answerString = answerString;
+		this.correctAnswer = correctAnswer;
 	}
 
 	public int getId() {
