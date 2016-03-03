@@ -1,14 +1,10 @@
 package server.datamodel;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 /**
  * The entity class that stores the usersubmited answers.
  * 
- * @author Johan Lindström (jolindse@hotmail.com)
+ * @author Johan Lindstrï¿½m (jolindse@hotmail.com)
  *
  */
 @Entity
