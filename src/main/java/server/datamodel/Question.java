@@ -13,7 +13,7 @@ public class Question {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	private boolean multiQuestion;
-	private Image questionImage;
+	//private Image questionImage;
 	private String questionText;
 	@OneToMany
 	private List<Answer> answers;
@@ -38,6 +38,7 @@ public class Question {
 		this.multiQuestion = multiQuestion;
 	}
 
+	/*
 	public Image getQuestionImage() {
 		return questionImage;
 	}
@@ -45,6 +46,7 @@ public class Question {
 	public void setQuestionImage(Image questionImage) {
 		this.questionImage = questionImage;
 	}
+	*/
 
 	public String getQuestionText() {
 		return questionText;

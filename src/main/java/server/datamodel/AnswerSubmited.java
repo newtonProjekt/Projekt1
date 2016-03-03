@@ -13,7 +13,7 @@ public class AnswerSubmited {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
-	@OneToOne
+	@JoinTable
 	private int testId;
 	private String answerString;
 	private boolean correctAnswer;
