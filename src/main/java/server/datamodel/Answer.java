@@ -2,19 +2,24 @@ package server.datamodel;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Answer {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	private String answerText;
 	private boolean correctAnswer;
 	
-	public Answer(){
-		
+	public Answer(){	
+	}
+
+	public Answer(String answerText, boolean correctAnswer) {
+		this.answerText = answerText;
+		this.correctAnswer = correctAnswer;
 	}
 
 	public int getId() {

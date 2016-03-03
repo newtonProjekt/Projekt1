@@ -6,7 +6,7 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class NetworkListener implements Runnable{
+public class NetworkListener implements Runnable {
     
     private int portNumber = 3004;
     private final int maxNumberOfClients = 100;
