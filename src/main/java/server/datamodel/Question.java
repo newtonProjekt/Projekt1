@@ -17,7 +17,7 @@ public class Question {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	private boolean multiQuestion;
-	private Image questionImage;
+	//private Image questionImage;
 	private String questionText;
 	@OneToMany
 	private List<Answer> answers;

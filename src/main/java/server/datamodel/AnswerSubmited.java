@@ -13,16 +13,15 @@ public class AnswerSubmited {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
-	@JoinTable
-	private int testId;
+	@OneToOne
+	private SchoolTest test;
 	private String answerString;
 	private boolean correctAnswer;
 	
 	public AnswerSubmited(){
 	}
 
-	public AnswerSubmited(int testId, String answerString, boolean correctAnswer) {
-		this.testId = testId;
+	public AnswerSubmited(String answerString, boolean correctAnswer) {
 		this.answerString = answerString;
 		this.correctAnswer = correctAnswer;
 	}
@@ -35,12 +34,12 @@ public class AnswerSubmited {
 		this.id = id;
 	}
 
-	public int getTestId() {
-		return testId;
+	public SchoolTest getTestId() {
+		return test;
 	}
 
-	public void setTestId(int testId) {
-		this.testId = testId;
+	public void setTestId(SchoolTest testId) {
+		this.test = test;
 	}
 
 	public String getAnswerString() {
