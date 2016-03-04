@@ -6,6 +6,11 @@ import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Entity class for the students.
+ *
+ * Contains login (personal number), name, password and the answers student has submitted to questions.
+ */
 @Entity
 public class Student {
 

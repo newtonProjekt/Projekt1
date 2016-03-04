@@ -8,7 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The bean to store questions for tests
+ * The entity class for questions that contains the answers refering to the tests, question type (multi or text), question
+ * text and optionally question image.
  */
 @Entity
 public class Question {

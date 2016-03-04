@@ -4,6 +4,9 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The entity class that represents the tests. Contains the type of test and the questions in the test.
+ */
 @Entity
 public class SchoolTest {
 

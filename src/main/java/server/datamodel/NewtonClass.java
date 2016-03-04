@@ -4,6 +4,9 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Entity class that consists of name of class, students in class and the tests the class has access to.
+ */
 @Entity
 public class NewtonClass {
 

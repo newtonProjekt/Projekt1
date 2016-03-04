@@ -5,6 +5,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/**
+ * Entity class for answers to test.
+ *
+ * Contains text and boolean to indicate if it's the correct answer.
+ */
 @Entity
 public class Answer {
 
