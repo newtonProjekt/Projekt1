@@ -1,11 +1,15 @@
 package server.datamodel;
 
-import javafx.scene.image.Image;
+
 
 import javax.persistence.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The bean to store questions for tests
+ */
 @Entity
 public class Question {
 
@@ -13,7 +17,7 @@ public class Question {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	private boolean multiQuestion;
-	//private Image questionImage;
+	private Image questionImage;
 	private String questionText;
 	@OneToMany
 	private List<Answer> answers;
@@ -39,7 +43,7 @@ public class Question {
 	}
 
 	/*
-	public Image getQuestionImage() {
+	public ImageView getQuestionImage() {
 		return questionImage;
 	}
 
