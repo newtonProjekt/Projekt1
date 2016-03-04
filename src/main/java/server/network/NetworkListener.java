@@ -28,12 +28,12 @@ public class NetworkListener implements Runnable {
         
         try {
             
-            System.out.println("Startar server...");
+            System.out.println("Starting server...");
             server = new ServerSocket(portNumber);
             
             thread = new Thread(this);
             thread.start();
-            
+            System.out.println("Server started and listening on port "+portNumber);
             
         } catch (IOException ex) {
             Logger.getLogger(NetworkListener.class.getName()).log(Level.SEVERE, null, ex);

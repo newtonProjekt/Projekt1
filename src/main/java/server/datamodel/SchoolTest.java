@@ -41,5 +41,12 @@ public class SchoolTest {
 	public void setQuestions(List<Question> questions) {
 		this.questions = questions;
 	}
-	
+
+	public void addQuestion(Question currQuestion){
+		questions.add(currQuestion);
+	}
+
+	public void removeQuestion(Question currQuestion){
+		questions.remove(currQuestion);
+	}
 }

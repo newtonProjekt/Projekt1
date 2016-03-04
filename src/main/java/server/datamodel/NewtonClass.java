@@ -52,7 +52,21 @@ public class NewtonClass {
 	public void setTests(List<SchoolTest> tests) {
 		this.tests = tests;
 	}
-	
-	
+
+	public void addTest(SchoolTest currTest){
+		tests.add(currTest);
+	}
+
+	public void removeTest(SchoolTest currTest){
+		tests.remove(currTest);
+	}
+
+	public void addStudent(Student currStudent){
+		students.add(currStudent);
+	}
+
+	public void removeStudent(Student currStudent){
+		students.remove(currStudent);
+	}
 	
 }
