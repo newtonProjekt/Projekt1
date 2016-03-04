@@ -12,7 +12,7 @@ public class NetworkListener implements Runnable {
     private ServerSocket server;
     private Thread thread ;
     private Socket connection;
-    private User user;
+    private Client client;
     
     
     public NetworkListener(){
@@ -61,7 +61,7 @@ public class NetworkListener implements Runnable {
                 connection = new Socket();
                 connection = server.accept();
                 System.out.println(connection.getInetAddress());
-                user = new User(connection);
+                client = new Client(connection);
                 
             
             

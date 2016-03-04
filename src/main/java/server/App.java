@@ -9,7 +9,7 @@ import java.util.ConcurrentModificationException;
  *
  * Entry point to application
  *
- * Starts controller and networklistening loop.
+ * Starts controller and network listening loop.
  * Gives controller a static reference to itself for further calls to a controller reference.
  *
  * Created by Johan on 2016-03-04.
