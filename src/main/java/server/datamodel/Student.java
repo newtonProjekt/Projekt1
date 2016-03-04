@@ -1,10 +1,13 @@
 package server.datamodel;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * Entity class for the students.
@@ -15,28 +18,48 @@ import java.util.List;
 public class Student {
 
 	@Id
-	private int persNumber;
-	private String name, login, password;
-	@OneToMany
+	@NotNull
+	private long persNumber;
+	@NotNull
+	private String name;
+	private String password;
+	@OneToMany (orphanRemoval = true)
 	private List<AnswerSubmited> answersSubmited;
 	
 	public Student(){
 		answersSubmited = new ArrayList<AnswerSubmited>();
 	}
-	
-	public Student(int persNumber, String name, String login, String password) {
+
+	/**
+	 * Constructor when no password has been submitted. Sets password to "password".
+	 * @param persNumber
+	 * @param name
+     */
+	public Student(long persNumber, String name){
 		answersSubmited = new ArrayList<AnswerSubmited>();
 		this.persNumber = persNumber;
 		this.name = name;
-		this.login = login;
+		password = "password";
+	}
+
+	/**
+	 * Constructor when all arguments is supplied.
+	 * @param persNumber
+	 * @param name
+	 * @param password
+     */
+	public Student(long persNumber, String name, String password) {
+		answersSubmited = new ArrayList<AnswerSubmited>();
+		this.persNumber = persNumber;
+		this.name = name;
 		this.password = password;
 	}
 
-	public int getPersNumber() {
+	public long getPersNumber() {
 		return persNumber;
 	}
 
-	public void setPersNumber(int persNumber) {
+	public void setPersNumber(long persNumber) {
 		this.persNumber = persNumber;
 	}
 
@@ -46,14 +69,6 @@ public class Student {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getLogin() {
-		return login;
-	}
-
-	public void setLogin(String login) {
-		this.login = login;
 	}
 
 	public String getPassword() {
@@ -72,5 +87,11 @@ public class Student {
 		this.answersSubmited = answersSubmited;
 	}
 	
-	
+	public void addAnswer(AnswerSubmited currAnswer){
+		answersSubmited.add(currAnswer);
+	}
+
+	public void removeAnswer(AnswerSubmited currAnswer){
+		answersSubmited.remove(currAnswer);
+	}
 }

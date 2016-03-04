@@ -3,6 +3,7 @@ package server.datamodel;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,13 +18,23 @@ public class Question {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
+	@NotNull
 	private boolean multiQuestion;
+	@NotNull
+	private int points;
 	//private Image questionImage;
+	@NotNull
 	private String questionText;
-	@OneToMany
+	@OneToMany(orphanRemoval = true)
 	private List<Answer> answers;
 	
 	public Question(){
+		answers = new ArrayList<Answer>();
+	}
+
+	public Question(String questionText, int points){
+		this.points = points;
+		this.questionText = questionText;
 		answers = new ArrayList<Answer>();
 	}
 
@@ -41,6 +52,14 @@ public class Question {
 
 	public void setMultiQuestion(boolean multiQuestion) {
 		this.multiQuestion = multiQuestion;
+	}
+
+	public int getPoints() {
+		return points;
+	}
+
+	public void setPoints(int points) {
+		this.points = points;
 	}
 
 	/*
@@ -67,6 +86,14 @@ public class Question {
 
 	public void setAnswers(List<Answer> answers) {
 		this.answers = answers;
+	}
+
+	public void addAnswer(Answer currAnswer){
+		answers.add(currAnswer);
+	}
+
+	public void removeAnswer(Answer currAnswer){
+		answers.remove(currAnswer);
 	}
 	
 }

@@ -1,6 +1,7 @@
 package server.datamodel;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,15 +14,22 @@ public class NewtonClass {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
+	@NotNull
 	private String name;
-	@OneToMany
+	@OneToMany(orphanRemoval = true)
 	private List<Student> students;
-	@OneToMany
+	@OneToMany(orphanRemoval = true)
 	private List<SchoolTest> tests;
 	
 	public NewtonClass(){
 		students = new ArrayList<Student>();
 		tests = new ArrayList<SchoolTest>();
+	}
+
+	public NewtonClass(String name){
+		students = new ArrayList<Student>();
+		tests = new ArrayList<SchoolTest>();
+		this.name = name;
 	}
 
 	public int getId() {
