@@ -44,12 +44,12 @@ public class NetworkListener implements Runnable {
         
     }
     
-    
     public static void main(String[] args) {
         
         NetworkListener n = new NetworkListener();
         
     }
+    
 
     @Override
     public void run() {
