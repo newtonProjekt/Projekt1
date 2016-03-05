@@ -16,6 +16,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import server.beans.Login;
 /**
  * 
  * @author DanielB
@@ -66,26 +67,22 @@ public class ClientChatProgram {
 class PrintServer implements Runnable{
 	
 	private Socket connection;
-        Employee employee = new Employee();
+        Login login = new Login();
         Gson gson = new Gson();
-        JsonObject json = new JsonObject();
-        
+        //JsonObject json = new JsonObject();
+        Message message = new Message();
         
 	
 	public PrintServer(Socket connection) throws IOException {
 		this.connection = connection;
                 
-                
-                employee.setId(1);
-                employee.setFirstName("Lokesh");
-                employee.setLastName("Gupta");
-                employee.setRoles(Arrays.asList("ADMIN", "MANAGER"));
-                
-                Department dep = new Department("Finance");
-                employee.setDepartment(dep);
+                login.setLoginId("12345");
+                login.setPassword("pw");
+                message.setCommand("login");
+                message.setLogin(login);
                 
                 PrintWriter pWriter = new PrintWriter(connection.getOutputStream());
-                pWriter.println(gson.toJson(employee));
+                pWriter.println(gson.toJson(message));
 		pWriter.flush();
                 
                 //gson.toJson(employee);
