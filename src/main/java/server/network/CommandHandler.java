@@ -6,15 +6,46 @@
 package server.network;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import java.util.Arrays;
+import server.beans.Message;
+import server.logic.ServerController;
 
 
+/**
+ * Class that handles all connections between controller and connected client.
+ *
+ *
+ */
 public class CommandHandler {
-    
+
+    private ServerController controller;
+    private Client client;
+    private long clientId;
+    private boolean loggedIn = false;
+    private Gson gson;
+
+    public CommandHandler(Client client){
+        this.client = client;
+        controller = ServerController.getController();
+        gson = new Gson();
+    }
+
+	/**
+     * Method that parses the JSON and calls for the appropriate method in controller.
+     *
+     * @param jsonData
+     */
+    public void parse(String jsonData){
+
+    }
+
+    public void send(Message currMessage){
+        String jsonData = null; // Temporary placeholder until json conversion routine is in place.
+        // Should convert a message object into json and then send it to client.
+        client.send(jsonData);
+    }
+
+}
+    /*
     Gson gson = new Gson();
     
     public CommandHandler(String fromuser){
@@ -45,3 +76,4 @@ public class CommandHandler {
     
     
 }
+*/
