@@ -50,13 +50,43 @@ public class CommandHandler {
     
     public CommandHandler(String fromuser){
         
-        System.out.println(gson.toJson(fromuser));
+        //System.out.println(gson.toJson(fromuser));
         
         //System.out.println(gson.toJson("roles"));
         
         JsonParser parser = new JsonParser();
-        JsonObject obj = parser.parse(fromuser).getAsJsonObject();
         
+        JsonObject obj = parser.parse(fromuser).getAsJsonObject();
+        String cmd = obj.get("command").getAsString();
+        System.out.println("The command is: " + cmd);
+        
+        JsonObject obj2 = obj.getAsJsonObject("login");
+        String id = obj2.get("loginId").getAsString();
+        System.out.println("The loginId is: " + id);
+        
+        String pw = obj2.get("password").getAsString();
+        System.out.println("The passwrod is: " + pw);
+        
+        
+        /*
+        String id = obj.get("loginId").getAsString();
+        String pw = obj.get("password").getAsString();
+        
+        System.out.println("The loginId is: " + id);
+        System.out.println("The password is: " + pw);
+        */
+        
+        /*
+        typeofjson:
+        login
+        starttest
+        seeresults
+        maketest
+        edittest
+        seeresults
+        */
+        
+        /*
         String r = obj.get("firstName").getAsString();
         System.out.println(r);
         
@@ -69,7 +99,7 @@ public class CommandHandler {
         JsonObject obj3 = obj.getAsJsonObject("department");
         String s = obj3.get("deptName").getAsString();
         System.out.println(s);
-        
+        */
         
         
     }
