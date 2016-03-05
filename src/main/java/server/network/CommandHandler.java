@@ -38,6 +38,12 @@ public class CommandHandler {
 
     }
 
+	/**
+     * Method that takes the message-bean returned from the controller, converts it to JSON
+     * and sends it to the client.
+     *
+     * @param currMessage
+     */
     public void send(Message currMessage){
         String jsonData = null; // Temporary placeholder until json conversion routine is in place.
         // Should convert a message object into json and then send it to client.
@@ -99,7 +105,7 @@ public class CommandHandler {
         JsonObject obj3 = obj.getAsJsonObject("department");
         String s = obj3.get("deptName").getAsString();
         System.out.println(s);
-        */
+
         
         
     }
