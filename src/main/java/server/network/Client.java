@@ -30,6 +30,7 @@ public class Client implements Runnable {
 
 	public Client(Socket connection) {
 		this.connection = connection;
+                commandHandler = new CommandHandler(this);
 		try {
 			out = new PrintWriter(connection.getOutputStream(), true);
 		} catch (IOException e) {

@@ -31,6 +31,7 @@ public class CommandHandler {
         this.client = client;
         controller = ServerController.getController();
         gson = new Gson();
+        parser = new JsonParser();
     }
 
 	/**
@@ -51,6 +52,7 @@ public class CommandHandler {
         switch(command){
             case "login":
                 // do login routine
+                System.out.println("This is login");
                 break;
             case "starttest":
                 // set test as started controller
