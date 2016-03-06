@@ -8,12 +8,15 @@ import javax.persistence.*;
  *
  */
 @Entity
+@NamedQuery(
+		name="getSubmittedAnswer",
+		query = "select c from AnswerSubmited c where SchoolTest.id = :testId")
 public class AnswerSubmited {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private SchoolTest test;
 	private String answerString;
 	private boolean correctAnswer;

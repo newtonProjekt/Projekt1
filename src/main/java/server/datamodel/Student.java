@@ -15,10 +15,15 @@ import java.util.stream.Stream;
  */
 @Entity
 @NamedQueries({
-@NamedQuery(name = "getUser",
-		query ="SELECT c FROM Student WHERE c.persNumber = :persNumber"),
-@NamedQuery(name = "getAllUsers",
-		query = "SELECT c FROM Student")
+@NamedQuery(
+		name = "getStudent",
+		query ="select c FROM Student c WHERE c.persNumber = :pNumber"),
+@NamedQuery(
+		name = "getAllStudents",
+		query = "SELECT c FROM Student c"),
+@NamedQuery(
+		name = "getTests",
+		query = "select c.testsToTake from Student c where c.persNumber = :pNumber")
 })
 public class Student {
 
@@ -28,9 +33,12 @@ public class Student {
 	@NotNull
 	private String name;
 	private String password;
-	@OneToMany (cascade = CascadeType.ALL,orphanRemoval = true)
+	@OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
 	private List<AnswerSubmited> answersSubmited;
-	
+	@OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
+	private List<SchoolTest> testsToTake;
+
+
 	public Student(){
 		answersSubmited = new ArrayList<AnswerSubmited>();
 	}
@@ -43,6 +51,7 @@ public class Student {
      */
 	public Student(long persNumber, String name){
 		answersSubmited = new ArrayList<AnswerSubmited>();
+		testsToTake = new ArrayList<>();
 		this.persNumber = persNumber;
 		this.name = name;
 		password = "password";
@@ -94,6 +103,24 @@ public class Student {
 
 	public void setAnswersSubmited(List<AnswerSubmited> answersSubmited) {
 		this.answersSubmited = answersSubmited;
+	}
+
+	public List<SchoolTest> getTestsToTake() {
+		return testsToTake;
+	}
+
+	public void setTestsToTake(List<SchoolTest> testsToTake) {
+		this.testsToTake = testsToTake;
+	}
+
+	// Methods to add and remove tests to take.
+
+	public void addTest(SchoolTest currTest){
+		testsToTake.add(currTest);
+	}
+
+	public void removeTest(SchoolTest currTest) {
+		testsToTake.remove(currTest);
 	}
 
 	// Methods to add and remove answers.

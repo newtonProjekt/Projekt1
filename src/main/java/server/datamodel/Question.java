@@ -25,7 +25,7 @@ public class Question {
 	//private Image questionImage;
 	@NotNull
 	private String questionText;
-	@OneToMany(orphanRemoval = true)
+	@OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
 	private List<Answer> answers;
 	
 	public Question(){

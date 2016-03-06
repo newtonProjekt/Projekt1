@@ -3,8 +3,11 @@ package server.logic;
 import server.datamodel.Student;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
+ * Contains methods to get data from database
+ *
  * Created by Johan on 2016-03-06.
  */
 public class DatabaseConnection {
@@ -18,14 +21,21 @@ public class DatabaseConnection {
 		em = emf.createEntityManager();
 	}
 
-	private void closeDb(){
+	public void closeDb(){
 		emf.close();
 		em.close();
 	}
 
 	// QUERIES
 
+	/**
+	 * Returns the student with the persNumber.
+	 *
+	 * @param persNumber String
+	 * @return Student
+	 */
 	public Student getStudent(String persNumber){
-
+		List result = em.createNamedQuery("getStudent").setParameter("pNumber",Long.parseLong(persNumber)).getResultList();
+		return (Student)result.get(0);
 	}
 }

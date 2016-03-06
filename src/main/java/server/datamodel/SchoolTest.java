@@ -16,7 +16,7 @@ public class SchoolTest {
 	private int id;
 	@NotNull
 	private String type;
-	@OneToMany(orphanRemoval = true)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Question> questions;
 	
 	public SchoolTest(){
