@@ -15,7 +15,7 @@ import server.datamodel.Student;
 
 public class ServerController {
 
-    private static ServerController controller;
+    private static ServerController controller = new ServerController();
     private DatabaseConnection dbc;
 
     public ServerController() {

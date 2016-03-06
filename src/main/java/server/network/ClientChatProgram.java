@@ -82,8 +82,8 @@ class PrintServer implements Runnable{
 		this.connection = connection;
                 
                 
-                login.setLoginId("12345");
-                login.setPassword("pw");
+                login.setLoginId("45454");
+                login.setPassword("password");
                 message.addCommandData(login);
                 
                 

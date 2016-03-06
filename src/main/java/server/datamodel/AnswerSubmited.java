@@ -8,9 +8,10 @@ import javax.persistence.*;
  *
  */
 @Entity
-@NamedQuery(
+/*@NamedQuery(
 		name="getSubmittedAnswer",
 		query = "select c from AnswerSubmited c where SchoolTest.id = :testId")
+*/
 public class AnswerSubmited {
 
 	@Id

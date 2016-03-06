@@ -59,12 +59,20 @@ public class CommandHandler {
                 System.out.println(commandDataArray);
                 JsonElement obj3 = commandDataArray.get(0);
                 JsonObject obj4 = obj3.getAsJsonObject();
-                String id = obj4.get("loginId").getAsString();
-                System.out.println("The loginId is : " + id);
+                String loginId = obj4.get("loginId").getAsString();
+                System.out.println("The loginId is : " + loginId);
                 
-                String pw = obj4.get("password").getAsString();
-                System.out.println("The password is : " + pw);
+                String password = obj4.get("password").getAsString();
+                System.out.println("The password is : " + password);
                 
+                //controller.checkLogin(loginId, password);
+                
+                if(controller.checkLogin(loginId, password) == true){
+                    System.out.println("Login OK!");
+                }
+                else{
+                    System.out.println("Login failed!");
+                }
                 
                 break;
             case "starttest":
