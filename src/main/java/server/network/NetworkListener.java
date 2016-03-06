@@ -20,6 +20,7 @@ public class NetworkListener implements Runnable {
     private ServerSocket server;
     private Socket connection;
 
+
     public NetworkListener() throws IOException{
         server = new ServerSocket(portNumber);
     }
@@ -37,15 +38,12 @@ public class NetworkListener implements Runnable {
         while(true){
             try {
                 Thread.sleep(100);
-            
                 connection = new Socket();
                 connection = server.accept();
                 System.out.println(connection.getInetAddress());
                 Thread clientThread = new Thread(new Client(connection));
                 clientThread.start();
-                
-            
-            
+
         } catch (InterruptedException ex) {
             Logger.getLogger(NetworkListener.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {

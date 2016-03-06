@@ -9,6 +9,7 @@ import javax.persistence.*;
  */
 @Entity
 /*@NamedQuery(
+@NamedQuery(
 		name="getSubmittedAnswer",
 		query = "select c from AnswerSubmited c where SchoolTest.id = :testId")
 */
@@ -19,6 +20,8 @@ public class AnswerSubmited {
 	private int id;
 	@OneToOne(cascade = CascadeType.ALL)
 	private SchoolTest test;
+	@OneToOne(cascade = CascadeType.ALL)
+	private Question question;
 	private String answerString;
 	private boolean correctAnswer;
 	
@@ -61,5 +64,12 @@ public class AnswerSubmited {
 	public void setCorrectAnswer(boolean correctAnswer) {
 		this.correctAnswer = correctAnswer;
 	}
-	
+
+	public Question getQuestion() {
+		return question;
+	}
+
+	public void setQuestion(Question question) {
+		this.question = question;
+	}
 }
