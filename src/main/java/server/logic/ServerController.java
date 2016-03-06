@@ -51,6 +51,9 @@ public class ServerController {
      */
     public boolean checkLogin(String login, String password){
         Student studentDB = dbc.getStudent(login);
-        return studentDB.checkLogin(password);
+        if (studentDB != null) {
+            return studentDB.checkLogin(password);
+        }
+        return false;
     }
 }

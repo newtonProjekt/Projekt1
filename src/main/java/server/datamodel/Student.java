@@ -22,7 +22,7 @@ import java.util.stream.Stream;
 		name = "getAllStudents",
 		query = "SELECT c FROM Student c"),
 @NamedQuery(
-		name = "getTests",
+		name = "getStudentTests",
 		query = "select c.testsToTake from Student c where c.persNumber = :pNumber")
 })
 public class Student {

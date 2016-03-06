@@ -1,5 +1,6 @@
 package server.logic;
 
+import server.datamodel.SchoolTest;
 import server.datamodel.Student;
 
 import javax.persistence.*;
@@ -35,7 +36,27 @@ public class DatabaseConnection {
 	 * @return Student
 	 */
 	public Student getStudent(String persNumber){
+
 		List result = em.createNamedQuery("getStudent").setParameter("pNumber",Long.parseLong(persNumber)).getResultList();
-		return (Student)result.get(0);
+		if (result.size() > 0) {
+			return (Student) result.get(0);
+		} else {
+			return null;
+		}
+	}
+
+	/**
+	 * Returns all students
+	 */
+
+	/**
+	 * Returns the test with the given id.
+	 *
+	 * @param testId String
+	 * @return SchoolTest
+	 */
+	public SchoolTest getTest(String testId){
+		List result = em.createNamedQuery("getTest").setParameter("testId",Integer.parseInt(testId)).getResultList();
+		return (SchoolTest)result.get(0);
 	}
 }
