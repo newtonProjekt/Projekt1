@@ -36,4 +36,10 @@ public class ServerController {
     public static ServerController getController(){
         return controller;
     }
+
+    // METHODS CALLED FROM COMMANDHANDLER
+
+    public boolean checkLogin(String login, String password){
+        return true;
+    }
 }

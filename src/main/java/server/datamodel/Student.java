@@ -32,8 +32,9 @@ public class Student {
 
 	/**
 	 * Constructor when no password has been submitted. Sets password to "password".
-	 * @param persNumber
-	 * @param name
+	 *
+	 * @param persNumber long
+	 * @param name String
      */
 	public Student(long persNumber, String name){
 		answersSubmited = new ArrayList<AnswerSubmited>();
@@ -44,9 +45,10 @@ public class Student {
 
 	/**
 	 * Constructor when all arguments is supplied.
-	 * @param persNumber
-	 * @param name
-	 * @param password
+	 *
+	 * @param persNumber long
+	 * @param name String
+	 * @param password String
      */
 	public Student(long persNumber, String name, String password) {
 		answersSubmited = new ArrayList<AnswerSubmited>();
@@ -54,6 +56,8 @@ public class Student {
 		this.name = name;
 		this.password = password;
 	}
+
+	// Getters and setters
 
 	public long getPersNumber() {
 		return persNumber;
@@ -86,12 +90,29 @@ public class Student {
 	public void setAnswersSubmited(List<AnswerSubmited> answersSubmited) {
 		this.answersSubmited = answersSubmited;
 	}
-	
+
+	// Methods to add and remove answers.
+
 	public void addAnswer(AnswerSubmited currAnswer){
 		answersSubmited.add(currAnswer);
 	}
 
 	public void removeAnswer(AnswerSubmited currAnswer){
 		answersSubmited.remove(currAnswer);
+	}
+
+	/**
+	 * Checks submitted login credentials against the ones stored in the entity. Returns boolean with result.
+	 *
+	 * @param submittedPassword String
+	 * @return
+	 */
+
+	public boolean checkLogin(String submittedPassword){
+		boolean loginOk = false;
+		if (password.equals(submittedPassword)){
+			loginOk = true;
+		}
+		return loginOk;
 	}
 }
