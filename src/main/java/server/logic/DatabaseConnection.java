@@ -1,5 +1,6 @@
 package server.logic;
 
+import server.datamodel.Question;
 import server.datamodel.SchoolTest;
 import server.datamodel.Student;
 
@@ -17,6 +18,8 @@ public class DatabaseConnection {
 	EntityManager em;
 	EntityTransaction etx;
 
+	// DB CONNECTIVITY METHODS
+
 	public DatabaseConnection(){
 		emf = Persistence.createEntityManagerFactory("jpa");
 		em = emf.createEntityManager();
@@ -27,7 +30,9 @@ public class DatabaseConnection {
 		em.close();
 	}
 
-	// QUERIES
+	//  GET INFO FROM DATABASE QUERIES
+
+	// From Student entity
 
 	/**
 	 * Returns the student with the persNumber.
@@ -36,7 +41,6 @@ public class DatabaseConnection {
 	 * @return Student
 	 */
 	public Student getStudent(String persNumber){
-
 		List result = em.createNamedQuery("getStudent").setParameter("pNumber",Long.parseLong(persNumber)).getResultList();
 		if (result.size() > 0) {
 			return (Student) result.get(0);
@@ -46,8 +50,25 @@ public class DatabaseConnection {
 	}
 
 	/**
-	 * Returns all students
+	 * Returns all students in database
+	 *
+	 * @return List\<Student\>
 	 */
+	public List<Student> getStudents(){
+		return em.createNamedQuery("getAllStudents").getResultList();
+	}
+
+	/**
+	 * Returns all tests available for student
+	 *
+	 * @param persNumber String
+	 * @return List\<SchoolTest\>
+	 */
+	public List<SchoolTest> getStudentTests(String persNumber){
+		return em.createNamedQuery("getStudentTests").getResultList();
+	}
+
+	// From SchoolTest entity
 
 	/**
 	 * Returns the test with the given id.
@@ -59,4 +80,27 @@ public class DatabaseConnection {
 		List result = em.createNamedQuery("getTest").setParameter("testId",Integer.parseInt(testId)).getResultList();
 		return (SchoolTest)result.get(0);
 	}
+
+	/**
+	 * Get all tests from database.
+	 *
+	 * @return List\<SchoolTest\>
+	 */
+	public List<SchoolTest> getAllTests(){
+		return em.createNamedQuery("getAllTests").getResultList();
+	}
+
+	// From Question entity
+
+	/**
+	 * Gets question specified with id.
+	 *
+	 * @param questionId String
+	 * @return Question
+	 */
+	public Question getQuestion(String questionId){
+		List result = em.createNamedQuery("getQuestion").setParameter("questionId",Integer.parseInt(questionId)).getResultList();
+		return (Question) result.get(0);
+	}
+
 }
