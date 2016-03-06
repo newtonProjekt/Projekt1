@@ -54,29 +54,22 @@ public class CommandHandler {
             case "login":
                 // do login routine
                 
-                System.out.println("This is login");
+                //breaking down the the desired parts of the commanddataArray
+                JsonElement jsonElement = commandDataArray.get(0);
+                JsonObject jsonObject = jsonElement.getAsJsonObject();
+                String loginId = jsonObject.get("loginId").getAsString();
+                String password = jsonObject.get("password").getAsString();
                 
-                System.out.println(commandDataArray);
-                JsonElement obj3 = commandDataArray.get(0);
-                JsonObject obj4 = obj3.getAsJsonObject();
-                String loginId = obj4.get("loginId").getAsString();
-                System.out.println("The loginId is : " + loginId);
+                //call the checkLogin in controller and pass the loginId and password
+                controller.checkLogin(loginId, password);
                 
-                String password = obj4.get("password").getAsString();
-                System.out.println("The password is : " + password);
-                
-                //controller.checkLogin(loginId, password);
-                
-                if(controller.checkLogin(loginId, password) == true){
-                    System.out.println("Login OK!");
-                }
-                else{
-                    System.out.println("Login failed!");
-                }
                 
                 break;
             case "starttest":
                 // set test as started controller
+                
+                
+                
                 break;
             case "getresult":
                 // send result data if possible

@@ -1,5 +1,6 @@
 package server;
 
+import java.io.IOException;
 import server.logic.ServerController;
 import server.network.NetworkListener;
 
@@ -15,7 +16,7 @@ import java.util.ConcurrentModificationException;
  * Created by Johan on 2016-03-04.
  */
 public class App {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         // Starts controller
         ServerController controller = new ServerController();
 

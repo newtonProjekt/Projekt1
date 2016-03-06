@@ -40,7 +40,7 @@ public class InitDB {
 		NewtonClass newtonClass = new NewtonClass("Java1");
 		Question question = new Question("Testet test tetstst",2);
 		SchoolTest schoolTest = new SchoolTest("Retest");
-		Student student = new Student(454545,"Johan LindstrÃ¶m","password");
+		Student student = new Student(454545,"Johan Lindström","password");
 
 		schoolTest.addQuestion(question);
 		question.addAnswer(answer);

@@ -75,32 +75,20 @@ class PrintServer implements Runnable{
         Login login = new Login();
         Gson gson = new Gson();
         //JsonObject json = new JsonObject();
-        Message message = new Message("login");
+        Message message = new Message("starttest");
         
 	
 	public PrintServer(Socket connection) throws IOException {
 		this.connection = connection;
                 
-                
-                login.setLoginId("45454");
+                /*
+                login.setLoginId("454545");
                 login.setPassword("password");
                 message.addCommandData(login);
-                
-                
-                /*
-                Question question = new Question();
-                question.setId(1);
-                question.setMultiQuestion(false);
-                question.setPoints(2);
-                question.setQuestionText("Huvudstaden i Spanien?");
-                List<Answer> list = new ArrayList<Answer>();
-                Answer answer = new Answer();
-                answer.setId(0);
-                answer.setAnswerText("madrid");
-                list.set(0, answer);
-                question.setAnswers(list);
                 */
-        
+                
+                
+                
                 PrintWriter pWriter = new PrintWriter(connection.getOutputStream());
                 pWriter.println(gson.toJson(message));
 		pWriter.flush();
