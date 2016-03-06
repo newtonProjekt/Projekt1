@@ -7,6 +7,7 @@ package server.network;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import server.beans.Message;
@@ -52,7 +53,19 @@ public class CommandHandler {
         switch(command){
             case "login":
                 // do login routine
+                
                 System.out.println("This is login");
+                
+                System.out.println(commandDataArray);
+                JsonElement obj3 = commandDataArray.get(0);
+                JsonObject obj4 = obj3.getAsJsonObject();
+                String id = obj4.get("loginId").getAsString();
+                System.out.println("The loginId is : " + id);
+                
+                String pw = obj4.get("password").getAsString();
+                System.out.println("The password is : " + pw);
+                
+                
                 break;
             case "starttest":
                 // set test as started controller
