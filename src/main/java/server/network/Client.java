@@ -65,8 +65,10 @@ public class Client implements Runnable {
 	@Override
 	public void run() {
 		while (!disconnect) {
+                    
 			try {
 				Scanner sc = new Scanner(connection.getInputStream());
+                                
 				while (sc.hasNextLine()) {
 					commandHandler.parse(sc.nextLine());
 				}

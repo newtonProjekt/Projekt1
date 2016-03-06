@@ -39,6 +39,7 @@ public class CommandHandler {
      * @param jsonData String
      */
     public void parse(String jsonData){
+        
         JsonObject commandObj = parser.parse(jsonData).getAsJsonObject();
         String command = commandObj.get("command").getAsString();
         JsonArray commandDataArray = commandObj.getAsJsonArray("commandData");

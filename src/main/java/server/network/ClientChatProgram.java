@@ -12,11 +12,16 @@ import java.io.InputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import server.beans.Login;
+import server.beans.Message;
+import server.datamodel.Answer;
+import server.datamodel.Question;
 /**
  * 
  * @author DanielB
@@ -70,17 +75,32 @@ class PrintServer implements Runnable{
         Login login = new Login();
         Gson gson = new Gson();
         //JsonObject json = new JsonObject();
-        Message message = new Message();
+        Message message = new Message("login");
         
 	
 	public PrintServer(Socket connection) throws IOException {
 		this.connection = connection;
                 
+                
                 login.setLoginId("12345");
                 login.setPassword("pw");
-                message.setCommand("login");
-                message.setLogin(login);
+                message.addCommandData(login);
                 
+                
+                /*
+                Question question = new Question();
+                question.setId(1);
+                question.setMultiQuestion(false);
+                question.setPoints(2);
+                question.setQuestionText("Huvudstaden i Spanien?");
+                List<Answer> list = new ArrayList<Answer>();
+                Answer answer = new Answer();
+                answer.setId(0);
+                answer.setAnswerText("madrid");
+                list.set(0, answer);
+                question.setAnswers(list);
+                */
+        
                 PrintWriter pWriter = new PrintWriter(connection.getOutputStream());
                 pWriter.println(gson.toJson(message));
 		pWriter.flush();
