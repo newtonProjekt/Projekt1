@@ -9,6 +9,14 @@ import java.util.List;
  * The entity class that represents the tests. Contains the type of test and the questions in the test.
  */
 @Entity
+@NamedQueries({
+@NamedQuery(
+		name="getTest",
+		query = "select c from SchoolTest c where SchoolTest.id=:testId"),
+@NamedQuery(
+		name="getAllTests",
+		query = "select c from SchoolTest c")
+})
 public class SchoolTest {
 
 	@Id
