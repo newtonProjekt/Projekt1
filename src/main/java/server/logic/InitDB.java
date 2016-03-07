@@ -1,6 +1,5 @@
 package server.logic;
 
-import org.eclipse.persistence.annotations.Properties;
 import server.datamodel.*;
 
 import javax.persistence.EntityManager;
@@ -36,7 +35,7 @@ public class InitDB {
 		// Create dummy entries
 		Answer answer = new Answer("Test",true);
 		Answer answer2 = new Answer("Test2",false);
-		AnswerSubmited answerSubmited = new AnswerSubmited("Test2",false);
+		AnswerSubmited answerSubmited = new AnswerSubmited("Test2");
 		NewtonClass newtonClass = new NewtonClass("Java1");
 		Question question = new Question("Testet test tetstst",2);
 		SchoolTest schoolTest = new SchoolTest("Retest");

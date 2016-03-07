@@ -16,6 +16,10 @@ import java.util.List;
 /*@NamedQuery(
 		name="getQuestion",
 		query = "select c from Question c where Question.id=:questionId")*/
+/*@NamedQuery(
+		name="getQuestion",
+		query = "select c from Question c where Question.id=:questionId")
+*/
 public class Question {
 
 	@Id

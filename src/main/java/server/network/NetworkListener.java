@@ -21,8 +21,10 @@ public class NetworkListener implements Runnable {
     private Socket connection;
 
 
+
     public NetworkListener() throws IOException{
         server = new ServerSocket(portNumber);
+
     }
 
     /**
@@ -39,6 +41,7 @@ public class NetworkListener implements Runnable {
             try {
                 Thread.sleep(100);
                 connection = new Socket();
+
                 connection = server.accept();
                 System.out.println(connection.getInetAddress());
                 Thread clientThread = new Thread(new Client(connection));

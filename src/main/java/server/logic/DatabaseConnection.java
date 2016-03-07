@@ -65,7 +65,7 @@ public class DatabaseConnection {
 	 * @return List\<SchoolTest\>
 	 */
 	public List<SchoolTest> getStudentTests(String persNumber){
-		return em.createNamedQuery("getStudentTests").getResultList();
+		return em.createNamedQuery("getStudentTests").setParameter("pNumber", Long.parseLong(persNumber)).getResultList();
 	}
 
 	// From SchoolTest entity

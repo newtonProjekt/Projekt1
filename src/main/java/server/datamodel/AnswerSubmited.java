@@ -9,6 +9,9 @@ import javax.persistence.*;
  */
 @Entity
 /*@NamedQuery(
+=======
+/*
+>>>>>>> origin/master
 @NamedQuery(
 		name="getSubmittedAnswer",
 		query = "select c from AnswerSubmited c where SchoolTest.id = :testId")
@@ -28,9 +31,9 @@ public class AnswerSubmited {
 	public AnswerSubmited(){
 	}
 
-	public AnswerSubmited(String answerString, boolean correctAnswer) {
+	public AnswerSubmited(String answerString) {
 		this.answerString = answerString;
-		this.correctAnswer = correctAnswer;
+		this.correctAnswer = false;
 	}
 
 	public int getId() {

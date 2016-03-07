@@ -137,7 +137,7 @@ public class Student {
 	 * Checks submitted login credentials against the ones stored in the entity. Returns boolean with result.
 	 *
 	 * @param submittedPassword String
-	 * @return
+	 * @return boolean
 	 */
 
 	public boolean checkLogin(String submittedPassword){
