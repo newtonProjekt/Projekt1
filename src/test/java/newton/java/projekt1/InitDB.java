@@ -1,4 +1,4 @@
-package server.logic;
+package newton.java.projekt1;
 
 import server.datamodel.*;
 
@@ -39,7 +39,7 @@ public class InitDB {
 		NewtonClass newtonClass = new NewtonClass("Java1");
 		Question question = new Question("Testet test tetstst",2);
 		SchoolTest schoolTest = new SchoolTest("Retest");
-		Student student = new Student(454545,"Johan Lindström","password");
+		Student student = new Student(454545,"Johan Lindstrï¿½m","password");
 
 		schoolTest.addQuestion(question);
 		question.addAnswer(answer);

@@ -4,18 +4,10 @@ import javax.persistence.*;
 /**
  * The entity class that stores the usersubmited answers.
  * 
- * @author Johan Lindstr�m (jolindse@hotmail.com)
+ * @author Johan (jolindse@hotmail.com)
  *
  */
 @Entity
-/*@NamedQuery(
-=======
-/*
->>>>>>> origin/master
-@NamedQuery(
-		name="getSubmittedAnswer",
-		query = "select c from AnswerSubmited c where SchoolTest.id = :testId")
-*/
 public class AnswerSubmited {
 
 	@Id

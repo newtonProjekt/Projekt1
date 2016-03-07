@@ -13,13 +13,9 @@ import java.util.List;
  * text and optionally question image.
  */
 @Entity
-/*@NamedQuery(
-		name="getQuestion",
-		query = "select c from Question c where Question.id=:questionId")*/
-/*@NamedQuery(
+@NamedQuery(
 		name="getQuestion",
 		query = "select c from Question c where Question.id=:questionId")
-*/
 public class Question {
 
 	@Id
