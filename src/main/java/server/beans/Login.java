@@ -6,6 +6,7 @@ package server.beans;
 public class Login {
 
     private String loginId, password;
+    private boolean getTests = false;
 
     public Login (){
 
@@ -14,6 +15,12 @@ public class Login {
     public Login (String loginId, String password){
         this.loginId = loginId;
         this.password = password;
+    }
+
+    public Login (String loginId, String password, boolean getTests){
+        this.loginId = loginId;
+        this.password = password;
+        this.getTests = getTests;
     }
 
     public String getLoginId() {

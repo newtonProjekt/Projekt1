@@ -7,10 +7,8 @@ package server.network;
 
 import com.google.gson.*;
 import server.beans.Message;
-import server.datamodel.SchoolTest;
 import server.logic.ServerController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -43,6 +41,8 @@ public class CommandHandler {
 		JsonObject commandObj = parser.parse(jsonData).getAsJsonObject();
 		String command = commandObj.get("command").getAsString();
 		JsonArray commandDataArray = commandObj.getAsJsonArray("commandData");
+		JsonObject jsonObject;
+		JsonElement jsonElement;
 
         /* The following switch statements calls for the appropriate method in controller.
 		   and always includes a reference to this instance of CommandHandler for possible
@@ -53,23 +53,23 @@ public class CommandHandler {
 				// do login routine
 
 				//breaking down the the desired parts of the commanddataArray
-				JsonElement jsonElement = commandDataArray.get(0);
-				JsonObject jsonObject = jsonElement.getAsJsonObject();
+				jsonElement = commandDataArray.get(0);
+				jsonObject = jsonElement.getAsJsonObject();
 				String loginId = jsonObject.get("loginId").getAsString();
 				String password = jsonObject.get("password").getAsString();
+				boolean getTests = jsonObject.get("getTests").getAsBoolean();
 
 				//call the checkLogin in controller and pass the loginId and password
 				if (controller.checkLogin(loginId, password) == true) {
 					clientId = Long.parseLong(loginId);
-					List<SchoolTest> listOfTests = new ArrayList<SchoolTest>();
-
-					//get all tests for the desired client from the database via controller
-					listOfTests = controller.getAlltestsFromDB(loginId);
-					Message message = new Message("gettestlist");
-					message.addCommandData(listOfTests);
-
-					//send the list of tests to the client
-					client.send(gson.toJson(message));
+					if (getTests) {
+						//get all tests for the desired client from the database via controller
+						List listOfTests = controller.getAlltestsFromDB(loginId);
+						Message message = new Message("gettestlist");
+						message.addCommandData(listOfTests);
+						//send the list of tests to the client
+						send(message);
+					}
 				}
 				break;
 			case "starttest":
