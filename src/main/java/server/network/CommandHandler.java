@@ -10,7 +10,10 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import java.util.ArrayList;
+import java.util.List;
 import server.beans.Message;
+import server.datamodel.SchoolTest;
 import server.logic.ServerController;
 
 
@@ -61,7 +64,18 @@ public class CommandHandler {
                 String password = jsonObject.get("password").getAsString();
                 
                 //call the checkLogin in controller and pass the loginId and password
-                controller.checkLogin(loginId, password);
+                if(controller.checkLogin(loginId, password) == true){
+                    clientId = Long.parseLong(loginId);
+                     List<SchoolTest> listOfTests = new ArrayList<SchoolTest>();
+                    listOfTests = controller.getAlltestsFromDB(loginId);
+                    Message message = new Message("gettestlist");
+                    message.addCommandData(listOfTests);
+                    
+                    client.send(gson.toJson(message));
+                }
+                else{
+                    break;
+                }
                 
                 
                 break;

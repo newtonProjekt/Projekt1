@@ -1,6 +1,8 @@
 package server.logic;
 
 
+import java.util.List;
+import server.datamodel.SchoolTest;
 import server.datamodel.Student;
 
 /**
@@ -55,5 +57,11 @@ public class ServerController {
             return studentDB.checkLogin(password);
         }
         return false;
+    }
+    
+    public List<SchoolTest> getAlltestsFromDB(String perNumber){
+        List<SchoolTest> listOfTests = dbc.getStudentTests(perNumber);
+        return listOfTests;
+        
     }
 }
