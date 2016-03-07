@@ -32,7 +32,7 @@ public class DatabaseConnection {
 
 	// PERSIST ENTITY
 
-	public <T> void persisitEntity(T entity){
+	public <T> void persistEntity(T entity){
 		etx = em.getTransaction();
 		etx.begin();
 
