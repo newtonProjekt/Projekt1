@@ -47,13 +47,10 @@ public class ServerController {
      *
      * @param login String
      * @param password String
-     * @return
+     * @return boolean
      */
-    public boolean checkLogin(String login, String password){
+    public boolean checkLogin(String login, String password) {
         Student studentDB = dbc.getStudent(login);
-        if (studentDB != null) {
-            return studentDB.checkLogin(password);
-        }
-        return false;
+        return studentDB != null && studentDB.checkLogin(password);
     }
 }
