@@ -15,7 +15,7 @@ import java.util.List;
 @Entity
 @NamedQuery(
 		name="getQuestion",
-		query = "select c from Question c where Question.id=:questionId")
+		query = "select c from Question c where c.id=:questionId")
 public class Question {
 
 	@Id

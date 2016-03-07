@@ -8,7 +8,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 /**
- * Class to init db tables
+ * Class to init db tables and fill with test data.
  * 
  * @author Johan Lindström (jolindse@hotmail.com)
  *
@@ -34,20 +34,102 @@ public class InitDB {
 
 		// Create dummy entries
 		Answer answer = new Answer("Test",true);
+		Answer answer1 = new Answer("Make",true);
 		Answer answer2 = new Answer("Test2",false);
-		AnswerSubmited answerSubmited = new AnswerSubmited("Test2");
+		Answer answer3 = new Answer("Lök",false);
+		Answer answer4 = new Answer("Sopa",false);
+		Answer answer5 = new Answer("Allt",false);
+		Answer answer6 = new Answer("Kossa",false);
+		Answer answer7 = new Answer("Handgranat",false);
+		Answer answer8 = new Answer("Lussebulle",true);
+		Answer answer9 = new Answer("Kaffe",false);
+		Answer answer10 = new Answer("Älg",false);
+		Answer answer11 = new Answer("Mindre potent",false);
+		Answer answer12 = new Answer("Kanonmat",false);
+		Answer answer13 = new Answer("Turturduva",false);
+		Answer answer14 = new Answer("Plånbok",false);
+		Answer answer15 = new Answer("Smögen",false);
+
 		NewtonClass newtonClass = new NewtonClass("Java1");
-		Question question = new Question("Testet test tetstst",2);
+		NewtonClass newtonClass1 = new NewtonClass(".NET 1");
+
+		Question question = new Question("Testet test tetstst",1);
+		Question question1 = new Question("Grötlök med smör",1);
+		Question question2 = new Question("Alla har kul",2);
+		Question question3 = new Question("Med ögon i rött",4);
+		Question question4 = new Question("Nils Poppe",2);
+		Question question5 = new Question("Tänk på döden",1);
+		Question question6 = new Question("Öbor är galna",2);
+		Question question7 = new Question("Hisingen. Varför Hisingen?",1);
+
+		AnswerSubmited answerSubmited = new AnswerSubmited("Test675",question);
+		AnswerSubmited answerSubmited1 = new AnswerSubmited("Test2452",question1);
+		AnswerSubmited answerSubmited2 = new AnswerSubmited("Test2615361",question2);
+		AnswerSubmited answerSubmited3 = new AnswerSubmited("Test26785",question3);
+		AnswerSubmited answerSubmited4 = new AnswerSubmited("Test25654",question4);
+		AnswerSubmited answerSubmited5 = new AnswerSubmited("Test252654",question5);
+
 		SchoolTest schoolTest = new SchoolTest("Retest");
-		Student student = new Student(454545,"Johan Lindstr�m","password");
+		SchoolTest schoolTest1 = new SchoolTest("Hejsan");
+		SchoolTest schoolTest2 = new SchoolTest("Hoppsan");
+		SchoolTest schoolTest3 = new SchoolTest("Muppen");
+
+		Student student = new Student(454545,"Johan Lindström","password");
+		Student student1 = new Student(545454, "Karl Fagher","lösen");
+		Student student2 = new Student(212121,"Lisa Nilsson","passord");
+
 
 		schoolTest.addQuestion(question);
+		schoolTest.addQuestion(question1);
 		question.addAnswer(answer);
-		question.addAnswer(answer2);
+		question.addAnswer(answer1);
+		question1.addAnswer(answer2);
+		question1.addAnswer(answer3);
+
+		schoolTest1.addQuestion(question2);
+		schoolTest1.addQuestion(question3);
+		question2.addAnswer(answer4);
+		question2.addAnswer(answer5);
+		question3.addAnswer(answer6);
+		question3.addAnswer(answer7);
+
+		schoolTest2.addQuestion(question4);
+		schoolTest2.addQuestion(question5);
+		question4.addAnswer(answer8);
+		question4.addAnswer(answer9);
+		question5.addAnswer(answer10);
+		question5.addAnswer(answer11);
+
+		schoolTest3.addQuestion(question6);
+		schoolTest3.addQuestion(question7);
+		question6.addAnswer(answer12);
+		question6.addAnswer(answer13);
+		question7.addAnswer(answer14);
+		question7.addAnswer(answer15);
 
 		student.addAnswer(answerSubmited);
+		student.addAnswer(answerSubmited1);
+		student.addTest(schoolTest);
+		student.addTest(schoolTest2);
+		student.addTest(schoolTest3);
+
+		student1.addAnswer(answerSubmited2);
+		student1.addAnswer(answerSubmited3);
+		student1.addTest(schoolTest1);
+		student1.addTest(schoolTest2);
+
+		student2.addAnswer(answerSubmited4);
+		student2.addAnswer(answerSubmited5);
+		student2.addTest(schoolTest);
+		student2.addTest(schoolTest3);
+
 		newtonClass.addStudent(student);
+		newtonClass.addStudent(student1);
+
+		newtonClass1.addStudent(student2);
+
 		newtonClass.addTest(schoolTest);
+		newtonClass1.addTest(schoolTest2);
 
 		EntityTransaction tx = em.getTransaction();
 
@@ -55,6 +137,7 @@ public class InitDB {
 
 		tx.begin();
 
+		/*
 		em.persist(question);
 		em.persist(answer);
 		em.persist(answer2);
@@ -62,6 +145,14 @@ public class InitDB {
 		em.persist(schoolTest);
 		em.persist(student);
 		em.persist(newtonClass);
+		*/
+
+		em.persist(student);
+		em.persist(student1);
+		em.persist(student2);
+
+		em.persist(newtonClass);
+		em.persist(newtonClass1);
 
 		tx.commit();
 

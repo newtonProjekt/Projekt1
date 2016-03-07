@@ -23,7 +23,8 @@ public class AnswerSubmited {
 	public AnswerSubmited(){
 	}
 
-	public AnswerSubmited(String answerString) {
+	public AnswerSubmited(String answerString, Question question) {
+		this.question = question;
 		this.answerString = answerString;
 		this.correctAnswer = false;
 	}

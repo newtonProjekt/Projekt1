@@ -12,7 +12,7 @@ import java.util.List;
 @NamedQueries({
 @NamedQuery(
 		name="getTest",
-		query = "select c from SchoolTest c where SchoolTest.id=:testId"),
+		query = "select c from SchoolTest c where c.id=:testId"),
 @NamedQuery(
 		name="getAllTests",
 		query = "select c from SchoolTest c")

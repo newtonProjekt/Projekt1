@@ -66,6 +66,7 @@ public class Student {
      */
 	public Student(long persNumber, String name, String password) {
 		answersSubmited = new ArrayList<AnswerSubmited>();
+		testsToTake = new ArrayList<>();
 		this.persNumber = persNumber;
 		this.name = name;
 		this.password = password;
