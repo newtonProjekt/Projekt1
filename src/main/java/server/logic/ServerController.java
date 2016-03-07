@@ -56,9 +56,38 @@ public class ServerController {
         return studentDB != null && studentDB.checkLogin(password);
     }
     
+    
+    /**
+     * Gets all the availabe tests for the client
+     *
+     * @param perNumber String
+     * @return List
+     */
     public List<SchoolTest> getAlltestsFromDB(String perNumber){
         List<SchoolTest> listOfTests = dbc.getStudentTests(perNumber);
         return listOfTests;
         
     }
+    
+    
+    
+    
+    public void startTest(Long clientId, String testId){
+    
+        int intTestId = Integer.parseInt(testId);
+        Student student = dbc.getStudent(Long.toString(clientId));
+	int index = -1;	   
+	for (SchoolTest currTest: student.getTestsToTake()){
+		   if (currTest.getId() == intTestId){
+			   index = student.getTestsToTake().indexOf(currTest);
+		   }
+        }
+        
+        if(index > -1){
+            SchoolTest toRemove = student.getTestsToTake().get(index);
+            student.removeTest(toRemove);
+        }
+        
+    }
+    
 }

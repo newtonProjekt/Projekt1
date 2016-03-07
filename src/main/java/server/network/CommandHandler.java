@@ -67,10 +67,13 @@ public class CommandHandler {
                 if(controller.checkLogin(loginId, password) == true){
                     clientId = Long.parseLong(loginId);
                      List<SchoolTest> listOfTests = new ArrayList<SchoolTest>();
+                     
+                     //get all tests for the desired client from the database via controller
                     listOfTests = controller.getAlltestsFromDB(loginId);
                     Message message = new Message("gettestlist");
                     message.addCommandData(listOfTests);
                     
+                    //send the list of tests to the client
                     client.send(gson.toJson(message));
                 }
                 else{
@@ -82,7 +85,12 @@ public class CommandHandler {
             case "starttest":
                 // set test as started controller
                 
+                //breaking down the the desired part of the commanddataArray
+                JsonElement jsonElement2 = commandDataArray.get(0);
+                String testId = jsonElement2.getAsString();
                 
+                //calling the starttest-method in controller to remove the test from the students list of available tests
+                controller.startTest(clientId , testId);
                 
                 break;
             case "getresult":
@@ -93,6 +101,9 @@ public class CommandHandler {
                 break;
             case "gettest":
                 // send test
+                
+                
+                
                 break;
             case "getalltests":
                 // send a list of all tests
