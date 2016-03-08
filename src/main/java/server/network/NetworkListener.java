@@ -61,5 +61,8 @@ public class NetworkListener implements Runnable {
         }
     }
     
+    public void stopServerConnection(){
+        serverSocketOk = false;
+    }
 
 }

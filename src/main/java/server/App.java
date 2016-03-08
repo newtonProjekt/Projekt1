@@ -16,6 +16,9 @@ import java.util.ConcurrentModificationException;
  * Created by Johan on 2016-03-04.
  */
 public class App {
+
+    public static NetworkListener networkListener;
+
     public static void main(String[] args) {
         // Starts controller
         ServerController controller = new ServerController();
@@ -24,7 +27,13 @@ public class App {
         ServerController.setReference(controller);
 
         // Starts network listening in separate thread
-        Thread networkListener = new Thread(new NetworkListener());
-        networkListener.start();
+        networkListener = new NetworkListener();
+
+        Thread networkThread = new Thread(networkListener);
+        networkThread.start();
+    }
+
+    public static void disconnect(){
+        networkListener.stopServerConnection();
     }
 }
