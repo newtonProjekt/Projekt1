@@ -23,9 +23,10 @@ public class Question {
 	private int id;
 	@NotNull
 	private boolean multiQuestion;
+	private boolean vgQuestion;
 	@NotNull
 	private int points;
-	//private Image questionImage;
+	private String questionImage;
 	@NotNull
 	private String questionText;
 	@OneToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE},orphanRemoval = true)
@@ -35,10 +36,23 @@ public class Question {
 		answers = new ArrayList<Answer>();
 	}
 
-	public Question(String questionText, int points){
+	public Question(String questionText, int points, boolean multiQuestion){
+		this.multiQuestion = multiQuestion;
 		this.points = points;
 		this.questionText = questionText;
-		answers = new ArrayList<Answer>();
+		if (multiQuestion) {
+			answers = new ArrayList<Answer>();
+		}
+	}
+
+	public Question(String questionText, int points, boolean multiQuestion, boolean vgQuestion){
+		this.multiQuestion = multiQuestion;
+		this.vgQuestion = vgQuestion;
+		this.points = points;
+		this.questionText = questionText;
+		if (multiQuestion) {
+			answers = new ArrayList<Answer>();
+		}
 	}
 
 	public int getId() {
@@ -65,15 +79,21 @@ public class Question {
 		this.points = points;
 	}
 
-	/*
-	public ImageView getQuestionImage() {
+	public String getQuestionImage() {
 		return questionImage;
 	}
 
-	public void setQuestionImage(Image questionImage) {
+	public void setQuestionImage(String questionImage) {
 		this.questionImage = questionImage;
 	}
-	*/
+
+	public boolean isVgQuestion() {
+		return vgQuestion;
+	}
+
+	public void setVgQuestion(boolean vgQuestion) {
+		this.vgQuestion = vgQuestion;
+	}
 
 	public String getQuestionText() {
 		return questionText;
@@ -92,11 +112,15 @@ public class Question {
 	}
 
 	public void addAnswer(Answer currAnswer){
-		answers.add(currAnswer);
+		if (multiQuestion) {
+			answers.add(currAnswer);
+		}
 	}
 
 	public void removeAnswer(Answer currAnswer){
-		answers.remove(currAnswer);
+		if (multiQuestion) {
+			answers.remove(currAnswer);
+		}
 	}
 	
 }
