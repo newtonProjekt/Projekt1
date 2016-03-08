@@ -11,6 +11,8 @@ import java.net.Socket;
 import java.util.Scanner;
 
 /**
+ * Test to open socket, send commands and display feedback from server in stdout.
+ *
  * Created by Johan on 2016-03-06.
  */
 public class TestLogin {
@@ -22,8 +24,6 @@ public class TestLogin {
 		Thread thread = new Thread(new Connect());
 		thread.start();
 	}
-
-
 }
 
 class Connect implements Runnable{

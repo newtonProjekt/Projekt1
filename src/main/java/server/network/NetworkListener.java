@@ -27,7 +27,7 @@ public class NetworkListener implements Runnable {
             server = new ServerSocket(portNumber);
             serverSocketOk = true;
         } catch (IOException e) {
-            e.printStackTrace();
+            Logger.getLogger(NetworkListener.class.getName()).log(Level.SEVERE, null, e);
         }
 
     }
@@ -63,6 +63,11 @@ public class NetworkListener implements Runnable {
     
     public void stopServerConnection(){
         serverSocketOk = false;
+        try {
+            server.close();
+        } catch (IOException e) {
+            Logger.getLogger(NetworkListener.class.getName()).log(Level.SEVERE, null, e);
+        }
     }
 
 }

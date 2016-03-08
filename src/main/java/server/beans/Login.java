@@ -10,9 +10,7 @@ public class Login {
     private String loginId, password;
     private boolean getTests = false;
 
-    public Login (){
-
-    }
+    public Login (){}
 
     public Login (String loginId, String password){
         this.loginId = loginId;

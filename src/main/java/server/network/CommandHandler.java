@@ -7,18 +7,16 @@ package server.network;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonParser;
-import java.util.ArrayList;
 import server.beans.Login;
 import server.beans.Message;
+import server.beans.SubmittedTest;
 import server.datamodel.SchoolTest;
+import server.datamodel.Student;
 import server.logic.ServerController;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import server.beans.SubmittedTest;
-import server.datamodel.AnswerSubmited;
-import server.datamodel.Student;
 
 
 /**
@@ -65,12 +63,14 @@ public class CommandHandler {
 					clientId = currLogin.getLoginId();
 					setLogin(true);
 					if (currLogin.isGetTests()) {
-						send("gettests",controller.getAlltestsFromDB(clientId));
+						send("gettests", controller.getAlltestsFromDB(clientId));
 					}
 				}
 				break;
 			case "starttest":
-				// Set test as started in controller.
+				/**
+				 * Starts test by removing it from the current Students available tests.
+				 */
 				String testId = cmdData.get(0);
 				controller.startTest(clientId, testId);
 				break;
@@ -81,44 +81,58 @@ public class CommandHandler {
 				// send all test results for given criteria
 				break;
 			case "gettest":
-				send("gettest",controller.getTest(cmdData.get(0)));
+				/**
+				 * Gets a specific test.
+				 */
+				send("gettest", controller.getTest(cmdData.get(0)));
 				break;
 			case "gettestlist":
 				/**
 				 * Returns a map of testname and id that client has access to.
 				 */
-				Map<String,String> listMap = new HashMap<>();
-				for(SchoolTest currTest: controller.getAlltestsFromDB(clientId)){
-					listMap.put(currTest.getName(),Integer.toString(currTest.getId()));
+				Map<String, String> listMap = new HashMap<>();
+				for (SchoolTest currTest : controller.getAlltestsFromDB(clientId)) {
+					listMap.put(currTest.getName(), Integer.toString(currTest.getId()));
 				}
-				send("gettestlist",listMap);
+				send("gettestlist", listMap);
 				break;
 			case "gettests":
 				/**
-				 * Returns all tests available to client as a list of SchoolTest
+				 * Returns all tests available to client as a list of SchoolTest.
 				 */
-				send("gettests",controller.getAlltestsFromDB(clientId));
+				send("gettests", controller.getAlltestsFromDB(clientId));
 				break;
 			case "submit":
-				// do submit routine
-                                SubmittedTest subMittedTest = gson.fromJson(cmdData.get(0), SubmittedTest.class);
-                                controller.submitTestToDB(subMittedTest,clientId);
+				/**
+				 * Persists a submitted test from client.
+				 */
+				SubmittedTest subMittedTest = gson.fromJson(cmdData.get(0), SubmittedTest.class);
+				controller.submitTestToDB(subMittedTest, clientId);
 				break;
 			case "puttest":
-				// make new/updatde test
-                                SchoolTest schoolTest = gson.fromJson(cmdData.get(0), SchoolTest.class);
-                                controller.putTest(schoolTest);
+				/**
+				 * Updates if existent or creates a new managed entity of SchoolTest.
+				 */
+				SchoolTest schoolTest = gson.fromJson(cmdData.get(0), SchoolTest.class);
+				controller.putTest(schoolTest);
 				break;
 			case "putstudent":
-				// make new/update student
-                                Student student = gson.fromJson(cmdData.get(0), Student.class);
-                                controller.putStudent(student);
-			case "getallusers":
-				// send list of all users
-				send("getallusers",controller.getAllStudentsFromDB());
+				/**
+				 * Updates if existent or creates a new managed entity of Student.
+				 */
+				Student student = gson.fromJson(cmdData.get(0), Student.class);
+				controller.putStudent(student);
+			case "getallstudents":
+				/**
+				 * Returns all students in database.
+				 */
+				send("getallstudents", controller.getAllStudentsFromDB());
 				break;
 			case "getallstudentclasses":
-				send("getallstudentclasses",controller.getAllClasses());
+				/**
+				 * Returns all NewtonClasses in database
+				 */
+				send("getallstudentclasses", controller.getAllClasses());
 			default:
 				// Do nothing
 				break;
@@ -133,13 +147,13 @@ public class CommandHandler {
 	 * @param commandData Object
 	 */
 	public <T> void send(String command, T commandData) {
-		Message currMessage = new Message(command,commandData);
+		Message currMessage = new Message(command, commandData);
 		String jsonData = gson.toJson(currMessage);
 		client.send(jsonData);
 	}
 
 	/**
-	 * Sets the logged in status to ok if verification is succesfull. Otherwise drops connection.
+	 * Sets the logged in status to ok if verification is successful. Otherwise drops connection.
 	 *
 	 * @param logginOk boolean
 	 */

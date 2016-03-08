@@ -43,14 +43,6 @@ public class Message<T> {
 		this.commandData = commandData;
 	}
 
-	@Override
-	public String toString() {
-		return "Message{" +
-				"command='" + command + '\'' +
-				", commandData=" + commandData +
-				'}';
-	}
-
 	/**
 	 * Converts object to JSON for inclusion in message object.
 	 *

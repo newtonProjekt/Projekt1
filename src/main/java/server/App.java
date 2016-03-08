@@ -33,6 +33,9 @@ public class App {
         networkThread.start();
     }
 
+	/**
+     * Stops the server NetworkListener thread and disconnects socket.
+     */
     public static void disconnect(){
         networkListener.stopServerConnection();
     }

@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 /**
  * Client class
  *
- * Handles all connections to client sockets.
+ * Handles connection to client socket.
  *
  */
 

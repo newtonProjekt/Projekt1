@@ -11,12 +11,11 @@ import java.util.List;
 
 /**
  * Server controller class.
- * <p>
+ *
  * All calls from clients are routed through this class that handles all connections to db through the entities and JPA.
- * <p>
+ *
  * Created by Johan on 2016-03-04.
  */
-
 
 public class ServerController {
 
@@ -50,7 +49,7 @@ public class ServerController {
 	/**
 	 * Checks that supplied credentials from login is accurate and returns result.
 	 *
-	 * @param login    String
+	 * @param login String
 	 * @param password String
 	 * @return boolean
 	 */
@@ -59,9 +58,8 @@ public class ServerController {
 		return studentDB != null && studentDB.checkLogin(password);
 	}
 
-
 	/**
-	 * Gets all the availabe tests for the client
+	 * Gets all the available tests for the client
 	 *
 	 * @param perNumber String
 	 * @return List SchoolTest
@@ -101,7 +99,6 @@ public class ServerController {
 			student.removeTest(toRemove);
 			dbc.updateEntity(student);
 		}
-
 	}
 
 	/**
@@ -136,21 +133,21 @@ public class ServerController {
 		dbc.updateEntity(currStudent);
 	}
         
-        /**
-	 * gets a test and persists it 
+     /**
+	 * Gets a test from client and persists it
 	 *
-	 * @param SchoolTest
+	 * @param schoolTest SchoolTest
 	 */
-        public void putTest(SchoolTest schoolTest) {
+	 public void putTest(SchoolTest schoolTest) {
 		dbc.updateEntity(schoolTest);
 	}
         
-        /**
-	 * gets a student and persists it 
+	/**
+	 * Gets a student from client and persists it
 	 *
-	 * @param Student
+	 * @param student Student
 	 */
-        public void putStudent(Student student) {
+     public void putStudent(Student student) {
 		dbc.updateEntity(student);
 	}
         
