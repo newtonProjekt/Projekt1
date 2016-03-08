@@ -16,9 +16,9 @@ public class NewtonClass {
 	private int id;
 	@NotNull
 	private String name;
-	@OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
+	@OneToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE},orphanRemoval = true)
 	private List<Student> students;
-	@OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
+	@OneToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE},orphanRemoval = true)
 	private List<SchoolTest> tests;
 	
 	public NewtonClass(){

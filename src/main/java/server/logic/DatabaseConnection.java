@@ -35,16 +35,25 @@ public class DatabaseConnection {
 
 	// PERSIST ENTITY
 
-	public <T> void persistEntity(T entity) {
+	/**
+	 * Updates a existing entity or creates a new one if non existent.
+	 *
+	 * @param entity
+	 * @param <T>
+	 */
+	public <T> void updateEntity(T entity){
 		etx = em.getTransaction();
 		etx.begin();
-
-		em.persist(entity);
-
+		em.merge(entity);
 		etx.commit();
 	}
 
-
+	public <T> void persistEntity(T entity) {
+		etx = em.getTransaction();
+		etx.begin();
+		em.persist(entity);
+		etx.commit();
+	}
 
 	//  GET INFO FROM DATABASE QUERIES
 

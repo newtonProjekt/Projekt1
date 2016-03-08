@@ -77,6 +77,7 @@ public class CommandHandler {
 				// send all test results for given criteria
 				break;
 			case "gettest":
+				send("gettest",controller.getTest(cmdData.get(0)));
 				break;
 			case "gettestlist":
 				/**

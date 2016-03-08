@@ -13,9 +13,9 @@ public class AnswerSubmited {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
 	private SchoolTest test;
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
 	private Question question;
 	private String answerString;
 	private boolean correctAnswer;

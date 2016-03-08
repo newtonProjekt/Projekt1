@@ -37,9 +37,8 @@ public class Student {
 	private String password;
 	@OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
 	private List<AnswerSubmited> answersSubmited;
-	@OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
+	@OneToMany(cascade = CascadeType.PERSIST)
 	private List<SchoolTest> testsToTake;
-
 
 	public Student(){
 		answersSubmited = new ArrayList<AnswerSubmited>();

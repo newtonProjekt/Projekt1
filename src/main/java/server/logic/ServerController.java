@@ -61,12 +61,21 @@ public class ServerController {
 	 * Gets all the availabe tests for the client
 	 *
 	 * @param perNumber String
-	 * @return List
+	 * @return List SchoolTest
 	 */
 	public List<SchoolTest> getAlltestsFromDB(String perNumber) {
 		List<SchoolTest> listOfTests = dbc.getStudentTests(perNumber);
 		return listOfTests;
+	}
 
+	/**
+	 * Returns a specific test
+	 *
+	 * @param testId String
+	 * @return SchoolTest
+	 */
+	public SchoolTest getTest(String testId){
+		return dbc.getTest(testId);
 	}
 
 	/**
@@ -88,6 +97,7 @@ public class ServerController {
 		if (index > -1) {
 			SchoolTest toRemove = student.getTestsToTake().get(index);
 			student.removeTest(toRemove);
+			dbc.updateEntity(student);
 		}
 
 	}
