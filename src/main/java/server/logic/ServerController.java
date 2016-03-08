@@ -64,8 +64,7 @@ public class ServerController {
 	 * @return List SchoolTest
 	 */
 	public List<SchoolTest> getAlltestsFromDB(String perNumber) {
-		List<SchoolTest> listOfTests = dbc.getStudentTests(perNumber);
-		return listOfTests;
+		return dbc.getStudentTests(perNumber);
 	}
 
 	/**

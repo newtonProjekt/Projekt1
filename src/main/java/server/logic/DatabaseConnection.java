@@ -17,9 +17,9 @@ import java.util.List;
  */
 public class DatabaseConnection {
 
-	EntityManagerFactory emf;
-	EntityManager em;
-	EntityTransaction etx;
+	private EntityManagerFactory emf;
+	private EntityManager em;
+	private EntityTransaction etx;
 
 	// DB CONNECTIVITY METHODS
 
@@ -38,20 +38,13 @@ public class DatabaseConnection {
 	/**
 	 * Updates a existing entity or creates a new one if non existent.
 	 *
-	 * @param entity
-	 * @param <T>
+	 * @param entity EntityClass
+	 * @param <T> Object
 	 */
 	public <T> void updateEntity(T entity){
 		etx = em.getTransaction();
 		etx.begin();
 		em.merge(entity);
-		etx.commit();
-	}
-
-	public <T> void persistEntity(T entity) {
-		etx = em.getTransaction();
-		etx.begin();
-		em.persist(entity);
 		etx.commit();
 	}
 
