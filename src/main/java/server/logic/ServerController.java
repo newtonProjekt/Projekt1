@@ -1,14 +1,13 @@
 package server.logic;
 
 
-import java.util.ArrayList;
+import server.beans.SubmittedTest;
+import server.datamodel.AnswerSubmited;
 import server.datamodel.NewtonClass;
 import server.datamodel.SchoolTest;
 import server.datamodel.Student;
 
 import java.util.List;
-import server.beans.SubmittedTest;
-import server.datamodel.AnswerSubmited;
 
 /**
  * Server controller class.
@@ -106,7 +105,7 @@ public class ServerController {
 	}
 
 	/**
-	 * gets all the students registered in the database and sends the list
+	 * Gets all the students registered in the database and sends the list
 	 */
 	public List<Student> getAllStudentsFromDB() {
 		List<Student> listOfStudents = dbc.getStudents();
@@ -114,20 +113,26 @@ public class ServerController {
 
 	}
 
+	/**
+	 * Returns list of classes in database
+	 *
+	 * @return List\<NewtonClass\>
+	 */
 	public List<NewtonClass> getAllClasses() {
 		return dbc.getAllClasses();
 	}
 
-        
-        public String submitTestToDB(SubmittedTest subMittedTest) {
-                
-            List<AnswerSubmited> list = subMittedTest.getAnswersSubmited();
-            for(AnswerSubmited answersSubmitted : list){
-                dbc.updateEntity(answersSubmitted);
-            }
-		
-                String submitConfirm = "Du har nu lämnat in ditt test!";
-                return submitConfirm;
-	}           
-        
+	/**
+	 * Submits test answers from client to database.
+	 *
+	 * @param subMittedTest
+	 * @param clientId
+	 */
+	public void submitTestToDB(SubmittedTest subMittedTest, String clientId) {
+		Student currStudent = dbc.getStudent(clientId);
+		for (AnswerSubmited currAnswer: subMittedTest.getAnswersSubmited()) {
+			currStudent.addAnswer(currAnswer);
+		}
+		dbc.updateEntity(currStudent);
+	}
 }

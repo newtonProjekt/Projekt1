@@ -100,8 +100,8 @@ public class CommandHandler {
 				break;
 			case "submit":
 				// do submit routine
-                                SubmittedTest subMittedTest = gson.fromJson(cmdData.get(0), SubmittedTest.class);  
-                                send("submitconfirm",controller.submitTestToDB(subMittedTest));
+                SubmittedTest subMittedTest = gson.fromJson(cmdData.get(0), SubmittedTest.class);
+                controller.submitTestToDB(subMittedTest,clientId);
 				break;
 			case "puttest":
 				// make new/updatde test
