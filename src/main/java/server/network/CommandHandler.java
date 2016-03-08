@@ -107,6 +107,8 @@ public class CommandHandler {
 				// send list of all users
 				send("getallusers",controller.getAllStudentsFromDB());
 				break;
+			case "getallstudentclasses":
+				send("getallstudentclasses",controller.getAllClasses());
 			default:
 				// Do nothing
 				break;

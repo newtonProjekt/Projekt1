@@ -1,6 +1,7 @@
 package server.logic;
 
 
+import server.datamodel.NewtonClass;
 import server.datamodel.SchoolTest;
 import server.datamodel.Student;
 
@@ -108,6 +109,10 @@ public class ServerController {
 		List<Student> listOfStudents = dbc.getStudents();
 		return listOfStudents;
 
+	}
+
+	public List<NewtonClass> getAllClasses() {
+		return dbc.getAllClasses();
 	}
 
 }

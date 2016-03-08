@@ -1,5 +1,6 @@
 package server.logic;
 
+import server.datamodel.NewtonClass;
 import server.datamodel.Question;
 import server.datamodel.SchoolTest;
 import server.datamodel.Student;
@@ -119,6 +120,15 @@ public class DatabaseConnection {
 	public Question getQuestion(String questionId) {
 		List result = em.createNamedQuery("getQuestion").setParameter("questionId", Integer.parseInt(questionId)).getResultList();
 		return (Question) result.get(0);
+	}
+
+	/**
+	 * Gets all classes.
+	 *
+	 * @return List\<NewtonClass\>
+	 */
+	public List<NewtonClass> getAllClasses() {
+		return em.createNamedQuery("getallclasses").getResultList();
 	}
 
 }
