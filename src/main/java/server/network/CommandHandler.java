@@ -15,6 +15,8 @@ import server.logic.ServerController;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import server.beans.SubmittedTest;
+import server.datamodel.AnswerSubmited;
 
 
 /**
@@ -97,6 +99,8 @@ public class CommandHandler {
 				break;
 			case "submit":
 				// do submit routine
+                                AnswerSubmited answerSubmitted = gson.fromJson(cmdData.get(0), AnswerSubmited.class);  
+                                send("submitconfirm",controller.submitTestToDB(answerSubmitted));
 				break;
 			case "puttest":
 				// make new/updatde test

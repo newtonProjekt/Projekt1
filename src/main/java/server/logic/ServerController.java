@@ -6,6 +6,8 @@ import server.datamodel.SchoolTest;
 import server.datamodel.Student;
 
 import java.util.List;
+import server.beans.SubmittedTest;
+import server.datamodel.AnswerSubmited;
 
 /**
  * Server controller class.
@@ -115,4 +117,11 @@ public class ServerController {
 		return dbc.getAllClasses();
 	}
 
+        public String submitTestToDB(AnswerSubmited answerSubmited) {
+                
+		dbc.updateEntity(answerSubmited);
+                String submitConfirm = "Du har nu lämnat in ditt test!";
+                return submitConfirm;
+	}           
+        
 }

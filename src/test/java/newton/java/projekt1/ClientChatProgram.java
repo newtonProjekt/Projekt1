@@ -11,11 +11,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import server.beans.Login;
 import server.beans.Message;
+import server.beans.SubmittedTest;
+import server.datamodel.Answer;
+import server.datamodel.AnswerSubmited;
+import server.datamodel.Question;
 
 /**
  * 
@@ -68,9 +73,14 @@ class PrintServer implements Runnable{
 	
 	private Socket connection;
         Login login = new Login();
+        SubmittedTest submit = new SubmittedTest();
+        AnswerSubmited anssub = new AnswerSubmited();
+        Question que = new Question();
+        Answer answer = new Answer();
+        ArrayList<AnswerSubmited> list = new ArrayList<AnswerSubmited>();
         Gson gson = new Gson();
         //JsonObject json = new JsonObject();
-        Message message = new Message("getallusers");
+        Message message = new Message("submit");
         
 	
 	public PrintServer(Socket connection) throws IOException {
@@ -80,11 +90,16 @@ class PrintServer implements Runnable{
                 login.setLoginId("454545");
                 login.setPassword("password");
                 login.setGetTests(true);
-                
-                
+                //message.addCommandData(10);
                 //message.addCommandData(login);
                 
-                
+                que.setQuestionText("Huvudstad i Spanien?");
+                //answer.setAnswerText("madrid");
+                anssub.setQuestion(que);
+                anssub.setAnswerString("madrid");
+                list.add(anssub);
+                submit.setAnswersSubmited(list);
+                message.addCommandData(submit);
                 
                 
                 PrintWriter pWriter = new PrintWriter(connection.getOutputStream());
