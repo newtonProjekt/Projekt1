@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 import server.beans.SubmittedTest;
 import server.datamodel.AnswerSubmited;
+import server.datamodel.Student;
 
 
 /**
@@ -100,14 +101,18 @@ public class CommandHandler {
 				break;
 			case "submit":
 				// do submit routine
-                SubmittedTest subMittedTest = gson.fromJson(cmdData.get(0), SubmittedTest.class);
-                controller.submitTestToDB(subMittedTest,clientId);
+                                SubmittedTest subMittedTest = gson.fromJson(cmdData.get(0), SubmittedTest.class);
+                                controller.submitTestToDB(subMittedTest,clientId);
 				break;
 			case "puttest":
 				// make new/updatde test
+                                SchoolTest schoolTest = gson.fromJson(cmdData.get(0), SchoolTest.class);
+                                controller.putTest(schoolTest);
 				break;
 			case "putstudent":
 				// make new/update student
+                                Student student = gson.fromJson(cmdData.get(0), Student.class);
+                                controller.putStudent(student);
 			case "getallusers":
 				// send list of all users
 				send("getallusers",controller.getAllStudentsFromDB());

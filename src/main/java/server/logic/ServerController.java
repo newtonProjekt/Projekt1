@@ -135,4 +135,23 @@ public class ServerController {
 		}
 		dbc.updateEntity(currStudent);
 	}
+        
+        /**
+	 * gets a test and persists it 
+	 *
+	 * @param SchoolTest
+	 */
+        public void putTest(SchoolTest schoolTest) {
+		dbc.updateEntity(schoolTest);
+	}
+        
+        /**
+	 * gets a student and persists it 
+	 *
+	 * @param Student
+	 */
+        public void putStudent(Student student) {
+		dbc.updateEntity(student);
+	}
+        
 }
