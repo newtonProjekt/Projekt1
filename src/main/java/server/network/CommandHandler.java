@@ -61,10 +61,7 @@ public class CommandHandler {
 					clientId = currLogin.getLoginId();
 					setLogin(true);
 					if (currLogin.isGetTests()) {
-						List listOfTests = controller.getAlltestsFromDB(clientId);
-						Message sendMessage = new Message("availableTests");
-						sendMessage.addCommandData(listOfTests);
-						send(sendMessage);
+						send("availabletests",controller.getAlltestsFromDB(clientId));
 					}
 				}
 				break;
@@ -89,15 +86,13 @@ public class CommandHandler {
 				for(SchoolTest currTest: controller.getAlltestsFromDB(clientId)){
 					listMap.put(currTest.getName(),Integer.toString(currTest.getId()));
 				}
-				send(new Message("testlist",listMap));
+				send("testlist",listMap);
 				break;
 			case "gettests":
 				/**
 				 * Returns all tests available to client as a list of SchoolTest
 				 */
-				Message getTestMessage = new Message("availableTests");
-				getTestMessage.addCommandData(controller.getAlltestsFromDB(clientId));
-				send(getTestMessage);
+				send("availabletest",controller.getAlltestsFromDB(clientId));
 				break;
 			case "getalltests":
 				// send a list of all tests
@@ -121,11 +116,12 @@ public class CommandHandler {
 	 * Method that takes the message-bean returned from the controller, converts it to JSON
 	 * and sends it to the client.
 	 *
-	 * @param currMessage Message
+	 * @param command String
+	 * @param commandData Object
 	 */
-	public void send(Message currMessage) {
+	public <T> void send(String command, T commandData) {
+		Message currMessage = new Message(command,commandData);
 		String jsonData = gson.toJson(currMessage);
-		System.out.println(jsonData); // TEST
 		client.send(jsonData);
 	}
 

@@ -36,7 +36,6 @@ public class Client implements Runnable {
 		} catch (IOException e) {
 			Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, e);
 		}
-		System.out.println("Client connection established."); // TEST
 	}
 
 	/**
@@ -73,9 +72,7 @@ public class Client implements Runnable {
 				Scanner sc = new Scanner(connection.getInputStream());
 
 				while (sc.hasNextLine()) {
-					logLine = sc.nextLine();
-					System.out.println(logLine);
-					commandHandler.parse(logLine);
+					commandHandler.parse(sc.nextLine());
 				}
 			} catch (IOException e) {
 				Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, e);

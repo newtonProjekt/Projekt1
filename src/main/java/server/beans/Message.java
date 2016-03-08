@@ -51,6 +51,11 @@ public class Message<T> {
 				'}';
 	}
 
+	/**
+	 * Converts object to JSON for inclusion in message object.
+	 *
+	 * @param currData Object
+	 */
 	public void addCommandData(T currData){
 		Gson gson = new Gson();
 		String cmdData = gson.toJson(currData);

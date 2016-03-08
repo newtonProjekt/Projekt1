@@ -43,7 +43,7 @@ public class NetworkListener implements Runnable {
                 connection = new Socket();
 
                 connection = server.accept();
-                System.out.println(connection.getInetAddress());
+                System.out.println(connection.getInetAddress()); // TO BE LOGGED
                 Thread clientThread = new Thread(new Client(connection));
                 clientThread.start();
 

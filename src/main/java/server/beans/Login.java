@@ -1,6 +1,8 @@
 package server.beans;
 
 /**
+ * Login bean used to send login data and optionally request available tests.
+ *
  * Created by Johan on 2016-03-04.
  */
 public class Login {
