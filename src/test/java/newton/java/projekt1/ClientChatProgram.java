@@ -70,7 +70,7 @@ class PrintServer implements Runnable{
         Login login = new Login();
         Gson gson = new Gson();
         //JsonObject json = new JsonObject();
-        Message message = new Message("starttest");
+        Message message = new Message("getallusers");
         
 	
 	public PrintServer(Socket connection) throws IOException {
@@ -79,8 +79,10 @@ class PrintServer implements Runnable{
                 
                 login.setLoginId("454545");
                 login.setPassword("password");
+                login.setGetTests(true);
                 
-                message.addCommandData("10");
+                
+                //message.addCommandData(login);
                 
                 
                 

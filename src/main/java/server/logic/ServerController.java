@@ -101,4 +101,15 @@ public class ServerController {
 
 	}
 
+        /**
+	 * gets all the students registered in the database and sends the list
+	 *
+	 * 
+	 */
+        public List<Student> getAllStudentsFromDB() {
+		List<Student> listOfStudents = dbc.getStudents();
+		return listOfStudents;
+
+	}
+        
 }
