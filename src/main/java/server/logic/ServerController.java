@@ -73,7 +73,7 @@ public class ServerController {
 	 * @param testId String
 	 * @return SchoolTest
 	 */
-	public SchoolTest getTest(String testId){
+	public SchoolTest getTest(String testId) {
 		return dbc.getTest(testId);
 	}
 
@@ -82,7 +82,7 @@ public class ServerController {
 	 * current client.
 	 *
 	 * @param clientId String
-	 * @param testId String
+	 * @param testId   String
 	 */
 	public void startTest(String clientId, String testId) {
 		int intTestId = Integer.parseInt(testId);
@@ -101,15 +101,13 @@ public class ServerController {
 
 	}
 
-        /**
+	/**
 	 * gets all the students registered in the database and sends the list
-	 *
-	 * 
 	 */
-        public List<Student> getAllStudentsFromDB() {
+	public List<Student> getAllStudentsFromDB() {
 		List<Student> listOfStudents = dbc.getStudents();
 		return listOfStudents;
 
 	}
-        
+
 }

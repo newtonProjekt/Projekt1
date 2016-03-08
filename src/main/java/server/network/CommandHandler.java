@@ -61,7 +61,7 @@ public class CommandHandler {
 					clientId = currLogin.getLoginId();
 					setLogin(true);
 					if (currLogin.isGetTests()) {
-						send("availabletests",controller.getAlltestsFromDB(clientId));
+						send("gettests",controller.getAlltestsFromDB(clientId));
 					}
 				}
 				break;
@@ -87,26 +87,25 @@ public class CommandHandler {
 				for(SchoolTest currTest: controller.getAlltestsFromDB(clientId)){
 					listMap.put(currTest.getName(),Integer.toString(currTest.getId()));
 				}
-				send("testlist",listMap);
+				send("gettestlist",listMap);
 				break;
 			case "gettests":
 				/**
 				 * Returns all tests available to client as a list of SchoolTest
 				 */
-				send("availabletest",controller.getAlltestsFromDB(clientId));
-				break;
-			case "getalltests":
-				// send a list of all tests
+				send("gettests",controller.getAlltestsFromDB(clientId));
 				break;
 			case "submit":
 				// do submit routine
 				break;
-			case "maketest":
-				// make new test
+			case "puttest":
+				// make new/updatde test
 				break;
+			case "putstudent":
+				// make new/update student
 			case "getallusers":
 				// send list of all users
-				send("studentlist",controller.getAllStudentsFromDB());
+				send("getallusers",controller.getAllStudentsFromDB());
 				break;
 			default:
 				// Do nothing
