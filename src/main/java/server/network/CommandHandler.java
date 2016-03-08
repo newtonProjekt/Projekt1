@@ -7,6 +7,7 @@ package server.network;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonParser;
+import java.util.ArrayList;
 import server.beans.Login;
 import server.beans.Message;
 import server.datamodel.SchoolTest;
@@ -99,8 +100,8 @@ public class CommandHandler {
 				break;
 			case "submit":
 				// do submit routine
-                                AnswerSubmited answerSubmitted = gson.fromJson(cmdData.get(0), AnswerSubmited.class);  
-                                send("submitconfirm",controller.submitTestToDB(answerSubmitted));
+                                SubmittedTest subMittedTest = gson.fromJson(cmdData.get(0), SubmittedTest.class);  
+                                send("submitconfirm",controller.submitTestToDB(subMittedTest));
 				break;
 			case "puttest":
 				// make new/updatde test

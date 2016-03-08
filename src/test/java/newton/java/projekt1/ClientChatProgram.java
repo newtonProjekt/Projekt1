@@ -76,7 +76,8 @@ class PrintServer implements Runnable{
         SubmittedTest submit = new SubmittedTest();
         AnswerSubmited anssub = new AnswerSubmited();
         Question que = new Question();
-        Answer answer = new Answer();
+        AnswerSubmited anssub2 = new AnswerSubmited();
+        Question que2 = new Question();
         ArrayList<AnswerSubmited> list = new ArrayList<AnswerSubmited>();
         Gson gson = new Gson();
         //JsonObject json = new JsonObject();
@@ -97,7 +98,11 @@ class PrintServer implements Runnable{
                 //answer.setAnswerText("madrid");
                 anssub.setQuestion(que);
                 anssub.setAnswerString("madrid");
+                que2.setQuestionText("Huvudstaden i Italien?");
+                anssub2.setQuestion(que2);
+                anssub2.setAnswerString("rom");
                 list.add(anssub);
+                list.add(anssub2);
                 submit.setAnswersSubmited(list);
                 message.addCommandData(submit);
                 

@@ -1,6 +1,7 @@
 package server.logic;
 
 
+import java.util.ArrayList;
 import server.datamodel.NewtonClass;
 import server.datamodel.SchoolTest;
 import server.datamodel.Student;
@@ -117,9 +118,14 @@ public class ServerController {
 		return dbc.getAllClasses();
 	}
 
-        public String submitTestToDB(AnswerSubmited answerSubmited) {
+        
+        public String submitTestToDB(SubmittedTest subMittedTest) {
                 
-		dbc.updateEntity(answerSubmited);
+            List<AnswerSubmited> list = subMittedTest.getAnswersSubmited();
+            for(AnswerSubmited answersSubmitted : list){
+                dbc.updateEntity(answersSubmitted);
+            }
+		
                 String submitConfirm = "Du har nu lämnat in ditt test!";
                 return submitConfirm;
 	}           
