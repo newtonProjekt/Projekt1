@@ -53,14 +53,14 @@ public class InitDB {
 		NewtonClass newtonClass = new NewtonClass("Java1");
 		NewtonClass newtonClass1 = new NewtonClass(".NET 1");
 
-		Question question = new Question("Testet test tetstst",1);
-		Question question1 = new Question("Grötlök med smör",1);
-		Question question2 = new Question("Alla har kul",2);
-		Question question3 = new Question("Med ögon i rött",4);
-		Question question4 = new Question("Nils Poppe",2);
-		Question question5 = new Question("Tänk på döden",1);
-		Question question6 = new Question("Öbor är galna",2);
-		Question question7 = new Question("Hisingen. Varför Hisingen?",1);
+		Question question = new Question("Testet test tetstst",1,true,false);
+		Question question1 = new Question("Grötlök med smör",1,true,false);
+		Question question2 = new Question("Alla har kul",2,true,true);
+		Question question3 = new Question("Med ögon i rött",4,true,false);
+		Question question4 = new Question("Nils Poppe",2,true,true);
+		Question question5 = new Question("Tänk på döden",1,true,false);
+		Question question6 = new Question("Öbor är galna",2,true,true);
+		Question question7 = new Question("Hisingen. Varför Hisingen?",1,true,false);
 
 		AnswerSubmited answerSubmited = new AnswerSubmited("Test675",question);
 		AnswerSubmited answerSubmited1 = new AnswerSubmited("Test2452",question1);
