@@ -19,11 +19,16 @@ public class NetworkListener implements Runnable {
     private int portNumber = 3004;
     private ServerSocket server;
     private Socket connection;
+    private boolean serverSocketOk = false;
 
 
-
-    public NetworkListener() throws IOException{
-        server = new ServerSocket(portNumber);
+    public NetworkListener() {
+        try {
+            server = new ServerSocket(portNumber);
+            serverSocketOk = true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -37,7 +42,7 @@ public class NetworkListener implements Runnable {
     public void run() {
         System.out.println("Starting server..."); // TO BE LOGGED
 
-        while(true){
+        while(serverSocketOk){
             try {
                 Thread.sleep(100);
                 connection = new Socket();
