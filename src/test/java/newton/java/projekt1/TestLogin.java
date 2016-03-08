@@ -61,6 +61,11 @@ class Connect implements Runnable{
 
 		paus();
 
+		System.out.println("Available tests");
+		send("gettestlist","");
+
+		paus();
+
 		System.out.println("Setting test 10 as started");
 		send("starttest",10);
 

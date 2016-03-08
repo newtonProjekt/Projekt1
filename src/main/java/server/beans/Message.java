@@ -21,6 +21,12 @@ public class Message<T> {
 		commandData = new ArrayList<>();
 	}
 
+	public Message(String command, T cmdData){
+		this.command = command;
+		commandData = new ArrayList<>();
+		addCommandData(cmdData);
+	}
+
 	public String getCommand() {
 		return command;
 	}

@@ -9,9 +9,12 @@ import com.google.gson.Gson;
 import com.google.gson.JsonParser;
 import server.beans.Login;
 import server.beans.Message;
+import server.datamodel.SchoolTest;
 import server.logic.ServerController;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -78,14 +81,26 @@ public class CommandHandler {
 				break;
 			case "gettest":
 				break;
+			case "gettestlist":
+				/**
+				 * Returns a map of testname and id that client has access to.
+				 */
+				Map<String,String> listMap = new HashMap<>();
+				for(SchoolTest currTest: controller.getAlltestsFromDB(clientId)){
+					listMap.put(currTest.getName(),Integer.toString(currTest.getId()));
+				}
+				send(new Message("testlist",listMap));
+				break;
+			case "gettests":
+				/**
+				 * Returns all tests available to client as a list of SchoolTest
+				 */
+				Message getTestMessage = new Message("availableTests");
+				getTestMessage.addCommandData(controller.getAlltestsFromDB(clientId));
+				send(getTestMessage);
+				break;
 			case "getalltests":
 				// send a list of all tests
-				break;
-			case "gettestlist":
-				List listOfTests = controller.getAlltestsFromDB(clientId);
-				Message sendMessage = new Message("availableTests");
-				sendMessage.addCommandData(listOfTests);
-				send(sendMessage);
 				break;
 			case "submit":
 				// do submit routine
