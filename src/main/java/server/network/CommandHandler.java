@@ -5,7 +5,9 @@
  */
 package server.network;
 
-import com.google.gson.*;
+import com.google.gson.Gson;
+import com.google.gson.JsonParser;
+import server.beans.Login;
 import server.beans.Message;
 import server.logic.ServerController;
 
@@ -19,7 +21,7 @@ public class CommandHandler {
 
 	private ServerController controller;
 	private Client client;
-	private long clientId;
+	private String clientId;
 	private boolean loggedIn = false;
 	private Gson gson;
 	private JsonParser parser;
@@ -38,50 +40,35 @@ public class CommandHandler {
 	 */
 	public void parse(String jsonData) {
 
-		JsonObject commandObj = parser.parse(jsonData).getAsJsonObject();
-		String command = commandObj.get("command").getAsString();
-		JsonArray commandDataArray = commandObj.getAsJsonArray("commandData");
-		JsonObject jsonObject;
-		JsonElement jsonElement;
+		Message currMessage = gson.fromJson(jsonData, Message.class);
+		List<String> cmdData = currMessage.getCommandData();
 
         /* The following switch statements calls for the appropriate method in controller.
 		   and always includes a reference to this instance of CommandHandler for possible
            return data.
          */
-		switch (command) {
+		switch (currMessage.getCommand()) {
+			/**
+			 * Login switch. Checks loginId and password against db and if requested sends a list
+			 * of all tests available back to client.
+			 */
 			case "login":
-				// do login routine
-
-				//breaking down the the desired parts of the commanddataArray
-				jsonElement = commandDataArray.get(0);
-				jsonObject = jsonElement.getAsJsonObject();
-				String loginId = jsonObject.get("loginId").getAsString();
-				String password = jsonObject.get("password").getAsString();
-				boolean getTests = jsonObject.get("getTests").getAsBoolean();
-
-				//call the checkLogin in controller and pass the loginId and password
-				if (controller.checkLogin(loginId, password) == true) {
-					clientId = Long.parseLong(loginId);
-					if (getTests) {
-						//get all tests for the desired client from the database via controller
-						List listOfTests = controller.getAlltestsFromDB(loginId);
-						Message message = new Message("gettestlist");
-						message.addCommandData(listOfTests);
-						//send the list of tests to the client
-						send(message);
+				Login currLogin = gson.fromJson(cmdData.get(0), Login.class);
+				if (controller.checkLogin(currLogin.getLoginId(), currLogin.getPassword())) {
+					clientId = currLogin.getLoginId();
+					setLogin(true);
+					if (currLogin.isGetTests()) {
+						List listOfTests = controller.getAlltestsFromDB(clientId);
+						Message sendMessage = new Message("availableTests");
+						sendMessage.addCommandData(listOfTests);
+						send(sendMessage);
 					}
 				}
 				break;
 			case "starttest":
-				// set test as started controller
-
-				//breaking down the the desired part of the commanddataArray
-				JsonElement jsonElement2 = commandDataArray.get(0);
-				String testId = jsonElement2.getAsString();
-
-				//calling the starttest-method in controller to remove the test from the students list of available tests
+				// Set test as started in controller.
+				String testId = cmdData.get(0);
 				controller.startTest(clientId, testId);
-
 				break;
 			case "getresult":
 				// send result data if possible
@@ -90,15 +77,15 @@ public class CommandHandler {
 				// send all test results for given criteria
 				break;
 			case "gettest":
-				// send test
-
-
 				break;
 			case "getalltests":
 				// send a list of all tests
 				break;
 			case "gettestlist":
-				// send list of available tests
+				List listOfTests = controller.getAlltestsFromDB(clientId);
+				Message sendMessage = new Message("availableTests");
+				sendMessage.addCommandData(listOfTests);
+				send(sendMessage);
 				break;
 			case "submit":
 				// do submit routine
@@ -123,6 +110,7 @@ public class CommandHandler {
 	 */
 	public void send(Message currMessage) {
 		String jsonData = gson.toJson(currMessage);
+		System.out.println(jsonData); // TEST
 		client.send(jsonData);
 	}
 
@@ -131,7 +119,7 @@ public class CommandHandler {
 	 *
 	 * @param logginOk boolean
 	 */
-	public void setLogin(boolean logginOk) {
+	private void setLogin(boolean logginOk) {
 		if (logginOk) {
 			loggedIn = true;
 		} else {

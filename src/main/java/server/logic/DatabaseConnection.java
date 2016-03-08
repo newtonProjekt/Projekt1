@@ -4,11 +4,14 @@ import server.datamodel.Question;
 import server.datamodel.SchoolTest;
 import server.datamodel.Student;
 
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 import java.util.List;
 
 /**
- * Contains methods to get data from database
+ * Contains methods to get or save data from/to database
  *
  * Created by Johan on 2016-03-06.
  */
@@ -20,19 +23,19 @@ public class DatabaseConnection {
 
 	// DB CONNECTIVITY METHODS
 
-	public DatabaseConnection(){
+	public DatabaseConnection() {
 		emf = Persistence.createEntityManagerFactory("jpa");
 		em = emf.createEntityManager();
 	}
 
-	public void closeDb(){
+	public void closeDb() {
 		emf.close();
 		em.close();
 	}
 
 	// PERSIST ENTITY
 
-	public <T> void persistEntity(T entity){
+	public <T> void persistEntity(T entity) {
 		etx = em.getTransaction();
 		etx.begin();
 
@@ -40,6 +43,8 @@ public class DatabaseConnection {
 
 		etx.commit();
 	}
+
+
 
 	//  GET INFO FROM DATABASE QUERIES
 
@@ -51,8 +56,8 @@ public class DatabaseConnection {
 	 * @param persNumber String
 	 * @return Student
 	 */
-	public Student getStudent(String persNumber){
-		List result = em.createNamedQuery("getStudent").setParameter("pNumber",Long.parseLong(persNumber)).getResultList();
+	public Student getStudent(String persNumber) {
+		List result = em.createNamedQuery("getStudent").setParameter("pNumber", Long.parseLong(persNumber)).getResultList();
 		if (result.size() > 0) {
 			return (Student) result.get(0);
 		} else {
@@ -65,7 +70,7 @@ public class DatabaseConnection {
 	 *
 	 * @return List\<Student\>
 	 */
-	public List<Student> getStudents(){
+	public List<Student> getStudents() {
 		return em.createNamedQuery("getAllStudents").getResultList();
 	}
 
@@ -75,7 +80,7 @@ public class DatabaseConnection {
 	 * @param persNumber String
 	 * @return List\<SchoolTest\>
 	 */
-	public List<SchoolTest> getStudentTests(String persNumber){
+	public List<SchoolTest> getStudentTests(String persNumber) {
 		return em.createNamedQuery("getStudentTests").setParameter("pNumber", Long.parseLong(persNumber)).getResultList();
 	}
 
@@ -87,9 +92,9 @@ public class DatabaseConnection {
 	 * @param testId String
 	 * @return SchoolTest
 	 */
-	public SchoolTest getTest(String testId){
-		List result = em.createNamedQuery("getTest").setParameter("testId",Integer.parseInt(testId)).getResultList();
-		return (SchoolTest)result.get(0);
+	public SchoolTest getTest(String testId) {
+		List result = em.createNamedQuery("getTest").setParameter("testId", Integer.parseInt(testId)).getResultList();
+		return (SchoolTest) result.get(0);
 	}
 
 	/**
@@ -97,7 +102,7 @@ public class DatabaseConnection {
 	 *
 	 * @return List\<SchoolTest\>
 	 */
-	public List<SchoolTest> getAllTests(){
+	public List<SchoolTest> getAllTests() {
 		return em.createNamedQuery("getAllTests").getResultList();
 	}
 
@@ -109,8 +114,8 @@ public class DatabaseConnection {
 	 * @param questionId String
 	 * @return Question
 	 */
-	public Question getQuestion(String questionId){
-		List result = em.createNamedQuery("getQuestion").setParameter("questionId",Integer.parseInt(questionId)).getResultList();
+	public Question getQuestion(String questionId) {
+		List result = em.createNamedQuery("getQuestion").setParameter("questionId", Integer.parseInt(questionId)).getResultList();
 		return (Question) result.get(0);
 	}
 

@@ -80,7 +80,7 @@ class PrintServer implements Runnable{
                 login.setLoginId("454545");
                 login.setPassword("password");
                 
-                message.addCommandData("5");
+                message.addCommandData("10");
                 
                 
                 

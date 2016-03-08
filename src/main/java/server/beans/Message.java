@@ -1,5 +1,7 @@
 package server.beans;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,14 +14,40 @@ import java.util.List;
  */
 public class Message<T> {
 	private String command;
-	private List<T> commandData;
+	private List<String> commandData;
 
 	public Message(String command){
 		this.command = command;
 		commandData = new ArrayList<>();
 	}
 
+	public String getCommand() {
+		return command;
+	}
+
+	public void setCommand(String command) {
+		this.command = command;
+	}
+
+	public List<String> getCommandData() {
+		return commandData;
+	}
+
+	public void setCommandData(List<String> commandData) {
+		this.commandData = commandData;
+	}
+
+	@Override
+	public String toString() {
+		return "Message{" +
+				"command='" + command + '\'' +
+				", commandData=" + commandData +
+				'}';
+	}
+
 	public void addCommandData(T currData){
-		commandData.add(currData);
+		Gson gson = new Gson();
+		String cmdData = gson.toJson(currData);
+		commandData.add(cmdData);
 	}
 }

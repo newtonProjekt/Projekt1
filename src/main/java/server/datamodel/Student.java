@@ -31,7 +31,9 @@ public class Student {
 	@NotNull
 	private long persNumber;
 	@NotNull
-	private String name;
+	private String firstName;
+	@NotNull
+	private String surName;
 	private String password;
 	@OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
 	private List<AnswerSubmited> answersSubmited;
@@ -47,13 +49,15 @@ public class Student {
 	 * Constructor when no password has been submitted. Sets password to "password".
 	 *
 	 * @param persNumber long
-	 * @param name String
+	 * @param firstName String
+	 * @param surName String
      */
-	public Student(long persNumber, String name){
+	public Student(long persNumber, String firstName, String surName){
 		answersSubmited = new ArrayList<AnswerSubmited>();
 		testsToTake = new ArrayList<>();
 		this.persNumber = persNumber;
-		this.name = name;
+		this.firstName = firstName;
+		this.surName = surName;
 		password = "password";
 	}
 
@@ -61,14 +65,16 @@ public class Student {
 	 * Constructor when all arguments is supplied.
 	 *
 	 * @param persNumber long
-	 * @param name String
+	 * @param firstName String
+	 * @param surName String
 	 * @param password String
      */
-	public Student(long persNumber, String name, String password) {
+	public Student(long persNumber, String firstName, String surName, String password) {
 		answersSubmited = new ArrayList<AnswerSubmited>();
 		testsToTake = new ArrayList<>();
 		this.persNumber = persNumber;
-		this.name = name;
+		this.firstName = firstName;
+		this.surName = surName;
 		this.password = password;
 	}
 
@@ -82,12 +88,20 @@ public class Student {
 		this.persNumber = persNumber;
 	}
 
-	public String getName() {
-		return name;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getSurName() {
+		return surName;
+	}
+
+	public void setSurName(String surName) {
+		this.surName = surName;
 	}
 
 	public String getPassword() {
@@ -121,7 +135,13 @@ public class Student {
 	}
 
 	public void removeTest(SchoolTest currTest) {
+		for (SchoolTest curr: testsToTake){
+			System.out.println("BEFORE" + curr);
+		}
 		testsToTake.remove(currTest);
+		for (SchoolTest curr: testsToTake){
+			System.out.println("AFTER" + curr);
+		}
 	}
 
 	// Methods to add and remove answers.

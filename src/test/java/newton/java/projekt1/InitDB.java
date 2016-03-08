@@ -74,9 +74,9 @@ public class InitDB {
 		SchoolTest schoolTest2 = new SchoolTest("Hoppsan");
 		SchoolTest schoolTest3 = new SchoolTest("Muppen");
 
-		Student student = new Student(454545,"Johan Lindström","password");
-		Student student1 = new Student(545454, "Karl Fagher","lösen");
-		Student student2 = new Student(212121,"Lisa Nilsson","passord");
+		Student student = new Student(454545,"Johan","Lindström","password");
+		Student student1 = new Student(545454, "Karl","Fagher","lösen");
+		Student student2 = new Student(212121,"Lisa","Nilsson","passord");
 
 
 		schoolTest.addQuestion(question);

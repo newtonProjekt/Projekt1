@@ -69,17 +69,22 @@ public class ServerController {
 
 	}
 
-
-	public void startTest(Long clientId, String testId) {
+	/**
+	 * Sets test as started by removing it from list of available tests from
+	 * current client.
+	 *
+	 * @param clientId String
+	 * @param testId String
+	 */
+	public void startTest(String clientId, String testId) {
 		int intTestId = Integer.parseInt(testId);
-		Student student = dbc.getStudent(Long.toString(clientId));
+		Student student = dbc.getStudent(clientId);
 		int index = -1;
 		for (SchoolTest currTest : student.getTestsToTake()) {
 			if (currTest.getId() == intTestId) {
 				index = student.getTestsToTake().indexOf(currTest);
 			}
 		}
-
 		if (index > -1) {
 			SchoolTest toRemove = student.getTestsToTake().get(index);
 			student.removeTest(toRemove);

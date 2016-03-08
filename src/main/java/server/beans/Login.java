@@ -38,4 +38,12 @@ public class Login {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public boolean isGetTests() {
+        return getTests;
+    }
+
+    public void setGetTests(boolean getTests) {
+        this.getTests = getTests;
+    }
 }
