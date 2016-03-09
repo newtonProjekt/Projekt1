@@ -1,14 +1,21 @@
 package server.logic;
 
 
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.Image;
 import server.beans.SubmittedTest;
 import server.datamodel.AnswerSubmited;
 import server.datamodel.NewtonClass;
 import server.datamodel.SchoolTest;
 import server.datamodel.Student;
 
-import java.io.File;
-import java.nio.file.Path;
+import javax.imageio.ImageIO;
+import javax.imageio.stream.ImageOutputStream;
+import java.awt.image.BufferedImage;
+import java.io.*;
+import java.net.Socket;
+import java.net.UnknownHostException;
+import java.nio.file.Files;
 import java.util.List;
 
 /**
@@ -23,6 +30,7 @@ public class ServerController {
 
 	private static ServerController controller = new ServerController();
 	private DatabaseConnection dbc;
+	private String IMAGE_PATH = "main/images/";
 
 	public ServerController() {
 		dbc = new DatabaseConnection();
@@ -49,25 +57,76 @@ public class ServerController {
 	// METHODS FOR IMAGES
 
 	/**
-	 * Gets an image from server and opens binary socket for transfer.
+	 * Gets an image from server and send through new socket.
 	 *
 	 * @param ipAddress String
 	 * @param imgName String
      */
-	public void getImage(String ipAddress, String imgName){
-		ipAddress = ipAddress.replace("[/]","");
-		File filePath = new File("main/images/"+imgName);
+	public void getImage(String ipAddress, String imgName) {
+		// Init socket.
+		Socket client = null;
 
+		// Clean IP-address.
+		ipAddress = ipAddress.replace("[/]","");
+
+		try {
+			client = new Socket(ipAddress,3400);
+			BufferedImage currImage = ImageIO.read(new File(IMAGE_PATH+imgName));
+
+			if(client.isConnected()) {
+				ImageIO.write(currImage,"PNG",client.getOutputStream());
+				client.getOutputStream().flush();
+			}
+		} catch (IOException e) {
+			System.out.println("CONTROLLER; getImage(); Problem sending image: "+IMAGE_PATH+imgName);
+		} finally {
+			if (client != null) {
+				try {
+					client.close();
+				} catch (IOException e) {
+					System.out.println("CONTROLLER; getImage(); Problem closing socket");
+				}
+			}
+		}
 	}
 
 	/**
-	 * Recieves and saves image on server.
+	 * Receives and saves image on server on new socket.
 	 *
 	 * @param ipAddress String
 	 * @param imgName String
      */
 	public void storeImage(String ipAddress, String imgName){
+		Socket client = null;
+		BufferedImage currImg = null;
 
+		// Clean IP-address.
+		ipAddress = ipAddress.replace("[/]","");
+
+		try {
+			client = new Socket(ipAddress,3400);
+			if(client.isConnected()) {
+				currImg = ImageIO.read(client.getInputStream());
+			}
+		} catch (IOException e) {
+			System.out.println("CONTROLLER; storeImage(); Problem receiving image: "+imgName);
+		} finally {
+			if (client != null){
+				try {
+					client.close();
+				} catch (IOException e) {
+					System.out.println("CONTROLLER; storeImage(); Problem closing socket");
+				}
+			}
+		}
+
+		if(currImg != null){
+			try {
+				ImageIO.write(currImg,"PNG",new File(IMAGE_PATH+imgName));
+			} catch (IOException e) {
+				System.out.println("CONTROLLER; getImage(); Problem saving file: "+IMAGE_PATH+imgName);
+			}
+		}
 	}
 
 	// METHODS CALLED FROM COMMANDHANDLER
@@ -165,6 +224,7 @@ public class ServerController {
 	 * @param schoolTest SchoolTest
 	 */
 	 public void putTest(SchoolTest schoolTest) {
+		 // check for images
 		dbc.updateEntity(schoolTest);
 	}
         

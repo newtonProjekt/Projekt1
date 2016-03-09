@@ -142,12 +142,13 @@ public class CommandHandler {
 				/**
 				 * Stores an image on server.
 				 */
-
+				controller.getImage(client.getIP(),gson.fromJson(cmdData.get(0),String.class));
 				break;
 			case "getimage":
 				/**
 				 * Retrieves an image from server.
 				 */
+				controller.storeImage(client.getIP(),gson.fromJson(cmdData.get(0),String.class));
 			default:
 				// Do nothing
 				break;
