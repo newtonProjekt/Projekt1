@@ -26,7 +26,9 @@ public class SchoolTest {
 	private String name;
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Question> questions;
-	
+	@NotNull
+	private int testTime;
+
 	public SchoolTest(){
 		questions = new ArrayList<Question>();
 	}
@@ -67,5 +69,13 @@ public class SchoolTest {
 
 	public void removeQuestion(Question currQuestion){
 		questions.remove(currQuestion);
+	}
+
+	public int getTestTime() {
+		return testTime;
+	}
+
+	public void setTestTime(int testTime) {
+		this.testTime = testTime;
 	}
 }

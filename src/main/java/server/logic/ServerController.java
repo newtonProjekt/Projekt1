@@ -7,6 +7,8 @@ import server.datamodel.NewtonClass;
 import server.datamodel.SchoolTest;
 import server.datamodel.Student;
 
+import java.io.File;
+import java.nio.file.Path;
 import java.util.List;
 
 /**
@@ -42,6 +44,18 @@ public class ServerController {
 	 */
 	public static ServerController getController() {
 		return controller;
+	}
+
+	// METHODS FOR IMAGES
+
+	public void getImage(String ipAddress, String imgName){
+		ipAddress = ipAddress.replace("[/]","");
+		File filePath = new File("main/images/"+imgName);
+
+	}
+
+	public void storeImage(String ipAddress, String imgName){
+
 	}
 
 	// METHODS CALLED FROM COMMANDHANDLER

@@ -1,6 +1,8 @@
 package server.datamodel;
 
 
+import javafx.scene.image.Image;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
@@ -25,6 +27,8 @@ public class Question {
     @NotNull
     private int points;
     private String questionImage;
+    @Transient
+    private Image questionImageFile;
     @NotNull
     private String questionText;
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
@@ -121,4 +125,11 @@ public class Question {
         }
     }
 
+    public Image getQuestionImageFile() {
+        return questionImageFile;
+    }
+
+    public void setQuestionImageFile(Image questionImageFile) {
+        this.questionImageFile = questionImageFile;
+    }
 }

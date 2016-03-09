@@ -39,6 +39,15 @@ public class Client implements Runnable {
 	}
 
 	/**
+	 * Returns client ipadress as String.
+	 *
+	 * @return String
+     */
+	public String getIP(){
+		return String.valueOf(connection.getInetAddress());
+	}
+
+	/**
 	 * Sends string to client socket.
 	 *
 	 * @param jsonSend String formatted as JSON

@@ -79,6 +79,16 @@ public class Student {
 		this.password = password;
 	}
 
+	public Student(long persNumber, String firstName, String surName, String password, NewtonClass newtonClass) {
+		answersSubmited = new ArrayList<AnswerSubmited>();
+		testsToTake = new ArrayList<>();
+		this.newtonClass = newtonClass;
+		this.persNumber = persNumber;
+		this.firstName = firstName;
+		this.surName = surName;
+		this.password = password;
+	}
+
 	// Getters and setters
 
 	public long getPersNumber() {

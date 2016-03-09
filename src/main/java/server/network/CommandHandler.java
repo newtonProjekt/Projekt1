@@ -133,6 +133,16 @@ public class CommandHandler {
 				 * Returns all NewtonClasses in database
 				 */
 				send("getallstudentclasses", controller.getAllClasses());
+			case "putimage":
+				/**
+				 * Stores an image on server.
+				 */
+
+				break;
+			case "getimage":
+				/**
+				 * Retrieves an image from server.
+				 */
 			default:
 				// Do nothing
 				break;
