@@ -1,5 +1,6 @@
 package server.beans;
 
+import server.datamodel.Answer;
 import server.datamodel.AnswerSubmited;
 
 import java.util.ArrayList;
@@ -38,6 +39,25 @@ public class SubmittedTest {
 
 	public void setAnswersSubmited(List<AnswerSubmited> answersSubmited) {
 		this.answersSubmited = answersSubmited;
+	}
+
+	/**
+	 * Adds an SubmittedAnswer on the array position corresponding to the Question array position in SchoolTest.
+	 * @param questionNumber int
+	 * @param currAnswer SubmittedAnswer
+	 */
+	public void addAnswer(int questionNumber,AnswerSubmited currAnswer){
+		answersSubmited.add(questionNumber, currAnswer);
+	}
+
+	/**
+	 * Get the submitted answer on the specified position in the array.
+	 *
+	 * @param questionNumber int
+	 * @return
+	 */
+	public AnswerSubmited getAnswer(int questionNumber){
+		return answersSubmited.get(questionNumber);
 	}
 }
 
