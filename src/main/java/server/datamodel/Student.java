@@ -39,6 +39,8 @@ public class Student {
 	private List<AnswerSubmited> answersSubmited;
 	@OneToMany(cascade = CascadeType.PERSIST)
 	private List<SchoolTest> testsToTake;
+	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	private NewtonClass newtonClass;
 
 	public Student(){
 		answersSubmited = new ArrayList<AnswerSubmited>();
@@ -125,6 +127,14 @@ public class Student {
 
 	public void setTestsToTake(List<SchoolTest> testsToTake) {
 		this.testsToTake = testsToTake;
+	}
+
+	public NewtonClass getNewtonClass() {
+		return newtonClass;
+	}
+
+	public void setNewtonClass(NewtonClass newtonClass) {
+		this.newtonClass = newtonClass;
 	}
 
 	// Methods to add and remove tests to take.

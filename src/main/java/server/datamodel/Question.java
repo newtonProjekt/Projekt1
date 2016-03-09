@@ -1,10 +1,8 @@
 package server.datamodel;
 
 
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,113 +12,113 @@ import java.util.List;
  */
 @Entity
 @NamedQuery(
-		name="getQuestion",
-		query = "select c from Question c where c.id=:questionId")
+        name = "getQuestion",
+        query = "select c from Question c where c.id=:questionId")
 public class Question {
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
-	@NotNull
-	private boolean multiQuestion;
-	private boolean vgQuestion;
-	@NotNull
-	private int points;
-	private String questionImage;
-	@NotNull
-	private String questionText;
-	@OneToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE},orphanRemoval = true)
-	private List<Answer> answers;
-	
-	public Question(){
-		answers = new ArrayList<Answer>();
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+    @NotNull
+    private boolean multiQuestion;
+    private boolean vgQuestion;
+    @NotNull
+    private int points;
+    private String questionImage;
+    @NotNull
+    private String questionText;
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
+    private List<Answer> answers;
 
-	public Question(String questionText, int points, boolean multiQuestion){
-		this.multiQuestion = multiQuestion;
-		this.points = points;
-		this.questionText = questionText;
-		if (multiQuestion) {
-			answers = new ArrayList<Answer>();
-		}
-	}
+    public Question() {
+        answers = new ArrayList<Answer>();
+    }
 
-	public Question(String questionText, int points, boolean multiQuestion, boolean vgQuestion){
-		this.multiQuestion = multiQuestion;
-		this.vgQuestion = vgQuestion;
-		this.points = points;
-		this.questionText = questionText;
-		if (multiQuestion) {
-			answers = new ArrayList<Answer>();
-		}
-	}
+    public Question(String questionText, int points, boolean multiQuestion) {
+        this.multiQuestion = multiQuestion;
+        this.points = points;
+        this.questionText = questionText;
+        if (multiQuestion) {
+            answers = new ArrayList<Answer>();
+        }
+    }
 
-	public int getId() {
-		return id;
-	}
+    public Question(String questionText, int points, boolean multiQuestion, boolean vgQuestion) {
+        this.multiQuestion = multiQuestion;
+        this.vgQuestion = vgQuestion;
+        this.points = points;
+        this.questionText = questionText;
+        if (multiQuestion) {
+            answers = new ArrayList<Answer>();
+        }
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public boolean isMultiQuestion() {
-		return multiQuestion;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setMultiQuestion(boolean multiQuestion) {
-		this.multiQuestion = multiQuestion;
-	}
+    public boolean isMultiQuestion() {
+        return multiQuestion;
+    }
 
-	public int getPoints() {
-		return points;
-	}
+    public void setMultiQuestion(boolean multiQuestion) {
+        this.multiQuestion = multiQuestion;
+    }
 
-	public void setPoints(int points) {
-		this.points = points;
-	}
+    public int getPoints() {
+        return points;
+    }
 
-	public String getQuestionImage() {
-		return questionImage;
-	}
+    public void setPoints(int points) {
+        this.points = points;
+    }
 
-	public void setQuestionImage(String questionImage) {
-		this.questionImage = questionImage;
-	}
+    public String getQuestionImage() {
+        return questionImage;
+    }
 
-	public boolean isVgQuestion() {
-		return vgQuestion;
-	}
+    public void setQuestionImage(String questionImage) {
+        this.questionImage = questionImage;
+    }
 
-	public void setVgQuestion(boolean vgQuestion) {
-		this.vgQuestion = vgQuestion;
-	}
+    public boolean isVgQuestion() {
+        return vgQuestion;
+    }
 
-	public String getQuestionText() {
-		return questionText;
-	}
+    public void setVgQuestion(boolean vgQuestion) {
+        this.vgQuestion = vgQuestion;
+    }
 
-	public void setQuestionText(String questionText) {
-		this.questionText = questionText;
-	}
+    public String getQuestionText() {
+        return questionText;
+    }
 
-	public List<Answer> getAnswers() {
-		return answers;
-	}
+    public void setQuestionText(String questionText) {
+        this.questionText = questionText;
+    }
 
-	public void setAnswers(List<Answer> answers) {
-		this.answers = answers;
-	}
+    public List<Answer> getAnswers() {
+        return answers;
+    }
 
-	public void addAnswer(Answer currAnswer){
-		if (multiQuestion) {
-			answers.add(currAnswer);
-		}
-	}
+    public void setAnswers(List<Answer> answers) {
+        this.answers = answers;
+    }
 
-	public void removeAnswer(Answer currAnswer){
-		if (multiQuestion) {
-			answers.remove(currAnswer);
-		}
-	}
-	
+    public void addAnswer(Answer currAnswer) {
+        if (multiQuestion) {
+            answers.add(currAnswer);
+        }
+    }
+
+    public void removeAnswer(Answer currAnswer) {
+        if (multiQuestion) {
+            answers.remove(currAnswer);
+        }
+    }
+
 }
