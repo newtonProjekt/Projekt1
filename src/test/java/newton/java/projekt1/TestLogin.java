@@ -61,19 +61,19 @@ class Connect implements Runnable{
 
 		paus();
 
-		System.out.println("Available tests");
-		send("gettestlist","");
+		//System.out.println("Available tests");
+		//send("gettestlist","");
 
 		paus();
 
-		System.out.println("Setting test 10 as started");
-		send("gettest",10);
+		//System.out.println("Setting test 10 as started");
+		//send("starttest",10);
 
 		paus();
-		/*
+
 		System.out.println("Requesting available tests");
-		send("gettestlist","");
-		*/
+		send("gettests","");
+
 	}
 
 	public <T> void send(String cmd, T cmdData){

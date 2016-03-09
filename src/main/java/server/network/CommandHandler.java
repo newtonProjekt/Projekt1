@@ -62,9 +62,13 @@ public class CommandHandler {
 				if (controller.checkLogin(currLogin.getLoginId(), currLogin.getPassword())) {
 					clientId = currLogin.getLoginId();
 					setLogin(true);
-					if (currLogin.isGetTests()) {
-						send("gettests", controller.getAlltestsFromDB(clientId));
-					}
+					//Returns a map of testname and id that client has access to.
+                                        Map<String, String> listMap1 = new HashMap<>();
+                                        for (SchoolTest currTest1 : controller.getAlltestsFromDB(clientId)) {
+                                            listMap1.put(currTest1.getName(), Integer.toString(currTest1.getId()));
+                                        }
+                                        send("gettestlist", listMap1);
+					
 				}
 				break;
 			case "starttest":
@@ -80,6 +84,7 @@ public class CommandHandler {
 			case "getresults":
 				// send all test results for given criteria
 				break;
+                                
 			case "gettest":
 				/**
 				 * Gets a specific test.
