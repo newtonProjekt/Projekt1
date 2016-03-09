@@ -48,12 +48,24 @@ public class ServerController {
 
 	// METHODS FOR IMAGES
 
+	/**
+	 * Gets an image from server and opens binary socket for transfer.
+	 *
+	 * @param ipAddress String
+	 * @param imgName String
+     */
 	public void getImage(String ipAddress, String imgName){
 		ipAddress = ipAddress.replace("[/]","");
 		File filePath = new File("main/images/"+imgName);
 
 	}
 
+	/**
+	 * Recieves and saves image on server.
+	 *
+	 * @param ipAddress String
+	 * @param imgName String
+     */
 	public void storeImage(String ipAddress, String imgName){
 
 	}
