@@ -109,6 +109,7 @@ public class CommandHandler {
 				send("gettests", controller.getAlltestsFromDB(clientId));
 				break;
 			case "getalltests":
+				System.out.println("Inne i getalltests");
 				send("getalltests",controller.getAllTests());
 				break;
 			case "submit":
@@ -158,6 +159,9 @@ public class CommandHandler {
 				 * Retrieves an image from server.
 				 */
 				controller.storeImage(client.getIP(),gson.fromJson(cmdData.get(0),String.class));
+			case "disconnect":
+				client.disconnect();
+				break;
 			default:
 				// Do nothing
 				break;

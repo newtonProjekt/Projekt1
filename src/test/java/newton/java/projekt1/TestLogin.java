@@ -40,8 +40,7 @@ class Connect implements Runnable{
 			connection = new Socket("127.0.0.1", 3004);
 			out = new PrintWriter(connection.getOutputStream(),true);
 			System.out.println("Connection established");
-			//doTest();
-			printJson();
+			doTest();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -61,21 +60,19 @@ class Connect implements Runnable{
 		Login login = new Login("454545","password",true);
 		send("login",login);
 
-		paus();
 
-		System.out.println("Available tests");
-		send("gettest",10);
 
-		paus();
+		System.out.println("getalltest:");
+		send("getalltests","");
 
-		//System.out.println("Setting test 10 as started");
-		//send("starttest",10);
+		send("getalltests","");
 
+		/*
 		paus();
 
 		System.out.println("Requesting available tests");
 		send("gettests","");
-
+*/
 
 
 	}
