@@ -10,7 +10,6 @@
         <class>server.datamodel.Question</class>
         <class>server.datamodel.SchoolTest</class>
         <class>server.datamodel.Student</class>
-
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/testdb"/>
             <property name="javax.persistence.jdbc.user" value="root"/>
@@ -18,6 +17,7 @@
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
             <property name="eclipselink.logging.level" value="FINE"/>
             <property name="eclipselink.ddl-generation" value="create-tables"/>
+            <property name="eclipselink.allow-zero-id" value="true"/>
         </properties>
     </persistence-unit>
 </persistence>
