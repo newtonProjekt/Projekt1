@@ -81,6 +81,8 @@ public class Client implements Runnable {
 				Scanner sc = new Scanner(connection.getInputStream());
 
 				while (sc.hasNextLine()) {
+					logLine = sc.nextLine();
+					System.out.println("SERVER RECIEVED INPUT: "+logLine);
 					commandHandler.parse(sc.nextLine());
 				}
 			} catch (IOException e) {
