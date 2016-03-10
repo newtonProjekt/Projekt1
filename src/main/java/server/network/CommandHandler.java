@@ -177,6 +177,7 @@ public class CommandHandler {
 		if (logginOk) {
 			loggedIn = true;
 		} else {
+			System.out.println("Wrong password. Dropped connection.");
 			client.disconnect();
 		}
 	}
