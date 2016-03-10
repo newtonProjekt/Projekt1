@@ -144,6 +144,15 @@ public class ServerController {
 	}
 
 	/**
+	 * Gets all tests from database.
+	 *
+	 * @return List SchoolTest
+     */
+	public List<SchoolTest> getAllTests(){
+		return dbc.getAllTests();
+	}
+
+	/**
 	 * Gets all the available tests for the client
 	 *
 	 * @param perNumber String
@@ -235,6 +244,10 @@ public class ServerController {
 	 */
      public void putStudent(Student student) {
 		dbc.updateEntity(student);
+	}
+
+	public void putNewtonClass(NewtonClass currClass){
+		dbc.updateEntity(currClass);
 	}
         
 }

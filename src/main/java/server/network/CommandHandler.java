@@ -10,6 +10,7 @@ import com.google.gson.JsonParser;
 import server.beans.Login;
 import server.beans.Message;
 import server.beans.SubmittedTest;
+import server.datamodel.NewtonClass;
 import server.datamodel.SchoolTest;
 import server.datamodel.Student;
 import server.logic.ServerController;
@@ -107,6 +108,9 @@ public class CommandHandler {
 				 */
 				send("gettests", controller.getAlltestsFromDB(clientId));
 				break;
+			case "getalltests":
+				send("getalltests",controller.getAllTests());
+				break;
 			case "submit":
 				/**
 				 * Persists a submitted test from client.
@@ -127,6 +131,11 @@ public class CommandHandler {
 				 */
 				Student student = gson.fromJson(cmdData.get(0), Student.class);
 				controller.putStudent(student);
+				break;
+			case "putnewtonclass":
+				NewtonClass newtonClass = gson.fromJson(cmdData.get(0),NewtonClass.class);
+				controller.putNewtonClass(newtonClass);
+				break;
 			case "getallstudents":
 				/**
 				 * Returns all students in database.
