@@ -62,17 +62,17 @@ public class InitDB {
 		Question question6 = new Question("Öbor är galna",2,true,true);
 		Question question7 = new Question("Hisingen. Varför Hisingen?",1,true,false);
 
-		AnswerSubmited answerSubmited = new AnswerSubmited("Test675",question);
-		AnswerSubmited answerSubmited1 = new AnswerSubmited("Test2452",question1);
-		AnswerSubmited answerSubmited2 = new AnswerSubmited("Test2615361",question2);
-		AnswerSubmited answerSubmited3 = new AnswerSubmited("Test26785",question3);
-		AnswerSubmited answerSubmited4 = new AnswerSubmited("Test25654",question4);
-		AnswerSubmited answerSubmited5 = new AnswerSubmited("Test252654",question5);
-
 		SchoolTest schoolTest = new SchoolTest("Retest");
 		SchoolTest schoolTest1 = new SchoolTest("Hejsan");
 		SchoolTest schoolTest2 = new SchoolTest("Hoppsan");
 		SchoolTest schoolTest3 = new SchoolTest("Muppen");
+
+		AnswerSubmited answerSubmited = new AnswerSubmited("Test675",schoolTest.getId(),question.getId());
+		AnswerSubmited answerSubmited1 = new AnswerSubmited("Test2452",schoolTest.getId(),question.getId());
+		AnswerSubmited answerSubmited2 = new AnswerSubmited("Test2615361",schoolTest1.getId(),question1.getId());
+		AnswerSubmited answerSubmited3 = new AnswerSubmited("Test26785",schoolTest1.getId(),question1.getId());
+		AnswerSubmited answerSubmited4 = new AnswerSubmited("Test25654",schoolTest2.getId(),question2.getId());
+		AnswerSubmited answerSubmited5 = new AnswerSubmited("Test252654",schoolTest2.getId(),question2.getId());
 
 		Student student = new Student(454545,"Johan","Lindström","password");
 		Student student1 = new Student(545454, "Karl","Fagher","lösen");
@@ -107,19 +107,25 @@ public class InitDB {
 		question7.addAnswer(answer14);
 		question7.addAnswer(answer15);
 
+
 		student.addAnswer(answerSubmited);
 		student.addAnswer(answerSubmited1);
+
 		student.addTest(schoolTest);
 		student.addTest(schoolTest2);
 		student.addTest(schoolTest3);
 
+
 		student1.addAnswer(answerSubmited2);
 		student1.addAnswer(answerSubmited3);
+
 		student1.addTest(schoolTest1);
 		student1.addTest(schoolTest2);
 
+
 		student2.addAnswer(answerSubmited4);
 		student2.addAnswer(answerSubmited5);
+
 		student2.addTest(schoolTest);
 		student2.addTest(schoolTest3);
 

@@ -96,10 +96,10 @@ class PrintServer implements Runnable{
                 
                 que.setQuestionText("Huvudstad i Spanien?");
                 //answer.setAnswerText("madrid");
-                anssub.setQuestion(que);
-                anssub.setAnswerString("madrid");
+                //nssub.setQuestion(que);
+                //anssub.setAnswerString("madrid");
                 que2.setQuestionText("Huvudstaden i Italien?");
-                anssub2.setQuestion(que2);
+                //anssub2.setQuestion(que2);
                 anssub2.setAnswerString("rom");
                 list.add(anssub);
                 list.add(anssub2);

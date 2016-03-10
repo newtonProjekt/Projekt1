@@ -32,12 +32,12 @@ public class SchoolTest {
 	private int testTime;
 
 	public SchoolTest(){
-		questions = new ArrayList<Question>();
+		questions = new ArrayList<>();
 	}
 
 	public SchoolTest(String name){
 		this.name = name;
-		questions = new ArrayList<Question>();
+		questions = new ArrayList<>();
 	}
 
 	public String getSubject() {

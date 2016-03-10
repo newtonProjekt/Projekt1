@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonParser;
 import server.beans.Login;
 import server.beans.Message;
+import server.datamodel.SchoolTest;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -39,7 +40,8 @@ class Connect implements Runnable{
 			connection = new Socket("127.0.0.1", 3004);
 			out = new PrintWriter(connection.getOutputStream(),true);
 			System.out.println("Connection established");
-			doTest();
+			//doTest();
+			printJson();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -61,8 +63,8 @@ class Connect implements Runnable{
 
 		paus();
 
-		//System.out.println("Available tests");
-		//send("gettestlist","");
+		System.out.println("Available tests");
+		send("gettest",10);
 
 		paus();
 
@@ -74,6 +76,14 @@ class Connect implements Runnable{
 		System.out.println("Requesting available tests");
 		send("gettests","");
 
+
+
+	}
+
+	public void printJson(){
+		SchoolTest schoolTest = new SchoolTest("test");
+		System.out.println(gson.toJson(schoolTest));
+		disconnect();
 	}
 
 	public <T> void send(String cmd, T cmdData){
