@@ -63,13 +63,14 @@ public class CommandHandler {
 				if (controller.checkLogin(currLogin.getLoginId(), currLogin.getPassword())) {
 					clientId = currLogin.getLoginId();
 					setLogin(true);
-					//Returns a map of testname and id that client has access to.
-                                        Map<String, String> listMap1 = new HashMap<>();
-                                        for (SchoolTest currTest1 : controller.getAlltestsFromDB(clientId)) {
-                                            listMap1.put(currTest1.getName(), Integer.toString(currTest1.getId()));
-                                        }
-                                        send("gettestlist", listMap1);
-					
+					if (currLogin.isGetTests()) {
+						//Returns a map of testname and id that client has access to.
+						Map<String, String> listMap1 = new HashMap<>();
+						for (SchoolTest currTest1 : controller.getAlltestsFromDB(clientId)) {
+							listMap1.put(currTest1.getName(), Integer.toString(currTest1.getId()));
+						}
+						send("gettestlist", listMap1);
+					}
 				}
 				break;
 			case "starttest":
