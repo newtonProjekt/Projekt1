@@ -24,6 +24,8 @@ public class SchoolTest {
 	private int id;
 	@NotNull
 	private String name;
+	private String subject;
+	private String dateCreated;
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Question> questions;
 	@NotNull
@@ -38,6 +40,21 @@ public class SchoolTest {
 		questions = new ArrayList<Question>();
 	}
 
+	public String getSubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+
+	public String getDateCreated() {
+		return dateCreated;
+	}
+
+	public void setDateCreated(String dateCreated) {
+		this.dateCreated = dateCreated;
+	}
 
 	public int getId() {
 		return id;
