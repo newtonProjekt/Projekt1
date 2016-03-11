@@ -127,6 +127,10 @@ public class CommandHandler {
 				SchoolTest schoolTest = gson.fromJson(cmdData.get(0), SchoolTest.class);
 				controller.putTest(schoolTest);
 				break;
+			case "updatetest":
+				SchoolTest updSchoolTest = gson.fromJson(cmdData.get(0), SchoolTest.class);
+				controller.updateTest(updSchoolTest);
+				break;
 			case "putstudent":
 				/**
 				 * Updates if existent or creates a new managed entity of Student.
@@ -137,6 +141,10 @@ public class CommandHandler {
 			case "putnewtonclass":
 				NewtonClass newtonClass = gson.fromJson(cmdData.get(0),NewtonClass.class);
 				controller.putNewtonClass(newtonClass);
+				break;
+			case "updatenewtonclass":
+				NewtonClass updNewtonClass = gson.fromJson(cmdData.get(0),NewtonClass.class);
+				controller.updateNewtonClass(updNewtonClass);
 				break;
 			case "getallstudents":
 				/**

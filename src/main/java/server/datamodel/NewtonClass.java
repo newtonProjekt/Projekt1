@@ -20,19 +20,11 @@ public class NewtonClass {
 	private int id;
 	@NotNull
 	private String name;
-	@OneToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE},orphanRemoval = true)
-	private List<Student> students;
-	@OneToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE},orphanRemoval = true)
-	private List<SchoolTest> tests;
-	
+
 	public NewtonClass(){
-		students = new ArrayList<Student>();
-		tests = new ArrayList<SchoolTest>();
 	}
 
 	public NewtonClass(String name){
-		students = new ArrayList<Student>();
-		tests = new ArrayList<SchoolTest>();
 		this.name = name;
 	}
 
@@ -52,36 +44,5 @@ public class NewtonClass {
 		this.name = name;
 	}
 
-	public List<Student> getStudents() {
-		return students;
-	}
 
-	public void setStudents(List<Student> students) {
-		this.students = students;
-	}
-
-	public List<SchoolTest> getTests() {
-		return tests;
-	}
-
-	public void setTests(List<SchoolTest> tests) {
-		this.tests = tests;
-	}
-
-	public void addTest(SchoolTest currTest){
-		tests.add(currTest);
-	}
-
-	public void removeTest(SchoolTest currTest){
-		tests.remove(currTest);
-	}
-
-	public void addStudent(Student currStudent){
-		students.add(currStudent);
-	}
-
-	public void removeStudent(Student currStudent){
-		students.remove(currStudent);
-	}
-	
 }

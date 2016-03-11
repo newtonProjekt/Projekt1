@@ -234,6 +234,10 @@ public class ServerController {
 	 */
 	 public void putTest(SchoolTest schoolTest) {
 		 // check for images
+		dbc.persistEntity(schoolTest);
+	}
+
+	public void updateTest(SchoolTest schoolTest){
 		dbc.updateEntity(schoolTest);
 	}
         
@@ -247,7 +251,10 @@ public class ServerController {
 	}
 
 	public void putNewtonClass(NewtonClass currClass){
+		dbc.persistEntity(currClass);
+	}
+
+	public void updateNewtonClass(NewtonClass currClass){
 		dbc.updateEntity(currClass);
 	}
-        
 }

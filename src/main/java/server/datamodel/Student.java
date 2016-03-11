@@ -154,13 +154,7 @@ public class Student {
 	}
 
 	public void removeTest(SchoolTest currTest) {
-		for (SchoolTest curr: testsToTake){
-			System.out.println("BEFORE" + curr);
-		}
 		testsToTake.remove(currTest);
-		for (SchoolTest curr: testsToTake){
-			System.out.println("AFTER" + curr);
-		}
 	}
 
 	// Methods to add and remove answers.

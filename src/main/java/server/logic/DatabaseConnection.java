@@ -49,6 +49,13 @@ public class DatabaseConnection {
 		etx.commit();
 	}
 
+	public <T> void persistEntity(T entity){
+		etx = em.getTransaction();
+		etx.begin();
+		em.persist(entity);
+		etx.commit();
+	}
+	
 	//  GET INFO FROM DATABASE QUERIES
 
 	// From Student entity
