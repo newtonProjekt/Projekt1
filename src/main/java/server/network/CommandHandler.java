@@ -157,6 +157,9 @@ public class CommandHandler {
 				 */
 				send("getallstudentclasses", controller.getAllClasses());
 				break;
+			case "getstudentsfromclass":
+				int classid = gson.fromJson(cmdData.get(0),int.class);
+				send("getstudentsfromclass",controller.getStudentsFromClass(classid));
 			case "putimage":
 				/**
 				 * Stores an image on server.

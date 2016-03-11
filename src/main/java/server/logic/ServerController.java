@@ -204,6 +204,10 @@ public class ServerController {
 
 	}
 
+	public List<Student> getStudentsFromClass(int classId){
+		return dbc.getStudentFromClass(classId);
+	}
+
 	/**
 	 * Returns list of classes in database
 	 *

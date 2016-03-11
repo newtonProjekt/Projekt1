@@ -55,7 +55,7 @@ public class DatabaseConnection {
 		em.persist(entity);
 		etx.commit();
 	}
-	
+
 	//  GET INFO FROM DATABASE QUERIES
 
 	// From Student entity
@@ -73,6 +73,10 @@ public class DatabaseConnection {
 		} else {
 			return null;
 		}
+	}
+
+	public List<Student> getStudentFromClass(int classId){
+		return em.createNamedQuery("getStudentsFromClass").setParameter("classId",classId).getResultList();
 	}
 
 	/**

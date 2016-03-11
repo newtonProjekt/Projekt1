@@ -1,12 +1,9 @@
 package server.datamodel;
 
-import org.eclipse.persistence.jpa.config.Cascade;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 /**
  * Entity class for the students.
@@ -23,8 +20,13 @@ import java.util.stream.Stream;
 		query = "SELECT c FROM Student c"),
 @NamedQuery(
 		name = "getStudentTests",
-		query = "select c.testsToTake from Student c where c.persNumber = :pNumber")
+		query = "select c.testsToTake from Student c where c.persNumber = :pNumber"),
+@NamedQuery(
+		name = "getStudentsFromClass",
+		query = "select c FROM Student c where c.newtonClassId=:classId"
+		)
 })
+
 public class Student {
 
 	@Id
@@ -39,8 +41,7 @@ public class Student {
 	private List<AnswerSubmited> answersSubmited;
 	@OneToMany(cascade = CascadeType.PERSIST)
 	private List<SchoolTest> testsToTake;
-	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	private NewtonClass newtonClass;
+	private int newtonClassId;
 
 	public Student(){
 		answersSubmited = new ArrayList<AnswerSubmited>();
@@ -79,10 +80,10 @@ public class Student {
 		this.password = password;
 	}
 
-	public Student(long persNumber, String firstName, String surName, String password, NewtonClass newtonClass) {
+	public Student(long persNumber, String firstName, String surName, String password, int newtonClass) {
 		answersSubmited = new ArrayList<AnswerSubmited>();
 		testsToTake = new ArrayList<>();
-		this.newtonClass = newtonClass;
+		this.newtonClassId = newtonClass;
 		this.persNumber = persNumber;
 		this.firstName = firstName;
 		this.surName = surName;
@@ -139,12 +140,12 @@ public class Student {
 		this.testsToTake = testsToTake;
 	}
 
-	public NewtonClass getNewtonClass() {
-		return newtonClass;
+	public int getNewtonClassId() {
+		return newtonClassId;
 	}
 
-	public void setNewtonClass(NewtonClass newtonClass) {
-		this.newtonClass = newtonClass;
+	public void setNewtonClassId(int newtonClass) {
+		this.newtonClassId = newtonClass;
 	}
 
 	// Methods to add and remove tests to take.
