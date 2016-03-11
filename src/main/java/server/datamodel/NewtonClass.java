@@ -9,10 +9,15 @@ import java.util.List;
  * Entity class that consists of name of class, students in class and the tests the class has access to.
  */
 @Entity
+@NamedQueries({
 @NamedQuery(
 		name = "getallclasses",
-		query = "select c from NewtonClass c"
+		query = "select c from NewtonClass c"),
+@NamedQuery(
+		name = "deleteClass",
+		query = "DELETE FROM NewtonClass c WHERE c.id=:classId"
 )
+})
 public class NewtonClass {
 
 	@Id

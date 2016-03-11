@@ -29,6 +29,9 @@ public class DatabaseConnection {
 		em = emf.createEntityManager();
 	}
 
+	/**
+	 * Close the database connection.
+	 */
 	public void closeDb() {
 		emf.close();
 		em.close();
@@ -37,7 +40,7 @@ public class DatabaseConnection {
 	// PERSIST ENTITY
 
 	/**
-	 * Updates a existing entity or creates a new one if non existent.
+	 * Updates a existing entity.
 	 *
 	 * @param entity EntityClass
 	 * @param <T> Object
@@ -49,6 +52,12 @@ public class DatabaseConnection {
 		etx.commit();
 	}
 
+	/**
+	 * Creates a new managed entity.
+	 *
+	 * @param entity Entityclass
+	 * @param <T> Object
+     */
 	public <T> void persistEntity(T entity){
 		etx = em.getTransaction();
 		etx.begin();
@@ -75,6 +84,12 @@ public class DatabaseConnection {
 		}
 	}
 
+	/**
+	 * Returns all students from specific class
+	 *
+	 * @param classId int
+	 * @return List\<Student\>
+     */
 	public List<Student> getStudentFromClass(int classId){
 		return em.createNamedQuery("getStudentsFromClass").setParameter("classId",classId).getResultList();
 	}
@@ -88,6 +103,12 @@ public class DatabaseConnection {
 		return em.createNamedQuery("getAllStudents").getResultList();
 	}
 
+	public void deleteStudent(long persNumber){
+		em.createNamedQuery("deleteStudent").setParameter("pNumber",persNumber);
+	}
+
+	// SchoolTest
+
 	/**
 	 * Returns all tests available for student
 	 *
@@ -96,6 +117,15 @@ public class DatabaseConnection {
 	 */
 	public List<SchoolTest> getStudentTests(String persNumber) {
 		return em.createNamedQuery("getStudentTests").setParameter("pNumber", Long.parseLong(persNumber)).getResultList();
+	}
+
+	/**
+	 * Deletes a schooltest.
+	 *
+	 * @param testId int
+     */
+	public void deleteSchoolTest(int testId){
+		em.createNamedQuery("deleteSchoolTest").setParameter("testId",testId);
 	}
 
 	// From SchoolTest entity
@@ -133,6 +163,8 @@ public class DatabaseConnection {
 		return (Question) result.get(0);
 	}
 
+	// NewtonClass entity
+
 	/**
 	 * Gets all classes.
 	 *
@@ -142,4 +174,12 @@ public class DatabaseConnection {
 		return em.createNamedQuery("getallclasses").getResultList();
 	}
 
+	/**
+	 * Deletes a class.
+	 *
+	 * @param classId int
+     */
+	public void deleteClass(int classId){
+		em.createNamedQuery("deleteClass").setParameter("classId",classId);
+	}
 }

@@ -153,7 +153,7 @@ public class ServerController {
 	}
 
 	/**
-	 * Gets all the available tests for the client
+	 * Gets all the available tests for the client.
 	 *
 	 * @param perNumber String
 	 * @return List SchoolTest
@@ -196,7 +196,7 @@ public class ServerController {
 	}
 
 	/**
-	 * Gets all the students registered in the database and sends the list
+	 * Gets all the students registered in the database and sends the list.
 	 */
 	public List<Student> getAllStudentsFromDB() {
 		List<Student> listOfStudents = dbc.getStudents();
@@ -204,17 +204,30 @@ public class ServerController {
 
 	}
 
+	public void deleteStudent(long persNumber){
+		dbc.deleteStudent(persNumber);
+	}
+
+	/**
+	 * Returns a list of students from a specific class
+	 * @param classId int
+	 * @return List\<Student\>
+     */
 	public List<Student> getStudentsFromClass(int classId){
 		return dbc.getStudentFromClass(classId);
 	}
 
 	/**
-	 * Returns list of classes in database
+	 * Returns list of classes in database.
 	 *
 	 * @return List\<NewtonClass\>
 	 */
 	public List<NewtonClass> getAllClasses() {
 		return dbc.getAllClasses();
+	}
+
+	public void deleteSchoolTest(int testId){
+		dbc.deleteSchoolTest(testId);
 	}
 
 	/**
@@ -230,9 +243,13 @@ public class ServerController {
 		}
 		dbc.updateEntity(currStudent);
 	}
+
+	public void deleteClass(int classId){
+		dbc.deleteClass(classId);
+	}
         
      /**
-	 * Gets a test from client and persists it
+	 * Gets a test from client and persists it.
 	 *
 	 * @param schoolTest SchoolTest
 	 */
@@ -241,24 +258,51 @@ public class ServerController {
 		dbc.persistEntity(schoolTest);
 	}
 
+	/**
+	 * Updates a SchoolTest entity.
+	 * @param schoolTest
+     */
 	public void updateTest(SchoolTest schoolTest){
 		dbc.updateEntity(schoolTest);
 	}
         
 	/**
-	 * Gets a student from client and persists it
+	 * Gets a student from client and persists it.
 	 *
 	 * @param student Student
 	 */
-     public void putStudent(Student student) {
+	public void putStudent(Student student) {
 		dbc.updateEntity(student);
 	}
 
+	/**
+	 * Gets a class from client and persists it.
+	 *
+	 * @param currClass NewtonClass
+     */
 	public void putNewtonClass(NewtonClass currClass){
 		dbc.persistEntity(currClass);
 	}
 
+	/**
+	 * Updates a NewtonClass entity.
+	 *
+	 * @param currClass NewtonClass
+     */
 	public void updateNewtonClass(NewtonClass currClass){
 		dbc.updateEntity(currClass);
+	}
+
+	/**
+	 * Adds a test to take for all students in a class
+	 *
+	 * @param classId int
+	 * @param testId int
+     */
+	public void addTestToClass(int classId, int testId){
+		List<Student> classStudents = dbc.getStudentFromClass(classId);
+		for (Student currStudent: classStudents){
+			currStudent.addTest(dbc.getTest(Integer.toString(testId)));
+		}
 	}
 }

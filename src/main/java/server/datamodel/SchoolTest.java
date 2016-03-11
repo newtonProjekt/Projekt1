@@ -15,8 +15,12 @@ import java.util.List;
 		query = "select c from SchoolTest c where c.id=:testId"),
 @NamedQuery(
 		name="getAllTests",
-		query = "select c from SchoolTest c")
+		query = "select c from SchoolTest c"),
+@NamedQuery(
+		name = "deleteSchoolTest",
+		query = "DELETE FROM SchoolTest c WHERE c.id=:testId")
 })
+
 public class SchoolTest {
 
 	@Id

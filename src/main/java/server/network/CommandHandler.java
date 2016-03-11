@@ -81,12 +81,11 @@ public class CommandHandler {
 				controller.startTest(clientId, testId);
 				break;
 			case "getresult":
-				// send result data if possible
+				//TODO send result data if possible
 				break;
 			case "getresults":
-				// send all test results for given criteria
+				//TODO send all test results for given criteria
 				break;
-                                
 			case "gettest":
 				/**
 				 * Gets a specific test.
@@ -110,6 +109,9 @@ public class CommandHandler {
 				send("gettests", controller.getAlltestsFromDB(clientId));
 				break;
 			case "getalltests":
+				/**
+				 * Returns a list of all tests in database.
+				 */
 				send("getalltests",controller.getAllTests());
 				break;
 			case "submit":
@@ -121,11 +123,14 @@ public class CommandHandler {
 				break;
 			case "puttest":
 				/**
-				 * Updates if existent or creates a new managed entity of SchoolTest.
+				 * Creates a new managed entity of SchoolTest.
 				 */
 				SchoolTest schoolTest = gson.fromJson(cmdData.get(0), SchoolTest.class);
 				controller.putTest(schoolTest);
 				break;
+				/**
+			 	* Updates a existent test in database.
+			 	*/
 			case "updatetest":
 				SchoolTest updSchoolTest = gson.fromJson(cmdData.get(0), SchoolTest.class);
 				controller.updateTest(updSchoolTest);
@@ -137,11 +142,25 @@ public class CommandHandler {
 				Student student = gson.fromJson(cmdData.get(0), Student.class);
 				controller.putStudent(student);
 				break;
+			case "addTestToClass":
+				/**
+				 * Adds a test to all student in a class.
+				 */
+				int classId = gson.fromJson(cmdData.get(0),int.class);
+				int testid = gson.fromJson(cmdData.get(1),int.class);
+				controller.addTestToClass(classId,testid);
+				break;
+				/**
+			 	* Creates a new managed entity of NewtonClass.
+			 	*/
 			case "putnewtonclass":
 				NewtonClass newtonClass = gson.fromJson(cmdData.get(0),NewtonClass.class);
 				controller.putNewtonClass(newtonClass);
 				break;
 			case "updatenewtonclass":
+				/**
+				 * Updates a existing NewtonClass.
+				 */
 				NewtonClass updNewtonClass = gson.fromJson(cmdData.get(0),NewtonClass.class);
 				controller.updateNewtonClass(updNewtonClass);
 				break;
@@ -158,6 +177,9 @@ public class CommandHandler {
 				send("getallstudentclasses", controller.getAllClasses());
 				break;
 			case "getstudentsfromclass":
+				/**
+				 * Get all students from a class.
+				 */
 				int classid = gson.fromJson(cmdData.get(0),int.class);
 				send("getstudentsfromclass",controller.getStudentsFromClass(classid));
 			case "putimage":
@@ -172,7 +194,22 @@ public class CommandHandler {
 				 */
 				controller.storeImage(client.getIP(),gson.fromJson(cmdData.get(0),String.class));
 				break;
+			case "deletestudent":
+				long studId = gson.fromJson(cmdData.get(0),long.class);
+				controller.deleteStudent(studId);
+				break;
+			case "deletetest":
+				int testToDelete = gson.fromJson(cmdData.get(0),int.class);
+				controller.deleteSchoolTest(testToDelete);
+				break;
+			case "deleteclass":
+				int classToDelete = gson.fromJson(cmdData.get(0),int.class);
+				controller.deleteClass(classToDelete);
+				break;
 			case "disconnect":
+				/**
+				 * Disconnect client gracefully.
+				 */
 				client.disconnect();
 				break;
 			default:
