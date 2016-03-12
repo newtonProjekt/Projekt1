@@ -54,22 +54,27 @@ public class CommandHandler {
            return data.
          */
 		switch (currMessage.getCommand()) {
-			/**
-			 * Login switch. Checks loginId and password against db and if requested sends a list
-			 * of all tests available back to client.
-			 */
 			case "login":
-				Login currLogin = gson.fromJson(cmdData.get(0), Login.class);
+				/**
+				 * Login switch. Checks loginId and password against db and if requested sends a list
+				 * of all tests available back to client.
+				 */
+					Login currLogin = gson.fromJson(cmdData.get(0), Login.class);
 				if (controller.checkLogin(currLogin.getLoginId(), currLogin.getPassword())) {
 					clientId = currLogin.getLoginId();
 					setLogin(true);
 					if (currLogin.isGetTests()) {
 						//Returns a map of testname and id that client has access to.
 						Map<String, String> listMap1 = new HashMap<>();
-						for (SchoolTest currTest1 : controller.getAlltestsFromDB(clientId)) {
-							listMap1.put(currTest1.getName(), Integer.toString(currTest1.getId()));
+						List<SchoolTest> testList = controller.getAlltestsFromDB(clientId);
+						if (testList.size() > 0) {
+							for (SchoolTest currTest1 : testList) {
+								listMap1.put(currTest1.getName(), Integer.toString(currTest1.getId()));
+							}
+							send("gettestlist", listMap1);
+						} else {
+							send("gettestlist","");
 						}
-						send("gettestlist", listMap1);
 					}
 				}
 				break;
@@ -128,10 +133,10 @@ public class CommandHandler {
 				SchoolTest schoolTest = gson.fromJson(cmdData.get(0), SchoolTest.class);
 				controller.putTest(schoolTest);
 				break;
-				/**
-			 	* Updates a existent test in database.
-			 	*/
 			case "updatetest":
+				/**
+				 * Updates a existent test in database.
+				 */
 				SchoolTest updSchoolTest = gson.fromJson(cmdData.get(0), SchoolTest.class);
 				controller.updateTest(updSchoolTest);
 				break;
@@ -150,10 +155,10 @@ public class CommandHandler {
 				int testid = gson.fromJson(cmdData.get(1),int.class);
 				controller.addTestToClass(classId,testid);
 				break;
-				/**
-			 	* Creates a new managed entity of NewtonClass.
-			 	*/
 			case "putnewtonclass":
+				/**
+				 * Creates a new managed entity of NewtonClass.
+				 */
 				NewtonClass newtonClass = gson.fromJson(cmdData.get(0),NewtonClass.class);
 				controller.putNewtonClass(newtonClass);
 				break;
@@ -182,6 +187,7 @@ public class CommandHandler {
 				 */
 				int classid = gson.fromJson(cmdData.get(0),int.class);
 				send("getstudentsfromclass",controller.getStudentsFromClass(classid));
+				break;
 			case "putimage":
 				/**
 				 * Stores an image on server.

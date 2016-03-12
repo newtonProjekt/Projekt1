@@ -129,13 +129,18 @@ public class InitDB {
 		student2.addTest(schoolTest);
 		student2.addTest(schoolTest3);
 
+		/*
 		newtonClass.addStudent(student);
+
 		newtonClass.addStudent(student1);
 
 		newtonClass1.addStudent(student2);
+		*/
 
+		/*
 		newtonClass.addTest(schoolTest);
 		newtonClass1.addTest(schoolTest2);
+		*/
 
 		EntityTransaction tx = em.getTransaction();
 
