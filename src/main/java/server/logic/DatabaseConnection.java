@@ -104,7 +104,9 @@ public class DatabaseConnection {
 	}
 
 	public void deleteStudent(long persNumber){
-		em.createNamedQuery("deleteStudent").setParameter("pNumber",persNumber);
+        em.getTransaction().begin();
+		em.createNamedQuery("deleteStudent").setParameter("pNumber",persNumber).executeUpdate();
+        em.getTransaction().commit();
 	}
 
 	// SchoolTest
@@ -125,7 +127,9 @@ public class DatabaseConnection {
 	 * @param testId int
      */
 	public void deleteSchoolTest(int testId){
-		em.createNamedQuery("deleteSchoolTest").setParameter("testId",testId);
+        em.getTransaction().begin();
+		em.createNamedQuery("deleteSchoolTest").setParameter("testId",testId).executeUpdate();
+        em.getTransaction().commit();
 	}
 
 	// From SchoolTest entity
@@ -180,6 +184,8 @@ public class DatabaseConnection {
 	 * @param classId int
      */
 	public void deleteClass(int classId){
+        em.getTransaction().begin();
 		em.createNamedQuery("deleteClass").setParameter("classId",classId);
+        em.getTransaction().commit();
 	}
 }
