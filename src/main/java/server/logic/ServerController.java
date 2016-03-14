@@ -276,6 +276,14 @@ public class ServerController {
 	}
 
 	/**
+	 * Updates a Student entity.
+	 * @param student
+	 */
+	public void updateStudent(Student student){
+		dbc.updateEntity(student);
+	}
+
+	/**
 	 * Gets a class from client and persists it.
 	 *
 	 * @param currClass NewtonClass

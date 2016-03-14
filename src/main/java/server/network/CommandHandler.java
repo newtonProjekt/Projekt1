@@ -140,6 +140,13 @@ public class CommandHandler {
 				Student student = gson.fromJson(cmdData.get(0), Student.class);
 				controller.putStudent(student);
 				break;
+            case "updatestudent":
+                /**
+                 * Updates a existent student in database.
+                 */
+                Student updStudent = gson.fromJson(cmdData.get(0), Student.class);
+                controller.updateStudent(updStudent);
+                break;
 			case "addTestToClass":
 				/**
 				 * Adds a test to all student in a class.
