@@ -109,6 +109,12 @@ public class DatabaseConnection {
         em.getTransaction().commit();
 	}
 
+    public void deleteStudentsFromClass(int classId){
+        em.getTransaction().begin();
+        em.createNamedQuery("deleteStudentsFromClass").setParameter("classId",classId).executeUpdate();
+        em.getTransaction().commit();
+    }
+
 	// SchoolTest
 
 	/**

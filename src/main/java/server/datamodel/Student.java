@@ -28,7 +28,10 @@ import java.util.List;
         @NamedQuery(
                 name = "deleteStudent",
                 query = "DELETE FROM Student c WHERE c.persNumber=:pNumber"
-
+        ),
+        @NamedQuery(
+                name = "deleteStudentsFromClass",
+                query = "DELETE FROM Student c WHERE c.newtonClassId=:classId"
         )
 })
 

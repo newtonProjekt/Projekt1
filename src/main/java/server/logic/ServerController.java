@@ -208,6 +208,9 @@ public class ServerController {
 		dbc.deleteStudent(persNumber);
 	}
 
+    public void deleteStudentsFromClass(int classId){
+        dbc.deleteStudentsFromClass(classId);
+    }
 	/**
 	 * Returns a list of students from a specific class
 	 * @param classId int

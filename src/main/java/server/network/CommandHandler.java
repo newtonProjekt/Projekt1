@@ -204,13 +204,16 @@ public class CommandHandler {
 				long studId = gson.fromJson(cmdData.get(0), long.class);
 				controller.deleteStudent(studId);
 				break;
+            case "deletestudentsfromclass":
+                int studentClassId = gson.fromJson(cmdData.get(0), int.class);
+                controller.deleteStudentsFromClass(studentClassId);
+                break;
 			case "deletetest":
 				int testToDelete = gson.fromJson(cmdData.get(0), int.class);
 				controller.deleteSchoolTest(testToDelete);
 				break;
 			case "deleteclass":
 				int classToDelete = gson.fromJson(cmdData.get(0), int.class);
-                System.out.println(classToDelete);
                 controller.deleteClass(classToDelete);
 				break;
 			case "disconnect":
