@@ -84,7 +84,6 @@ public class Client implements Runnable {
                 }
             } catch (IOException e) {
                 Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, e);
-
             } finally {
                 if(sc != null) {
                     sc.close();

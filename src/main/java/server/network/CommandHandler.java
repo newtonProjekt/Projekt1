@@ -65,20 +65,8 @@ public class CommandHandler {
 					setLogin(true);
 					send("loginok", "");
 					if (currLogin.isGetTests()) {
-						//Returns a map of testname and id that client has access to.
-						Map<String, String> testMap = new HashMap<>();
-						List<SchoolTest> testList = controller.getAlltestsFromDB(clientId);
-						for (SchoolTest currTest : testList) {
-								if (currTest != null) {
-									testMap.put(currTest.getName(), Integer.toString(currTest.getId()));
-								}
-							}
-							if (testMap.isEmpty()){
-								send("gettestlist","");
-							} else {
-								send("gettestlist", testMap);
-							}
-						}
+						send("gettestlist",controller.getAlltestsFromDB(currLogin.getLoginId()));
+					}
 				} else {
 					send("loginfailed","");
 				}
