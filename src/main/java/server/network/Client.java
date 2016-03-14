@@ -8,6 +8,7 @@ package server.network;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -59,6 +60,7 @@ public class Client implements Runnable {
     public void disconnect() {
         disconnect = true;
         try {
+            out.close();
             connection.close();
         } catch (IOException e) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, e);
@@ -72,17 +74,22 @@ public class Client implements Runnable {
     @Override
     public void run() {
         String logLine = null;
+        Scanner sc = null;
         while (!disconnect) {
-
             try {
-                Scanner sc = new Scanner(connection.getInputStream());
-
+                sc = new Scanner(connection.getInputStream());
                 while (sc.hasNextLine()) {
                     logLine = sc.nextLine();
                     commandHandler.parse(logLine);
                 }
             } catch (IOException e) {
                 Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, e);
+
+            } finally {
+                if(sc != null) {
+                    sc.close();
+                    disconnect();
+                }
             }
         }
 

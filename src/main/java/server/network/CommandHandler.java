@@ -59,23 +59,28 @@ public class CommandHandler {
 				 * Login switch. Checks loginId and password against db and if requested sends a list
 				 * of all tests available back to client.
 				 */
-					Login currLogin = gson.fromJson(cmdData.get(0), Login.class);
+				Login currLogin = gson.fromJson(cmdData.get(0), Login.class);
 				if (controller.checkLogin(currLogin.getLoginId(), currLogin.getPassword())) {
 					clientId = currLogin.getLoginId();
 					setLogin(true);
+					send("loginok", "");
 					if (currLogin.isGetTests()) {
 						//Returns a map of testname and id that client has access to.
-						Map<String, String> listMap1 = new HashMap<>();
+						Map<String, String> testMap = new HashMap<>();
 						List<SchoolTest> testList = controller.getAlltestsFromDB(clientId);
-						if (testList.size() > 0) {
-							for (SchoolTest currTest1 : testList) {
-								listMap1.put(currTest1.getName(), Integer.toString(currTest1.getId()));
+						for (SchoolTest currTest : testList) {
+								if (currTest != null) {
+									testMap.put(currTest.getName(), Integer.toString(currTest.getId()));
+								}
 							}
-							send("gettestlist", listMap1);
-						} else {
-							send("gettestlist","");
+							if (testMap.isEmpty()){
+								send("gettestlist","");
+							} else {
+								send("gettestlist", testMap);
+							}
 						}
-					}
+				} else {
+					send("loginfailed","");
 				}
 				break;
 			case "starttest":
@@ -117,7 +122,7 @@ public class CommandHandler {
 				/**
 				 * Returns a list of all tests in database.
 				 */
-				send("getalltests",controller.getAllTests());
+				send("getalltests", controller.getAllTests());
 				break;
 			case "submit":
 				/**
@@ -151,22 +156,22 @@ public class CommandHandler {
 				/**
 				 * Adds a test to all student in a class.
 				 */
-				int classId = gson.fromJson(cmdData.get(0),int.class);
-				int testid = gson.fromJson(cmdData.get(1),int.class);
-				controller.addTestToClass(classId,testid);
+				int classId = gson.fromJson(cmdData.get(0), int.class);
+				int testid = gson.fromJson(cmdData.get(1), int.class);
+				controller.addTestToClass(classId, testid);
 				break;
 			case "putnewtonclass":
 				/**
 				 * Creates a new managed entity of NewtonClass.
 				 */
-				NewtonClass newtonClass = gson.fromJson(cmdData.get(0),NewtonClass.class);
+				NewtonClass newtonClass = gson.fromJson(cmdData.get(0), NewtonClass.class);
 				controller.putNewtonClass(newtonClass);
 				break;
 			case "updatenewtonclass":
 				/**
 				 * Updates a existing NewtonClass.
 				 */
-				NewtonClass updNewtonClass = gson.fromJson(cmdData.get(0),NewtonClass.class);
+				NewtonClass updNewtonClass = gson.fromJson(cmdData.get(0), NewtonClass.class);
 				controller.updateNewtonClass(updNewtonClass);
 				break;
 			case "getallstudents":
@@ -185,31 +190,31 @@ public class CommandHandler {
 				/**
 				 * Get all students from a class.
 				 */
-				int classid = gson.fromJson(cmdData.get(0),int.class);
-				send("getstudentsfromclass",controller.getStudentsFromClass(classid));
+				int classid = gson.fromJson(cmdData.get(0), int.class);
+				send("getstudentsfromclass", controller.getStudentsFromClass(classid));
 				break;
 			case "putimage":
 				/**
 				 * Stores an image on server.
 				 */
-				controller.getImage(client.getIP(),gson.fromJson(cmdData.get(0),String.class));
+				controller.getImage(client.getIP(), gson.fromJson(cmdData.get(0), String.class));
 				break;
 			case "getimage":
 				/**
 				 * Retrieves an image from server.
 				 */
-				controller.storeImage(client.getIP(),gson.fromJson(cmdData.get(0),String.class));
+				controller.storeImage(client.getIP(), gson.fromJson(cmdData.get(0), String.class));
 				break;
 			case "deletestudent":
-				long studId = gson.fromJson(cmdData.get(0),long.class);
+				long studId = gson.fromJson(cmdData.get(0), long.class);
 				controller.deleteStudent(studId);
 				break;
 			case "deletetest":
-				int testToDelete = gson.fromJson(cmdData.get(0),int.class);
+				int testToDelete = gson.fromJson(cmdData.get(0), int.class);
 				controller.deleteSchoolTest(testToDelete);
 				break;
 			case "deleteclass":
-				int classToDelete = gson.fromJson(cmdData.get(0),int.class);
+				int classToDelete = gson.fromJson(cmdData.get(0), int.class);
 				controller.deleteClass(classToDelete);
 				break;
 			case "disconnect":
@@ -228,7 +233,7 @@ public class CommandHandler {
 	 * Method that takes the message-bean returned from the controller, converts it to JSON
 	 * and sends it to the client.
 	 *
-	 * @param command String
+	 * @param command     String
 	 * @param commandData Object
 	 */
 	public <T> void send(String command, T commandData) {
