@@ -210,7 +210,8 @@ public class CommandHandler {
 				break;
 			case "deleteclass":
 				int classToDelete = gson.fromJson(cmdData.get(0), int.class);
-				controller.deleteClass(classToDelete);
+                System.out.println(classToDelete);
+                controller.deleteClass(classToDelete);
 				break;
 			case "disconnect":
 				/**

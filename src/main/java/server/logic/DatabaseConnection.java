@@ -185,7 +185,7 @@ public class DatabaseConnection {
      */
 	public void deleteClass(int classId){
         em.getTransaction().begin();
-		em.createNamedQuery("deleteClass").setParameter("classId",classId);
+		em.createNamedQuery("deleteClass").setParameter("classId",classId).executeUpdate();
         em.getTransaction().commit();
 	}
 }
