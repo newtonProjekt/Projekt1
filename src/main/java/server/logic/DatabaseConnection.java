@@ -111,7 +111,11 @@ public class DatabaseConnection {
 	}
 
     public void deleteStudentsFromClass(int classId){
-        em.getTransaction().begin();
+		List<Student> currClass = em.createNamedQuery("getStudentsFromClass").setParameter("classId",classId).getResultList();
+	    em.getTransaction().begin();
+    	for(Student currStudent: currClass){
+			em.createNamedQuery("deletecorrectedtestsfromstudent").setParameter("pNumber",currStudent.getPersNumber()).executeUpdate();
+		}
         em.createNamedQuery("deleteStudentsFromClass").setParameter("classId",classId).executeUpdate();
         em.getTransaction().commit();
     }
