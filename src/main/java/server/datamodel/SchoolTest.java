@@ -130,4 +130,5 @@ public class SchoolTest {
 	public void setTestTime(int testTime) {
 		this.testTime = testTime;
 	}
+
 }
