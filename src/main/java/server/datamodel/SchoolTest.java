@@ -2,6 +2,7 @@ package server.datamodel;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +30,8 @@ public class SchoolTest {
 	@NotNull
 	private String name;
 	private String subject;
-	private String dateCreated;
+	@Temporal(TemporalType.DATE)
+	private Date dateCreated;
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Question> questions;
 	@NotNull
@@ -52,11 +54,11 @@ public class SchoolTest {
 		this.subject = subject;
 	}
 
-	public String getDateCreated() {
+	public Date getDateCreated() {
 		return dateCreated;
 	}
 
-	public void setDateCreated(String dateCreated) {
+	public void setDateCreated(Date dateCreated) {
 		this.dateCreated = dateCreated;
 	}
 
