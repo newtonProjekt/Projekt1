@@ -8,7 +8,18 @@ import java.util.List;
 
 /**
  * The entity class that represents the tests. Contains the type of test and the questions in the test.
+ *
+ * id 			= Auto generated id value.
+ * name 		= Name of test.
+ * subject		= The subject of the test.
+ * dateCreated	= Date of test creation.
+ * questions	= List of questions in the test
+ * testTime		= Timecap to complete the test.
+ * gThreshold	= The percentage threshold for a G
+ * vgThreshold	= The percentage threshold for a VG
+ *
  */
+
 @Entity
 @NamedQueries({
 @NamedQuery(
@@ -36,6 +47,8 @@ public class SchoolTest {
 	private List<Question> questions;
 	@NotNull
 	private int testTime;
+	private int gThreshold;
+	private int vgThreshold;
 
 	public SchoolTest(){
 		questions = new ArrayList<>();
@@ -92,6 +105,22 @@ public class SchoolTest {
 
 	public void removeQuestion(Question currQuestion){
 		questions.remove(currQuestion);
+	}
+
+	public int getgThreshold() {
+		return gThreshold;
+	}
+
+	public void setgThreshold(int gThreshold) {
+		this.gThreshold = gThreshold;
+	}
+
+	public int getVgThreshold() {
+		return vgThreshold;
+	}
+
+	public void setVgThreshold(int vgThreshold) {
+		this.vgThreshold = vgThreshold;
 	}
 
 	public int getTestTime() {

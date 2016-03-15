@@ -7,8 +7,22 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
 /**
+ * Entity class that handles the tests thats been corrected for further reference.
+ *
  * Created by Johan Lindström (jolindse@hotmail.com) on 2016-03-14.
+ *
+ * id	 					= Auto generated id value.
+ * testId					= Referencing what test with id.
+ * persNumber				= Referencing the student id.
+ * totalNumberOfVgQuestions	= The number of questions marked as VG-questions.
+ * totalNumberOfGQuestions	= The number of questions marked as G-questions.
+ * maxPoints				= How many points a maximal result on the test would amount to.
+ * vgPoints					= How many points the student earned in VG-questions.
+ * gPoints					= How many points the student earned in G-questions.
+ * completedCorrection		= Boolean that notes if the test was completely corrected.
+ *
  */
+
 @Entity
 public class CorrectedTests {
 

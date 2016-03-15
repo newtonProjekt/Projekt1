@@ -10,7 +10,13 @@ import javax.validation.constraints.NotNull;
  * Entity class for answers to test.
  *
  * Contains text and boolean to indicate if it's the correct answer.
+ *
+ * id 				= Auto generated id value.
+ * answerText		= The string with answer text.
+ * correctAnswer	= Boolean that indicates if this is the correct answer.
+ *
  */
+
 @Entity
 public class Answer {
 

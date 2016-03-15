@@ -8,7 +8,14 @@ import javax.validation.constraints.NotNull;
  * 
  * @author Johan (jolindse@hotmail.com)
  *
+ * id 				= Auto generated id value.
+ * testId			= Reference to the test id.
+ * questionId		= Reference to the question id.
+ * answerString		= The string containing the selected/given answer.
+ * correctAnswer	= Boolean referencing if the supplied answer was deemed correct.
+ * corrected		= Boolean referencing if the submitted answer has been corrected.
  */
+
 @Entity
 public class AnswerSubmited {
 
@@ -21,6 +28,7 @@ public class AnswerSubmited {
 	private int questionId;
 	private String answerString;
 	private boolean correctAnswer;
+	private boolean corrected;
 	
 	public AnswerSubmited(){
 	}
@@ -72,4 +80,11 @@ public class AnswerSubmited {
 		this.correctAnswer = correctAnswer;
 	}
 
+	public boolean isCorrected() {
+		return corrected;
+	}
+
+	public void setCorrected(boolean corrected) {
+		this.corrected = corrected;
+	}
 }

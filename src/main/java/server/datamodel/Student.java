@@ -9,7 +9,17 @@ import java.util.List;
  * Entity class for the students.
  *
  * Contains login (personal number), name, password and the answers student has submitted to questions.
+ *
+ * persNumber       = The personnumber of the student is the unique id.
+ * firstName        = The first name of the student.
+ * surName          = The surname of the student.
+ * password         = The students password.
+ * answersSubmited  = List of submitted answers to tests.
+ * testsToTake      = List of SchoolTest to take.
+ * newtonClassId    = The id of the class that the user belongs to.
+ *
  */
+
 @Entity
 @NamedQueries({
         @NamedQuery(
