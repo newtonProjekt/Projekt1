@@ -1,9 +1,6 @@
 package server.datamodel;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -22,6 +19,17 @@ import javax.validation.constraints.NotNull;
  * completedCorrection		= Boolean that notes if the test was completely corrected.
  *
  */
+
+@NamedQueries({
+		@NamedQuery(name="deletecorrectedtestsfromstudent",
+				query = "DELETE FROM CorrectedTests c WHERE c.persNumber=:pNumber" ),
+		@NamedQuery(name="deletecorrectedtest",
+				query = "DELETE FROM CorrectedTests c WHERE c.testId=:test" ),
+		@NamedQuery(name="getcorrectedtestsfromstudent",
+				query = "SELECT c FROM CorrectedTests c WHERE c.persNumber=:pNumber"),
+		@NamedQuery(name="getcorrectedtestfromstudent",
+				query = "SELECT c FROM CorrectedTests c WHERE c.persNumber=:pNumber AND c.testId=:test")
+})
 
 @Entity
 public class CorrectedTests {

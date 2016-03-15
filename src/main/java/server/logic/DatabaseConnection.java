@@ -105,6 +105,7 @@ public class DatabaseConnection {
 
 	public void deleteStudent(long persNumber){
         em.getTransaction().begin();
+		em.createNamedQuery("deletecorrectedtestsfromstudent").setParameter("pNumber",persNumber).executeUpdate();
 		em.createNamedQuery("deleteStudent").setParameter("pNumber",persNumber).executeUpdate();
         em.getTransaction().commit();
 	}
@@ -134,6 +135,7 @@ public class DatabaseConnection {
      */
 	public void deleteSchoolTest(int testId){
         em.getTransaction().begin();
+		em.createNamedQuery("deletecorrectedtest").setParameter("test",testId).executeUpdate();
 		em.createNamedQuery("deleteSchoolTest").setParameter("testId",testId).executeUpdate();
         em.getTransaction().commit();
 	}
