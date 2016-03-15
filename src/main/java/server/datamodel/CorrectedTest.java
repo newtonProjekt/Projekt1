@@ -22,17 +22,17 @@ import javax.validation.constraints.NotNull;
 
 @NamedQueries({
 		@NamedQuery(name="deletecorrectedtestsfromstudent",
-				query = "DELETE FROM CorrectedTests c WHERE c.persNumber=:pNumber" ),
+				query = "DELETE FROM CorrectedTest c WHERE c.persNumber=:pNumber" ),
 		@NamedQuery(name="deletecorrectedtest",
-				query = "DELETE FROM CorrectedTests c WHERE c.testId=:test" ),
+				query = "DELETE FROM CorrectedTest c WHERE c.testId=:test" ),
 		@NamedQuery(name="getcorrectedtestsfromstudent",
-				query = "SELECT c FROM CorrectedTests c WHERE c.persNumber=:pNumber"),
+				query = "SELECT c FROM CorrectedTest c WHERE c.persNumber=:pNumber"),
 		@NamedQuery(name="getcorrectedtestfromstudent",
-				query = "SELECT c FROM CorrectedTests c WHERE c.persNumber=:pNumber AND c.testId=:test")
+				query = "SELECT c FROM CorrectedTest c WHERE c.persNumber=:pNumber AND c.testId=:test")
 })
 
 @Entity
-public class CorrectedTests {
+public class CorrectedTest {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -60,10 +60,10 @@ public class CorrectedTests {
 	private boolean completedCorrection;
 
 
-	public CorrectedTests(){
+	public CorrectedTest(){
 	}
 
-	public CorrectedTests(int testId, long persNumber, int totalNumberOfVgQuestion, int totalNumberOfGQuestions, int maxPoints, int vgPoints, int gPoints, boolean completedCorrection) {
+	public CorrectedTest(int testId, long persNumber, int totalNumberOfVgQuestion, int totalNumberOfGQuestions, int maxPoints, int vgPoints, int gPoints, boolean completedCorrection) {
 		this.testId = testId;
 		this.persNumber = persNumber;
 		this.totalNumberOfVgQuestion = totalNumberOfVgQuestion;

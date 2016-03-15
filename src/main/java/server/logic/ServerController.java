@@ -4,10 +4,7 @@ package server.logic;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import server.beans.SubmittedTest;
-import server.datamodel.AnswerSubmited;
-import server.datamodel.NewtonClass;
-import server.datamodel.SchoolTest;
-import server.datamodel.Student;
+import server.datamodel.*;
 
 import javax.imageio.ImageIO;
 import javax.imageio.stream.ImageOutputStream;
@@ -30,10 +27,12 @@ public class ServerController {
 
 	private static ServerController controller = new ServerController();
 	private DatabaseConnection dbc;
+	private CorrectionHandler corrHandler;
 	private String IMAGE_PATH = "main/images/";
 
 	public ServerController() {
 		dbc = new DatabaseConnection();
+		corrHandler = new CorrectionHandler(this);
 	}
 
 	/**
@@ -305,7 +304,7 @@ public class ServerController {
 	}
 
 	/**
-	 * Adds a test to take for all students in a class
+	 * Adds a test to take for all students in a class.
 	 *
 	 * @param classId int
 	 * @param testId int
@@ -315,5 +314,32 @@ public class ServerController {
 		for (Student currStudent: classStudents){
 			currStudent.addTest(dbc.getTest(Integer.toString(testId)));
 		}
+	}
+
+	// Question
+
+	/**
+	 * Gets specified question from database.
+	 *
+	 * @param questionId int
+	 * @return Question
+	 */
+	public Question getQuestion(int questionId){
+		return dbc.getQuestion(questionId);
+	}
+
+	// Correction
+
+	/**
+	 *
+	 *
+	 * @param persNumber
+	 * @param submittedTest
+	 */
+	public void correctTest(String persNumber, SubmittedTest submittedTest){
+		Student currStudent = dbc.getStudent(persNumber);
+		CorrectedTest currTest = corrHandler.correctTest(currStudent, submittedTest);
+		dbc.updateEntity(currStudent);
+		dbc.persistEntity(currTest);
 	}
 }

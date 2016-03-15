@@ -103,6 +103,11 @@ public class DatabaseConnection {
 		return em.createNamedQuery("getAllStudents").getResultList();
 	}
 
+	/**
+	 * Deletes the student and the submitted results from database.
+	 *
+	 * @param persNumber long
+	 */
 	public void deleteStudent(long persNumber){
         em.getTransaction().begin();
 		em.createNamedQuery("deletecorrectedtestsfromstudent").setParameter("pNumber",persNumber).executeUpdate();
@@ -110,6 +115,11 @@ public class DatabaseConnection {
         em.getTransaction().commit();
 	}
 
+	/**
+	 * Deletes all students in a class.
+	 *
+	 * @param classId int
+	 */
     public void deleteStudentsFromClass(int classId){
 		List<Student> currClass = em.createNamedQuery("getStudentsFromClass").setParameter("classId",classId).getResultList();
 	    em.getTransaction().begin();
@@ -144,7 +154,6 @@ public class DatabaseConnection {
         em.getTransaction().commit();
 	}
 
-	// From SchoolTest entity
 
 	/**
 	 * Returns the test with the given id.
@@ -174,8 +183,8 @@ public class DatabaseConnection {
 	 * @param questionId String
 	 * @return Question
 	 */
-	public Question getQuestion(String questionId) {
-		List result = em.createNamedQuery("getQuestion").setParameter("questionId", Integer.parseInt(questionId)).getResultList();
+	public Question getQuestion(int questionId) {
+		List result = em.createNamedQuery("getQuestion").setParameter("questionId", questionId).getResultList();
 		return (Question) result.get(0);
 	}
 
@@ -200,4 +209,5 @@ public class DatabaseConnection {
 		em.createNamedQuery("deleteClass").setParameter("classId",classId).executeUpdate();
         em.getTransaction().commit();
 	}
+
 }

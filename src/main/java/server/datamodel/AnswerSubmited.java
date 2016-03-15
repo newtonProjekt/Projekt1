@@ -37,7 +37,6 @@ public class AnswerSubmited {
 		this.testId = testId;
 		this.questionId = questionId;
 		this.answerString = answerString;
-		this.correctAnswer = false;
 	}
 
 	public int getId() {
