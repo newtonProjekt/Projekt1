@@ -247,9 +247,16 @@ public class ServerController {
                 }
             }
             currStudent.removeTest(toRemove);
+            dbc.updateEntity(currStudent);
         }
         dbc.deleteSchoolTest(testId);
     }
+
+    /*
+    public void deleteTestFromStudent(long persNumber, int testId){
+        Student currStudent = dbc.getStudent();
+    }
+    */
 
     /**
      * Submits test answers from client to database.
