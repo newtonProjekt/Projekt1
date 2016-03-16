@@ -161,6 +161,11 @@ public class CommandHandler {
 				int testtoadd = gson.fromJson(cmdData.get(1),int.class);
 				controller.addTestToStudent(persNumber,testtoadd);
 				break;
+			case "removetestfromstudent":
+				long pNumber = gson.fromJson(cmdData.get(0),long.class);
+				int testtoremove = gson.fromJson(cmdData.get(1),int.class);
+				controller.deleteTestFromStudent(pNumber,testtoremove);
+				break;
 			case "putnewtonclass":
 				/**
 				 * Creates a new managed entity of NewtonClass.

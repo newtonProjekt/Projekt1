@@ -238,10 +238,10 @@ public class ServerController {
         List<Student> affectedStudents = dbc.getStudentsTestList(testId);
         SchoolTest toRemove = null;
 
-        for(Student currStudent: affectedStudents){
+        for (Student currStudent : affectedStudents) {
             List<SchoolTest> currTestsToTake = currStudent.getTestsToTake();
-            for (SchoolTest currTest: currTestsToTake){
-                if (currTest.getId() == testId){
+            for (SchoolTest currTest : currTestsToTake) {
+                if (currTest.getId() == testId) {
                     toRemove = currTest;
                     break;
                 }
@@ -252,16 +252,26 @@ public class ServerController {
         dbc.deleteSchoolTest(testId);
     }
 
-    public void deleteTestFromStudent(long persNumber, int testId){
+    public void deleteTestFromStudent(long persNumber, int testId) {
         Student currStudent = dbc.getStudent(Long.toString(persNumber));
+        List<SchoolTest> testsToTake = currStudent.getTestsToTake();
+        SchoolTest toRemove = null;
 
+        for (SchoolTest currTest : testsToTake) {
+            if (currTest.getId() == testId) {
+                toRemove = currTest;
+                break;
+            }
+        }
+        currStudent.removeTest(toRemove);
+        dbc.updateEntity(currStudent);
     }
 
     /**
      * Submits test answers from client to database.
      *
      * @param subMittedTest SubmittedTest
-     * @param clientId String
+     * @param clientId      String
      */
     public void submitTestToDB(SubmittedTest subMittedTest, String clientId) {
         Student currStudent = dbc.getStudent(clientId);
@@ -269,7 +279,7 @@ public class ServerController {
             currStudent.addAnswer(currAnswer);
         }
         dbc.updateEntity(currStudent);
-        correctTest(clientId,subMittedTest);
+        correctTest(clientId, subMittedTest);
     }
 
     public void deleteClass(int classId) {
