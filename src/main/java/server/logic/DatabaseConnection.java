@@ -181,6 +181,10 @@ public class DatabaseConnection {
 		return em.createNamedQuery("getteststudents").setParameter("testId",testId).getResultList();
 	}
 
+	public List<Student> getStudentsTestList(int testId){
+		return em.createNamedQuery("getteststudentsfull").setParameter("testId",testId).getResultList();
+	}
+
 	// From Question entity
 
 	/**

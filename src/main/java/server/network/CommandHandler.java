@@ -207,6 +207,9 @@ public class CommandHandler {
 				 */
 				send("getteststocorrect",controller.getTestsToCorrect());
 				break;
+			case "gettesttocorrect":
+				//TODO send information of test to correct
+				break;
 			case "putimage":
 				/**
 				 * Stores an image on server.
@@ -258,6 +261,15 @@ public class CommandHandler {
 		Message currMessage = new Message(command, commandData);
 		String jsonData = gson.toJson(currMessage);
 		client.send(jsonData);
+	}
+
+	/**
+	 * Sends a Message object as a JSON string to client.
+	 *
+	 * @param currMessage Message
+     */
+	public void sendMessage(Message currMessage){
+		client.send(gson.toJson(currMessage));
 	}
 
 	/**
