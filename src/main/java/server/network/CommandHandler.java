@@ -147,13 +147,20 @@ public class CommandHandler {
                 Student updStudent = gson.fromJson(cmdData.get(0), Student.class);
                 controller.updateStudent(updStudent);
                 break;
-			case "addTestToClass":
+			case "addtesttoclass":
 				/**
 				 * Adds a test to all student in a class.
 				 */
 				int classId = gson.fromJson(cmdData.get(0), int.class);
 				int testid = gson.fromJson(cmdData.get(1), int.class);
 				controller.addTestToClass(classId, testid);
+				break;
+			case "addtesttostudent":
+				long[] persNumber = gson.fromJson(cmdData.get(0),long[].class);
+				int testtoadd = gson.fromJson(cmdData.get(1),int.class);
+				for (long currPnumber: persNumber){
+					controller.addTestToStudent(currPnumber,testtoadd);
+				}
 				break;
 			case "putnewtonclass":
 				/**

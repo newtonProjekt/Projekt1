@@ -317,6 +317,12 @@ public class ServerController {
 		}
 	}
 
+	public void addTestToStudent(long persNummer, int testId){
+		Student currStudent = dbc.getStudent(Long.toString(persNummer));
+		currStudent.addTest(dbc.getTest(Integer.toString(testId)));
+		dbc.updateEntity(currStudent);
+	}
+
 	// Question
 
 	/**
