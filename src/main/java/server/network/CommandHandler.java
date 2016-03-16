@@ -10,6 +10,7 @@ import com.google.gson.JsonParser;
 import server.beans.Login;
 import server.beans.Message;
 import server.beans.SubmittedTest;
+import server.beans.TestsToCorrect;
 import server.datamodel.NewtonClass;
 import server.datamodel.SchoolTest;
 import server.datamodel.Student;
@@ -194,8 +195,17 @@ public class CommandHandler {
 				send("getstudentsfromclass", controller.getStudentsFromClass(classid));
 				break;
 			case "getteststudents":
+				/**
+				 * Gets all student personal numbers that has access to a test.
+				 */
 				int testtosee = gson.fromJson(cmdData.get(0),int.class);
 				send("getteststudents",controller.getTestStudents(testtosee));
+				break;
+			case "getteststocorrect":
+				/**
+				 * Sends a list of tests that need manual correction.
+				 */
+				send("getteststocorrect",controller.getTestsToCorrect());
 				break;
 			case "putimage":
 				/**

@@ -1,9 +1,6 @@
 package server.logic;
 
-import server.datamodel.NewtonClass;
-import server.datamodel.Question;
-import server.datamodel.SchoolTest;
-import server.datamodel.Student;
+import server.datamodel.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -141,6 +138,10 @@ public class DatabaseConnection {
 	 */
 	public List<SchoolTest> getStudentTests(String persNumber) {
 		return em.createNamedQuery("getStudentTests").setParameter("pNumber", Long.parseLong(persNumber)).getResultList();
+	}
+
+	public List<CorrectedTest> getTestsToCorrect(){
+		return em.createNamedQuery("getuncompeletetests").getResultList();
 	}
 
 	/**

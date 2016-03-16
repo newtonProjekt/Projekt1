@@ -4,6 +4,7 @@ package server.logic;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import server.beans.SubmittedTest;
+import server.beans.TestsToCorrect;
 import server.datamodel.*;
 
 import javax.imageio.ImageIO;
@@ -13,6 +14,7 @@ import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -348,15 +350,32 @@ public class ServerController {
 	// Correction
 
 	/**
+	 *	Takes a submitted test and corrects it.
 	 *
-	 *
-	 * @param persNumber
-	 * @param submittedTest
+	 * @param persNumber String
+	 * @param submittedTest SubmittedTest
 	 */
 	public void correctTest(String persNumber, SubmittedTest submittedTest){
 		Student currStudent = dbc.getStudent(persNumber);
 		CorrectedTest currTest = corrHandler.correctTest(currStudent, submittedTest);
 		dbc.updateEntity(currStudent);
 		dbc.persistEntity(currTest);
+	}
+
+	/**
+	 * Gets all uncorrected tests and sends them as a list of TestsToCorrect
+	 *
+	 * @return List\<TestsToCorrect\>
+     */
+	public List<TestsToCorrect> getTestsToCorrect(){
+		List<TestsToCorrect> sendList = new ArrayList<>();
+		List<CorrectedTest> incompleteTests = dbc.getTestsToCorrect();
+		for(CorrectedTest currIncomplete: incompleteTests){
+			SchoolTest currTest = dbc.getTest(Integer.toString(currIncomplete.getTestId()));
+			Student currStudent = dbc.getStudent(Long.toString(currIncomplete.getPersNumber()));
+			TestsToCorrect currTestToAdd = new TestsToCorrect(currTest.getId(),currStudent.getPersNumber(),currTest.getName(),currStudent.getFirstName()+" "+currStudent.getSurName());
+			sendList.add(currTestToAdd);
+		}
+		return sendList;
 	}
 }

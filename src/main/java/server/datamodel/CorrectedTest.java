@@ -31,7 +31,11 @@ import javax.validation.constraints.NotNull;
 		@NamedQuery(name="getcorrectedtestsfromstudent",
 				query = "SELECT c FROM CorrectedTest c WHERE c.persNumber=:pNumber"),
 		@NamedQuery(name="getcorrectedtestfromstudent",
-				query = "SELECT c FROM CorrectedTest c WHERE c.persNumber=:pNumber AND c.testId=:test")
+				query = "SELECT c FROM CorrectedTest c WHERE c.persNumber=:pNumber AND c.testId=:test"),
+		@NamedQuery(name="getuncompeletetests",
+				query = "SELECT c FROM CorrectedTest c WHERE c.completedCorrection=false"),
+		@NamedQuery(name="getuncompletetestfromstudent",
+				query = "SELECT c FROM CorrectedTest c WHERE c.completedCorrection=false AND c.persNumber=:pNumber")
 })
 
 @Entity
