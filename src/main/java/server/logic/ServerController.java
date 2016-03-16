@@ -267,6 +267,16 @@ public class ServerController {
 	public void updateTest(SchoolTest schoolTest){
 		dbc.updateEntity(schoolTest);
 	}
+
+	/**
+	 * Get list of student persNumber that has access to a test.
+	 *
+	 * @param testId int
+	 * @return List\<Long\>
+     */
+	public List<Long> getTestStudents(int testId){
+		return dbc.getStudentsTest(testId);
+	}
         
 	/**
 	 * Gets a student from client and persists it.

@@ -49,8 +49,7 @@ public class DatabaseConnection {
 			em.merge(entity);
 			etx.commit();
 		} catch (RollbackException e){
-			/* Workaround for a rollbackexception if entry is already existent.
-			*/
+			// Workaround for a rollbackexception if entry is already existent.
 		}
 	}
 
@@ -175,6 +174,10 @@ public class DatabaseConnection {
 	 */
 	public List<SchoolTest> getAllTests() {
 		return em.createNamedQuery("getAllTests").getResultList();
+	}
+
+	public List<Long> getStudentsTest(int testId){
+		return em.createNamedQuery("getteststudents").setParameter("testId",testId).getResultList();
 	}
 
 	// From Question entity
