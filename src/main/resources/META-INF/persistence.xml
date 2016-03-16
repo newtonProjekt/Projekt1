@@ -11,6 +11,7 @@
         <class>server.datamodel.SchoolTest</class>
         <class>server.datamodel.Student</class>
         <class>server.datamodel.CorrectedTest</class>
+        <class>server.datamodel.AnswerCorrected</class>
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/testdb"/>
             <property name="javax.persistence.jdbc.user" value="root"/>
