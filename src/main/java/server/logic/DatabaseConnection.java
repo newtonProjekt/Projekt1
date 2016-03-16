@@ -5,10 +5,7 @@ import server.datamodel.Question;
 import server.datamodel.SchoolTest;
 import server.datamodel.Student;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -46,10 +43,15 @@ public class DatabaseConnection {
 	 * @param <T> Object
 	 */
 	public <T> void updateEntity(T entity){
-		etx = em.getTransaction();
-		etx.begin();
-		em.merge(entity);
-		etx.commit();
+		try {
+			etx = em.getTransaction();
+			etx.begin();
+			em.merge(entity);
+			etx.commit();
+		} catch (RollbackException e){
+			/* Workaround for a rollbackexception if entry is already existent.
+			*/
+		}
 	}
 
 	/**
