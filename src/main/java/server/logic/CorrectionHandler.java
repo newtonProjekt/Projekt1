@@ -73,8 +73,11 @@ public class CorrectionHandler {
 		}
 		return new CorrectedTest(currSubmitted.getTestId(),currStudent.getPersNumber(),vgQuestions,gQuestions,maxPoints,totalVgPoints,totalGPoints,vgPoints,gPoints,allCorrected);
 	}
+/*
+	public CorrectedTest completeCorrection(){
 
-
+	}
+*/
 
 }
 

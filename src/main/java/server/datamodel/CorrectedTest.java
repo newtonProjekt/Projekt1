@@ -23,8 +23,7 @@ import javax.validation.constraints.NotNull;
  */
 
 @NamedQueries({
-		@NamedQuery(name="deletecorrected" +
-				"testsfromstudent",
+		@NamedQuery(name="deletecorrectedtestsfromstudent",
 				query = "DELETE FROM CorrectedTest c WHERE c.persNumber=:pNumber" ),
 		@NamedQuery(name="deletecorrectedtest",
 				query = "DELETE FROM CorrectedTest c WHERE c.testId=:test" ),
@@ -43,7 +42,7 @@ public class CorrectedTest {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	private Integer id;
 
 	// Identification
 	@NotNull
