@@ -1,7 +1,10 @@
 package server.logic;
 
+import server.beans.CorrectedTestBean;
 import server.beans.SubmittedTest;
 import server.datamodel.*;
+
+import java.util.List;
 
 /**
  * Auto correcting handler
@@ -73,11 +76,27 @@ public class CorrectionHandler {
 		}
 		return new CorrectedTest(currSubmitted.getTestId(),currStudent.getPersNumber(),vgQuestions,gQuestions,maxPoints,totalVgPoints,totalGPoints,vgPoints,gPoints,allCorrected);
 	}
-/*
-	public CorrectedTest completeCorrection(){
 
+	public CorrectedTest completeCorrection(CorrectedTest currCorrected, CorrectedTestBean currSubmitted){
+		int vgPoints = currCorrected.getVgPoints();
+		int gPoints = currCorrected.getgPoints();
+
+		for(AnswerCorrected currAnswer: currSubmitted.getCorrected()){
+			Question currQuestion = controller.getQuestion(currAnswer.getQuestionId());
+			AnswerSubmited currAnswerSubmitted = controller.getAnswerSubmitted(currAnswer.getQuestionId(),currAnswer.getStudentId());
+			if (currQuestion.isMultiQuestion()){
+				vgPoints += currAnswer.getPointsAwarded();
+			} else {
+				gPoints += currAnswer.getPointsAwarded();
+			}
+			currAnswerSubmitted.setCorrected(true);
+			controller.updateAnswer(currAnswerSubmitted);
+		}
+		currCorrected.setVgPoints(vgPoints);
+		currCorrected.setgPoints(gPoints);
+		currCorrected.setCompletedCorrection(true);
+
+		return currCorrected;
 	}
-*/
-
 }
 

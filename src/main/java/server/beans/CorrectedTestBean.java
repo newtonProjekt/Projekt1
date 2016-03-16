@@ -10,16 +10,16 @@ import java.util.List;
  *
  * Created by Johan Lindström (jolindse@hotmail.com) on 2016-03-16.
  */
-public class CorrectedTest {
+public class CorrectedTestBean {
 
 	private long studentId;
 	List<AnswerCorrected> corrected;
 
-	public CorrectedTest() {
+	public CorrectedTestBean() {
 		corrected = new ArrayList<>();
 	}
 
-	public CorrectedTest(long studentId) {
+	public CorrectedTestBean(long studentId) {
 		corrected = new ArrayList<>();
 		this.studentId = studentId;
 	}

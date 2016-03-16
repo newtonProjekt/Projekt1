@@ -50,9 +50,11 @@ import java.util.List;
         @NamedQuery(
                 name = "getteststudentsfull",
                 query = "SELECT c FROM Student c JOIN c.testsToTake e WHERE e.id =:testId"
+        ),
+        @NamedQuery(
+                name = "getstudentanswerfromtest",
+                query = "SELECT e FROM Student c JOIN c.answersSubmited e WHERE e.questionId=:questionId AND c.persNumber=:pNumber"
         )
-
-
 })
 
 

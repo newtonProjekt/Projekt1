@@ -198,6 +198,10 @@ public class DatabaseConnection {
 		return result.get(0);
 	}
 
+	public AnswerSubmited getAnswerToQuestion(long pNumber, int questionId){
+		return (AnswerSubmited) em.createNamedQuery("getstudentanswerfromtest").setParameter("questionId",questionId).setParameter("pNumber",pNumber).getResultList().get(0);
+	}
+
 	// NewtonClass entity
 
 	/**
@@ -218,6 +222,12 @@ public class DatabaseConnection {
         em.getTransaction().begin();
 		em.createNamedQuery("deleteClass").setParameter("classId",classId).executeUpdate();
         em.getTransaction().commit();
+	}
+
+	// Correction
+
+	public CorrectedTest getCorrectedTest(long persNumber, int testId){
+		return (CorrectedTest) em.createNamedQuery("getcorrectedtestfromstudent").setParameter("pNumber",persNumber).setParameter("testId",testId).getResultList().get(0);
 	}
 
 }

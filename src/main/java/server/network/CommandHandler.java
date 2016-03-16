@@ -7,10 +7,7 @@ package server.network;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonParser;
-import server.beans.Login;
-import server.beans.Message;
-import server.beans.SubmittedTest;
-import server.beans.TestsToCorrect;
+import server.beans.*;
 import server.datamodel.NewtonClass;
 import server.datamodel.SchoolTest;
 import server.datamodel.Student;
@@ -231,6 +228,10 @@ public class CommandHandler {
 				pNumber = gson.fromJson(cmdData.get(0),long.class);
 				testId = gson.fromJson(cmdData.get(1),int.class);
 				sendMessage(controller.getTestToCorrect(pNumber,testId));
+				break;
+			case "putcorrectedtest":
+				CorrectedTestBean currCorrected = gson.fromJson(cmdData.get(0),CorrectedTestBean.class);
+				controller.submitCorrectedTest(currCorrected);
 				break;
 			case "putimage":
 				/**

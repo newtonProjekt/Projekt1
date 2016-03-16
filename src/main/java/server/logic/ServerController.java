@@ -3,10 +3,9 @@ package server.logic;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
-import server.beans.Message;
-import server.beans.SubmittedTest;
-import server.beans.TestsToCorrect;
+import server.beans.*;
 import server.datamodel.*;
+import server.datamodel.CorrectedTest;
 
 import javax.imageio.ImageIO;
 import javax.imageio.stream.ImageOutputStream;
@@ -293,6 +292,10 @@ public class ServerController {
         correctTest(clientId, subMittedTest);
     }
 
+    public void updateAnswer(AnswerSubmited currAnswer){
+        dbc.updateEntity(currAnswer);
+    }
+
     public void deleteClass(int classId) {
         dbc.deleteClass(classId);
     }
@@ -400,6 +403,12 @@ public class ServerController {
         return dbc.getQuestion(questionId);
     }
 
+    // Answers
+
+    public AnswerSubmited getAnswerSubmitted(int questionId, long pNumber){
+        return dbc.getAnswerToQuestion(pNumber,questionId);
+    }
+
     // Correction
 
     /**
@@ -455,5 +464,19 @@ public class ServerController {
 		messageToSend.addCommandData(currSub);
 		messageToSend.addCommandData(currTest);
         return messageToSend;
+    }
+
+	/**
+     * Updates a manually corrected test in database.
+     *
+     * @param currCorrected CorrectedTestBean
+     */
+    public void submitCorrectedTest(CorrectedTestBean currCorrected){
+        int testId = currCorrected.getCorrected().get(0).getTestId();
+        long persNumber = currCorrected.getStudentId();
+
+        CorrectedTest corrected = dbc.getCorrectedTest(persNumber,testId);
+
+        dbc.updateEntity(corrHandler.completeCorrection(corrected,currCorrected));
     }
 }
