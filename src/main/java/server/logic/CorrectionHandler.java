@@ -29,6 +29,8 @@ public class CorrectionHandler {
 
 		int vgQuestions = 0;
 		int gQuestions = 0;
+		int totalVgPoints = 0;
+		int totalGPoints = 0;
 
 		int vgPoints = 0;
 		int gPoints = 0;
@@ -41,12 +43,14 @@ public class CorrectionHandler {
 			// Get basic test info
 			if (currQuestion.isVgQuestion()) {
 				vgQuestions++;
+				totalVgPoints += currQuestion.getPoints();
 			} else {
 				gQuestions++;
+				totalGPoints += currQuestion.getPoints();
 			}
 			maxPoints += currQuestion.getPoints();
 
-			// If multiquestion check answers.
+			// If multi question check answers.
 			if (currQuestion.isMultiQuestion()) {
 				// Check all Question answers
 				for (Answer currAnswer : currQuestion.getAnswers()) {
@@ -67,8 +71,10 @@ public class CorrectionHandler {
 			}
 			currStudent.addAnswer(currSubmittedAnswer);
 		}
-		return new CorrectedTest(currSubmitted.getTestId(),currStudent.getPersNumber(),vgQuestions,gQuestions,maxPoints,vgPoints,gPoints,allCorrected);
+		return new CorrectedTest(currSubmitted.getTestId(),currStudent.getPersNumber(),vgQuestions,gQuestions,maxPoints,totalVgPoints,totalGPoints,vgPoints,gPoints,allCorrected);
 	}
+
+
 
 }
 

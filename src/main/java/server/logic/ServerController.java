@@ -313,6 +313,7 @@ public class ServerController {
 		List<Student> classStudents = dbc.getStudentFromClass(classId);
 		for (Student currStudent: classStudents){
 			currStudent.addTest(dbc.getTest(Integer.toString(testId)));
+			dbc.updateEntity(currStudent);
 		}
 	}
 
