@@ -47,13 +47,19 @@ public class CommandHandler {
 	 */
 	public void parse(String jsonData) {
 
+		// Variables used
+		int testId, classId;
+		long pNumber;
+		NewtonClass newtonClass;
+		Student student;
+		SchoolTest schoolTest;
+		String testIdS;
+
+		// Objects from Message.
 		Message currMessage = gson.fromJson(jsonData, Message.class);
 		List<String> cmdData = currMessage.getCommandData();
 
-        /* The following switch statements calls for the appropriate method in controller.
-		   and always includes a reference to this instance of CommandHandler for possible
-           return data.
-         */
+        // The following switch statements calls for the appropriate method in controller.
 		switch (currMessage.getCommand()) {
 			case "login":
 				/**
@@ -76,8 +82,8 @@ public class CommandHandler {
 				/**
 				 * Starts test by removing it from the current Students available tests.
 				 */
-				String testId = cmdData.get(0);
-				controller.startTest(clientId, testId);
+				testIdS = cmdData.get(0);
+				controller.startTest(clientId, testIdS);
 				break;
 			case "getresult":
 				//TODO send result data if possible
@@ -124,61 +130,67 @@ public class CommandHandler {
 				/**
 				 * Creates a new managed entity of SchoolTest.
 				 */
-				SchoolTest schoolTest = gson.fromJson(cmdData.get(0), SchoolTest.class);
+				schoolTest = gson.fromJson(cmdData.get(0), SchoolTest.class);
 				controller.putTest(schoolTest);
 				break;
 			case "updatetest":
 				/**
 				 * Updates a existent test in database.
 				 */
-				SchoolTest updSchoolTest = gson.fromJson(cmdData.get(0), SchoolTest.class);
-				controller.updateTest(updSchoolTest);
+				schoolTest = gson.fromJson(cmdData.get(0), SchoolTest.class);
+				controller.updateTest(schoolTest);
 				break;
 			case "putstudent":
 				/**
 				 * Updates if existent or creates a new managed entity of Student.
 				 */
-				Student student = gson.fromJson(cmdData.get(0), Student.class);
+				student = gson.fromJson(cmdData.get(0), Student.class);
 				controller.putStudent(student);
 				break;
             case "updatestudent":
                 /**
                  * Updates a existent student in database.
                  */
-                Student updStudent = gson.fromJson(cmdData.get(0), Student.class);
-                controller.updateStudent(updStudent);
+                student = gson.fromJson(cmdData.get(0), Student.class);
+                controller.updateStudent(student);
                 break;
 			case "addtesttoclass":
 				/**
 				 * Adds a test to all student in a class.
 				 */
-				int classId = gson.fromJson(cmdData.get(0), int.class);
-				int testid = gson.fromJson(cmdData.get(1), int.class);
-				controller.addTestToClass(classId, testid);
+				classId = gson.fromJson(cmdData.get(0), int.class);
+				testId = gson.fromJson(cmdData.get(1), int.class);
+				controller.addTestToClass(classId, testId);
 				break;
 			case "addtesttostudent":
-				long persNumber = gson.fromJson(cmdData.get(0),long.class);
-				int testtoadd = gson.fromJson(cmdData.get(1),int.class);
-				controller.addTestToStudent(persNumber,testtoadd);
+				/**
+				 * Adds a test to a single student.
+				 */
+				pNumber = gson.fromJson(cmdData.get(0),long.class);
+				testId = gson.fromJson(cmdData.get(1),int.class);
+				controller.addTestToStudent(pNumber,testId);
 				break;
 			case "removetestfromstudent":
-				long pNumber = gson.fromJson(cmdData.get(0),long.class);
-				int testtoremove = gson.fromJson(cmdData.get(1),int.class);
-				controller.deleteTestFromStudent(pNumber,testtoremove);
+				/**
+				 * Removes a test from a single student.
+				 */
+				pNumber = gson.fromJson(cmdData.get(0),long.class);
+				testId = gson.fromJson(cmdData.get(1),int.class);
+				controller.deleteTestFromStudent(pNumber,testId);
 				break;
 			case "putnewtonclass":
 				/**
 				 * Creates a new managed entity of NewtonClass.
 				 */
-				NewtonClass newtonClass = gson.fromJson(cmdData.get(0), NewtonClass.class);
+				newtonClass = gson.fromJson(cmdData.get(0), NewtonClass.class);
 				controller.putNewtonClass(newtonClass);
 				break;
 			case "updatenewtonclass":
 				/**
 				 * Updates a existing NewtonClass.
 				 */
-				NewtonClass updNewtonClass = gson.fromJson(cmdData.get(0), NewtonClass.class);
-				controller.updateNewtonClass(updNewtonClass);
+				newtonClass = gson.fromJson(cmdData.get(0), NewtonClass.class);
+				controller.updateNewtonClass(newtonClass);
 				break;
 			case "getallstudents":
 				/**
@@ -196,15 +208,15 @@ public class CommandHandler {
 				/**
 				 * Get all students from a class.
 				 */
-				int classid = gson.fromJson(cmdData.get(0), int.class);
-				send("getstudentsfromclass", controller.getStudentsFromClass(classid));
+				classId = gson.fromJson(cmdData.get(0), int.class);
+				send("getstudentsfromclass", controller.getStudentsFromClass(classId));
 				break;
 			case "getteststudents":
 				/**
 				 * Gets all student personal numbers that has access to a test.
 				 */
-				int testtosee = gson.fromJson(cmdData.get(0),int.class);
-				send("getteststudents",controller.getTestStudents(testtosee));
+				testId = gson.fromJson(cmdData.get(0),int.class);
+				send("getteststudents",controller.getTestStudents(testId));
 				break;
 			case "getteststocorrect":
 				/**
@@ -213,7 +225,12 @@ public class CommandHandler {
 				send("getteststocorrect",controller.getTestsToCorrect());
 				break;
 			case "gettesttocorrect":
-				//TODO send information of test to correct
+				/**
+				 * Get a test to correct with submitted answers and SchoolTest
+				 */
+				pNumber = gson.fromJson(cmdData.get(0),long.class);
+				testId = gson.fromJson(cmdData.get(1),int.class);
+				sendMessage(controller.getTestToCorrect(pNumber,testId));
 				break;
 			case "putimage":
 				/**
@@ -228,20 +245,32 @@ public class CommandHandler {
 				controller.storeImage(client.getIP(), gson.fromJson(cmdData.get(0), String.class));
 				break;
 			case "deletestudent":
-				long studId = gson.fromJson(cmdData.get(0), long.class);
-				controller.deleteStudent(studId);
+				/**
+				 * Removes a student from database.
+				 */
+				pNumber = gson.fromJson(cmdData.get(0), long.class);
+				controller.deleteStudent(pNumber);
 				break;
             case "deletestudentsfromclass":
-                int studentClassId = gson.fromJson(cmdData.get(0), int.class);
-                controller.deleteStudentsFromClass(studentClassId);
+				/**
+				 * Removes a student from a NewtonClass
+				 */
+                classId = gson.fromJson(cmdData.get(0), int.class);
+                controller.deleteStudentsFromClass(classId);
                 break;
 			case "deletetest":
-				int testToDelete = gson.fromJson(cmdData.get(0), int.class);
-				controller.deleteSchoolTest(testToDelete);
+				/**
+				 * Removes a SchoolTest
+				 */
+				testId = gson.fromJson(cmdData.get(0), int.class);
+				controller.deleteSchoolTest(testId);
 				break;
 			case "deleteclass":
-				int classToDelete = gson.fromJson(cmdData.get(0), int.class);
-                controller.deleteClass(classToDelete);
+				/**
+				 * Removes a complete class
+				 */
+				classId = gson.fromJson(cmdData.get(0), int.class);
+                controller.deleteClass(classId);
 				break;
 			case "disconnect":
 				/**

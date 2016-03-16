@@ -20,9 +20,9 @@ import java.util.List;
 
 /**
  * Server controller class.
- * <p>
+ *
  * All calls from clients are routed through this class that handles all connections to db through the entities and JPA.
- * <p>
+ *
  * Created by Johan on 2016-03-04.
  */
 
@@ -233,6 +233,11 @@ public class ServerController {
         return dbc.getAllClasses();
     }
 
+	/**
+	 * Deletes a SchoolTest from database.
+	 *
+	 * @param testId int
+	 */
     public void deleteSchoolTest(int testId) {
         //TODO Check if schooltest is in any students testsToDo and remove it.
         List<Student> affectedStudents = dbc.getStudentsTestList(testId);
@@ -252,6 +257,12 @@ public class ServerController {
         dbc.deleteSchoolTest(testId);
     }
 
+	/**
+	 * Remove a test from a student.
+	 *
+	 * @param persNumber long
+	 * @param testId int
+	 */
     public void deleteTestFromStudent(long persNumber, int testId) {
         Student currStudent = dbc.getStudent(Long.toString(persNumber));
         List<SchoolTest> testsToTake = currStudent.getTestsToTake();
@@ -365,6 +376,12 @@ public class ServerController {
         }
     }
 
+	/**
+	 * Adds a test to student.
+	 *
+	 * @param persNummer long
+	 * @param testId int
+	 */
     public void addTestToStudent(long persNummer, int testId) {
         Student currStudent = dbc.getStudent(Long.toString(persNummer));
         currStudent.addTest(dbc.getTest(Integer.toString(testId)));
@@ -415,9 +432,28 @@ public class ServerController {
         return sendList;
     }
 
+	/**
+	 * Returns a Message containing both user submitted answer and the SchoolTest they belong to.
+	 *
+	 * @param persNumber long
+	 * @param testId int
+	 * @return Message
+	 */
     public Message getTestToCorrect(long persNumber, int testId) {
         Message messageToSend = new Message("gettesttocorrect");
+		Student currStudent = dbc.getStudent(Long.toString(persNumber));
+		SchoolTest currTest = dbc.getTest(Integer.toString(testId));
 
+		SubmittedTest currSub = new SubmittedTest();
+		currSub.setTestId(testId);
+
+		for(AnswerSubmited currAnswer: currStudent.getAnswersSubmited()){
+			if (currAnswer.getTestId() == testId){
+				currSub.addAnswer(currAnswer.getQuestionId(),currAnswer);
+			}
+		}
+		messageToSend.addCommandData(currSub);
+		messageToSend.addCommandData(currTest);
         return messageToSend;
     }
 }
