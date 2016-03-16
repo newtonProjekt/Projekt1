@@ -194,8 +194,8 @@ public class DatabaseConnection {
 	 * @return Question
 	 */
 	public Question getQuestion(int questionId) {
-		List result = em.createNamedQuery("getQuestion").setParameter("questionId", questionId).getResultList();
-		return (Question) result.get(0);
+		List<Question> result = em.createNamedQuery("getQuestion").setParameter("questionId", questionId).getResultList();
+		return result.get(0);
 	}
 
 	// NewtonClass entity

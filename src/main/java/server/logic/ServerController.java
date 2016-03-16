@@ -252,17 +252,16 @@ public class ServerController {
         dbc.deleteSchoolTest(testId);
     }
 
-    /*
     public void deleteTestFromStudent(long persNumber, int testId){
-        Student currStudent = dbc.getStudent();
+        Student currStudent = dbc.getStudent(Long.toString(persNumber));
+
     }
-    */
 
     /**
      * Submits test answers from client to database.
      *
-     * @param subMittedTest
-     * @param clientId
+     * @param subMittedTest SubmittedTest
+     * @param clientId String
      */
     public void submitTestToDB(SubmittedTest subMittedTest, String clientId) {
         Student currStudent = dbc.getStudent(clientId);
@@ -270,6 +269,7 @@ public class ServerController {
             currStudent.addAnswer(currAnswer);
         }
         dbc.updateEntity(currStudent);
+        correctTest(clientId,subMittedTest);
     }
 
     public void deleteClass(int classId) {
