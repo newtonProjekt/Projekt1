@@ -20,8 +20,8 @@ import javax.validation.constraints.NotNull;
 public class AnswerSubmited {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Integer id;
 	@NotNull
 	private int testId;
 	@NotNull
@@ -41,10 +41,6 @@ public class AnswerSubmited {
 
 	public int getId() {
 		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public int getTestId() {

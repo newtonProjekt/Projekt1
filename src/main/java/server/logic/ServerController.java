@@ -287,6 +287,7 @@ public class ServerController {
         Student currStudent = dbc.getStudent(clientId);
         for (AnswerSubmited currAnswer : subMittedTest.getAnswersSubmited()) {
             currStudent.addAnswer(currAnswer);
+            dbc.persistEntity(currAnswer);
         }
         dbc.updateEntity(currStudent);
         correctTest(clientId, subMittedTest);

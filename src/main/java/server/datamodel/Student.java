@@ -62,7 +62,7 @@ public class Student {
 
     @Id
     @NotNull
-    private long persNumber;
+    private Long persNumber;
     @NotNull
     private String firstName;
     @NotNull
