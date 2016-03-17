@@ -43,7 +43,7 @@ public class SubmittedTest {
 
 	/**
 	 * Adds an SubmittedAnswer on the array position corresponding to the Question array position in SchoolTest.
-	 * @param questionNumber int
+	 *
 	 * @param currAnswer SubmittedAnswer
 	 */
 	public void addAnswer(AnswerSubmited currAnswer){
@@ -57,7 +57,14 @@ public class SubmittedTest {
 	 * @return
 	 */
 	public AnswerSubmited getAnswer(int questionNumber){
-		return answersSubmited.get(questionNumber);
+		int index;
+		for (AnswerSubmited currAnswer: answersSubmited){
+			if(currAnswer.getQuestionId() == questionNumber){
+				index = answersSubmited.indexOf(currAnswer);
+				return answersSubmited.get(index);
+			}
+		}
+		return null;
 	}
 }
 
