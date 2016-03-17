@@ -46,8 +46,8 @@ public class SubmittedTest {
 	 * @param questionNumber int
 	 * @param currAnswer SubmittedAnswer
 	 */
-	public void addAnswer(int questionNumber,AnswerSubmited currAnswer){
-		answersSubmited.add(questionNumber, currAnswer);
+	public void addAnswer(AnswerSubmited currAnswer){
+		answersSubmited.add(currAnswer);
 	}
 
 	/**
