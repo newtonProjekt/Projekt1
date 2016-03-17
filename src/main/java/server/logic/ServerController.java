@@ -306,7 +306,7 @@ public class ServerController {
      * @param schoolTest SchoolTest
      */
     public void putTest(SchoolTest schoolTest) {
-        // check for images
+        //TODO Check for images
         dbc.persistEntity(schoolTest);
     }
 
@@ -405,6 +405,13 @@ public class ServerController {
 
     // Answers
 
+    /**
+     * Gets a answer submitted from a student to a specific question.
+     *
+     * @param questionId int
+     * @param pNumber long
+     * @return AnswerSubmited
+     */
     public AnswerSubmited getAnswerSubmitted(int questionId, long pNumber){
         return dbc.getAnswerToQuestion(pNumber,questionId);
     }
@@ -436,7 +443,6 @@ public class ServerController {
             SchoolTest currTest = dbc.getTest(Integer.toString(currIncomplete.getTestId()));
             Student currStudent = dbc.getStudent(Long.toString(currIncomplete.getPersNumber()));
             TestsToCorrect currTestToAdd = new TestsToCorrect(currTest.getId(), currStudent.getPersNumber(), currTest.getName(), currStudent.getFirstName() + " " + currStudent.getSurName());
-            System.out.println(currTestToAdd); // TEST
             sendList.add(currTestToAdd);
         }
         return sendList;
@@ -460,7 +466,8 @@ public class ServerController {
 		for(AnswerSubmited currAnswer: currStudent.getAnswersSubmited()){
 			if (currAnswer.getTestId() == testId){
 				currSub.addAnswer(currAnswer.getQuestionId(),currAnswer);
-			}
+                System.out.println("Should add answerSubmitted: "+currAnswer); // TEST
+            }
 		}
 		messageToSend.addCommandData(currSub);
 		messageToSend.addCommandData(currTest);
@@ -494,8 +501,44 @@ public class ServerController {
 
     // Statistics
 
+    /**
+     * Returns a results-bean with information for the specific test from the specific student.
+     *
+     * @param persNumber long
+     * @param testId int
+     * @return Results
+     */
     public Results getStatisticsSingleTest(long persNumber, int testId){
         return corrHandler.singleTestStats(persNumber,testId);
     }
 
+    /**
+     * Returns the average VG-points from a specific test.
+     *
+     * @param testId int
+     * @return double
+     */
+    public double getAvgVGPoints(int testId){
+        return dbc.getAverageVGPoints(testId);
+    }
+
+    /**
+     * Returns the average G-points from a specific test.
+     *
+     * @param testId
+     * @return
+     */
+    public double getAvgGPoints(int testId){
+        return dbc.getAverageGPoints(testId);
+    }
+
+    /**
+     * Returns the average points from a specific test.
+     *
+     * @param testId int
+     * @return double
+     */
+    public double getAvgPoints(int testId){
+        return dbc.getAveragePoints(testId);
+    }
 }

@@ -83,7 +83,12 @@ public class CommandHandler {
 				controller.startTest(clientId, testIdS);
 				break;
 			case "getresult":
-				//TODO send result data if possible
+				/**
+				 * Get result of a test for a single user on a single test.
+				 */
+				testId = gson.fromJson(cmdData.get(0),int.class);
+				pNumber = gson.fromJson(cmdData.get(1),long.class);
+				send("getresult",controller.getStatisticsSingleTest(pNumber,testId));
 				break;
 			case "getresults":
 				//TODO send all test results for given criteria

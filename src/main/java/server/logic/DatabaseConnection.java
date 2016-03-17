@@ -140,6 +140,11 @@ public class DatabaseConnection {
 		return em.createNamedQuery("getStudentTests").setParameter("pNumber", Long.parseLong(persNumber)).getResultList();
 	}
 
+	/**
+	 * Returns a list of tests that needs correction.
+	 *
+	 * @return List\<CorrectedTest\>
+     */
 	public List<CorrectedTest> getTestsToCorrect(){
 		return em.createNamedQuery("getuncompeletetests").getResultList();
 	}
@@ -155,7 +160,6 @@ public class DatabaseConnection {
 		em.createNamedQuery("deleteSchoolTest").setParameter("testId",testId).executeUpdate();
         em.getTransaction().commit();
 	}
-
 
 	/**
 	 * Returns the test with the given id.
@@ -177,10 +181,22 @@ public class DatabaseConnection {
 		return em.createNamedQuery("getAllTests").getResultList();
 	}
 
+	/**
+	 * Returns a list of person number for users that has access to a test.
+	 *
+	 * @param testId int
+	 * @return List\<Long\>
+     */
 	public List<Long> getStudentsTest(int testId){
 		return em.createNamedQuery("getteststudents").setParameter("testId",testId).getResultList();
 	}
 
+	/**
+	 * Returns a list of Students who has access to a test.
+	 *
+	 * @param testId int
+	 * @return List\<Student\>
+     */
 	public List<Student> getStudentsTestList(int testId){
 		return em.createNamedQuery("getteststudentsfull").setParameter("testId",testId).getResultList();
 	}
@@ -198,6 +214,13 @@ public class DatabaseConnection {
 		return result.get(0);
 	}
 
+	/**
+	 * Get a students answer to a question.
+	 *
+	 * @param pNumber long
+	 * @param questionId int
+     * @return AnswerSubmited
+     */
 	public AnswerSubmited getAnswerToQuestion(long pNumber, int questionId){
 		return (AnswerSubmited) em.createNamedQuery("getstudentanswerfromtest").setParameter("questionId",questionId).setParameter("pNumber",pNumber).getResultList().get(0);
 	}
@@ -226,8 +249,44 @@ public class DatabaseConnection {
 
 	// Correction
 
+	/**
+	 * Returns a corrected test from a student.
+	 *
+	 * @param persNumber long
+	 * @param testId int
+     * @return CorrectedTest
+     */
 	public CorrectedTest getCorrectedTest(long persNumber, int testId){
 		return (CorrectedTest) em.createNamedQuery("getcorrectedtestfromstudent").setParameter("pNumber",persNumber).setParameter("testId",testId).getResultList().get(0);
 	}
 
+	/**
+	 * Returns the average VG points for all students who has taken a test.
+	 *
+	 * @param testId int
+	 * @return double
+     */
+	public double getAverageVGPoints(int testId){
+		return (double) em.createNamedQuery("getaveragevgpoints").setParameter("testId",testId).getResultList().get(0);
+	}
+
+	/**
+	 * Returns the average G points for all students who has taken a test.
+	 *
+	 * @param testId int
+	 * @return double
+     */
+	public double getAverageGPoints(int testId){
+		return (double) em.createNamedQuery("getaveragegpoints").setParameter("testId",testId).getResultList().get(0);
+	}
+
+	/**
+	 * Returns the average total points for all students who has taken a test.
+	 *
+	 * @param testId int
+	 * @return double
+     */
+	public double getAveragePoints(int testId){
+		return (double) em.createNamedQuery("getaveragepoints").setParameter("testId",testId).getResultList().get(0);
+	}
 }

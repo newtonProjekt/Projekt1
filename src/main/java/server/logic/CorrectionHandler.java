@@ -124,7 +124,9 @@ public class CorrectionHandler {
 		currResults.setPercentTotal(Double.parseDouble(decForm.format(totalPercent)));
 
 		//All students statistics
-		List<Long> testStudents = controller.getTestStudents(testId);
+		currResults.setAverageCorrectVG(controller.getAvgVGPoints(testId));
+		currResults.setAverageCorrectG(controller.getAvgGPoints(testId));
+		currResults.setAverageTotalPoints(controller.getAvgPoints(testId));
 
 		return currResults;
 	}

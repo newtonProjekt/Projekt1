@@ -19,9 +19,10 @@ public class Results {
     public Results() {
     }
 
-    public Results(double percentCorrectVG, double percentCorrectG, int vgPoints, int gPoints, int totalPoints, String gradeAwarded, double averageCorrectVG, double averageCorrectG, double averageTotalPoints) {
+    public Results(double percentCorrectVG, double percentCorrectG, double percentTotal, int vgPoints, int gPoints, int totalPoints, String gradeAwarded, double averageCorrectVG, double averageCorrectG, double averageTotalPoints) {
         this.percentCorrectVG = percentCorrectVG;
         this.percentCorrectG = percentCorrectG;
+        this.percentTotal = percentTotal;
         this.vgPoints = vgPoints;
         this.gPoints = gPoints;
         this.totalPoints = totalPoints;

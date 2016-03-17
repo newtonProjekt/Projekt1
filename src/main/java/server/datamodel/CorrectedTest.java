@@ -39,7 +39,10 @@ import javax.validation.constraints.NotNull;
 				query = "SELECT AVG(c.vgPoints) FROM CorrectedTest c WHERE c.testId=:testId"),
 		@NamedQuery(name = "getaveragegpoints",
 					query = "SELECT AVG(c.gPoints) FROM CorrectedTest c WHERE c.testId=:testId"),
-
+		@NamedQuery(name = "getaveragevgpoints",
+					query = "SELECT AVG(c.vgPoints) FROM CorrectedTest c WHERE c.testId=:testId"),
+		@NamedQuery(name = "getaveragepoints",
+					query = "SELECT AVG(c.gPoints + c.vgPoints) FROM CorrectedTest c WHERE c.testId=:testId")
 })
 
 @Entity
