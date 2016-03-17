@@ -436,6 +436,7 @@ public class ServerController {
             SchoolTest currTest = dbc.getTest(Integer.toString(currIncomplete.getTestId()));
             Student currStudent = dbc.getStudent(Long.toString(currIncomplete.getPersNumber()));
             TestsToCorrect currTestToAdd = new TestsToCorrect(currTest.getId(), currStudent.getPersNumber(), currTest.getName(), currStudent.getFirstName() + " " + currStudent.getSurName());
+            System.out.println(currTestToAdd); // TEST
             sendList.add(currTestToAdd);
         }
         return sendList;
@@ -471,12 +472,30 @@ public class ServerController {
      *
      * @param currCorrected CorrectedTestBean
      */
-    public void submitCorrectedTest(CorrectedTestBean currCorrected){
+    public void submitCorrectedTest(CorrectedTestBean currCorrected) {
         int testId = currCorrected.getCorrected().get(0).getTestId();
         long persNumber = currCorrected.getStudentId();
 
-        CorrectedTest corrected = dbc.getCorrectedTest(persNumber,testId);
+        CorrectedTest corrected = dbc.getCorrectedTest(persNumber, testId);
 
-        dbc.updateEntity(corrHandler.completeCorrection(corrected,currCorrected));
+        dbc.updateEntity(corrHandler.completeCorrection(corrected, currCorrected));
     }
+
+    /**
+     * Gets a corrected test from database.
+     *
+     * @param persNumber long
+     * @param testId int
+     * @return CorrectedTest
+     */
+    public CorrectedTest getCorrectedTest(long persNumber, int testId){
+        return dbc.getCorrectedTest(persNumber,testId);
+    }
+
+    // Statistics
+
+    public Results getStatisticsSingleTest(long persNumber, int testId){
+        return corrHandler.singleTestStats(persNumber,testId);
+    }
+
 }

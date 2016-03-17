@@ -53,4 +53,14 @@ public class TestsToCorrect {
     public void setTestUser(String testUser) {
         this.testUser = testUser;
     }
+
+    @Override
+    public String toString() {
+        return "TestsToCorrect{" +
+                "testId=" + testId +
+                ", testUserNumber=" + testUserNumber +
+                ", testName='" + testName + '\'' +
+                ", testUser='" + testUser + '\'' +
+                '}';
+    }
 }

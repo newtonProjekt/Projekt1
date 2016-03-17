@@ -34,7 +34,12 @@ import javax.validation.constraints.NotNull;
 		@NamedQuery(name="getuncompeletetests",
 				query = "SELECT c FROM CorrectedTest c WHERE c.completedCorrection=false"),
 		@NamedQuery(name="getuncompletetestfromstudent",
-				query = "SELECT c FROM CorrectedTest c WHERE c.completedCorrection=false AND c.persNumber=:pNumber")
+				query = "SELECT c FROM CorrectedTest c WHERE c.completedCorrection=false AND c.persNumber=:pNumber"),
+		@NamedQuery(name = "getaveragevgpoints",
+				query = "SELECT AVG(c.vgPoints) FROM CorrectedTest c WHERE c.testId=:testId"),
+		@NamedQuery(name = "getaveragegpoints",
+					query = "SELECT AVG(c.gPoints) FROM CorrectedTest c WHERE c.testId=:testId"),
+
 })
 
 @Entity

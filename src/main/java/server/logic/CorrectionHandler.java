@@ -1,9 +1,11 @@
 package server.logic;
 
 import server.beans.CorrectedTestBean;
+import server.beans.Results;
 import server.beans.SubmittedTest;
 import server.datamodel.*;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 /**
@@ -97,6 +99,34 @@ public class CorrectionHandler {
 		currCorrected.setCompletedCorrection(true);
 
 		return currCorrected;
+	}
+
+	// STATISTICS METHODS
+
+	public Results singleTestStats(long persNumber, int testId){
+		Results currResults = new Results();
+		DecimalFormat decForm = new DecimalFormat(".##");
+
+		// Student specific stats
+		CorrectedTest studentCorrected = controller.getCorrectedTest(persNumber,testId);
+
+		// Points
+		currResults.setVgPoints(studentCorrected.getVgPoints());
+		currResults.setgPoints(studentCorrected.getgPoints());
+		currResults.setTotalPoints(studentCorrected.getVgPoints()+studentCorrected.getgPoints());
+
+		// Percentage
+		String vgPercent = Double.toString((currResults.getVgPoints()/studentCorrected.getTotalVgPoins())*100);
+		String gPercent = Double.toString((currResults.getgPoints()/studentCorrected.getTotalGPoints())*100);
+		String totalPercent = Double.toString(((currResults.getVgPoints()+currResults.getgPoints())/studentCorrected.getMaxPoints())*100);
+		currResults.setPercentCorrectVG(Double.parseDouble(decForm.format(vgPercent)));
+		currResults.setPercentCorrectG(Double.parseDouble(decForm.format(gPercent)));
+		currResults.setPercentTotal(Double.parseDouble(decForm.format(totalPercent)));
+
+		//All students statistics
+		List<Long> testStudents = controller.getTestStudents(testId);
+
+		return currResults;
 	}
 }
 
