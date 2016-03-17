@@ -459,12 +459,16 @@ public class ServerController {
     public Message getTestToCorrect(long persNumber, int testId) {
         Message messageToSend = new Message("gettesttocorrect");
 		Student currStudent = dbc.getStudent(Long.toString(persNumber));
-		SchoolTest currTest = dbc.getTest(Integer.toString(testId));
+        System.out.println(currStudent);
+        SchoolTest currTest = dbc.getTest(Integer.toString(testId));
+        System.out.println(currTest);
+        System.out.println(currStudent.getAnswersSubmited().size());
 
 		SubmittedTest currSub = new SubmittedTest();
 		currSub.setTestId(testId);
+        List<AnswerSubmited> currAnsList = currStudent.getAnswersSubmited();
 
-		for(AnswerSubmited currAnswer: currStudent.getAnswersSubmited()){
+		for(AnswerSubmited currAnswer: currAnsList){
 			if (currAnswer.getTestId() == testId){
 				currSub.addAnswer(currAnswer.getQuestionId(),currAnswer);
                 System.out.println("Should add answerSubmitted: "+currAnswer); // TEST
