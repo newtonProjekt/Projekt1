@@ -74,6 +74,7 @@ public class CorrectionHandler {
 			} else {
 				allCorrected = false;
 			}
+			currSubmittedAnswer.setTestId(currSubmitted.getTestId());
 			currStudent.addAnswer(currSubmittedAnswer);
 		}
 		return new CorrectedTest(currSubmitted.getTestId(),currStudent.getPersNumber(),vgQuestions,gQuestions,maxPoints,totalVgPoints,totalGPoints,vgPoints,gPoints,allCorrected);
